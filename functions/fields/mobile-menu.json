@@ -1,0 +1,82 @@
+{
+    "key": "mobile-menu",
+    "title": "Mobile Menu",
+    "fields": [
+        {
+            "key": "field_5b77196189487",
+            "label": "Notice",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "The following settings affect the <strong>Header Menu<\/strong> only.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5b770ed7e8f62",
+            "label": "Set Breakpoint",
+            "name": "breakpoint",
+            "type": "range",
+            "instructions": "Determines when the menu will show.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 768,
+            "min": 480,
+            "max": 1920,
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_5b770eb3e8f61",
+            "label": "Show Search?",
+            "name": "search",
+            "type": "button_group",
+            "instructions": "Enables a searchbox within the dropdown.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "hide": "Hide",
+                "show": "Show"
+            },
+            "allow_null": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-mobile-menu"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "The Mobile.nav plugin replacement for this framework."
+}

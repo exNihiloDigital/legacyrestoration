@@ -1,0 +1,73 @@
+// Functions
+// ================================================================
+
+// Pulls a value from the following maps
+// function($value)
+@function color($key: "one") {
+    @return map-get($colors, $key);
+}
+
+@function phos($key: "one") {
+    @return map-get($phos, $key);
+}
+
+@function wordpress($key: "one") {
+    @return map-get($wordpress, $key);
+}
+
+@function font($key: "font-family") {
+    @return map-get($fonts, $key);
+}
+
+@function heading($key: "font-family") {
+    @return map-get($heading, $key);
+}
+
+// Pull $key => $value from any $map
+// map-deep-get($map, $key, $value)
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}
+
+// Mixins
+// ================================================================
+
+// Breakpoints
+// @include breakpoint($width up/down)
+@mixin breakpoint($width: 768px) {
+    $breakpoint: nth($width, 1);
+    $dir: if(length($width) > 1, nth($width, 2), up);
+    $str: "all";
+
+    @if $dir == "down" {
+        $max: $breakpoint - 1 / 16;
+        $str: $str + " and (max-width: #{$max})";
+    }
+    @else {
+        $str: $str + " and (min-width: #{$breakpoint})";
+    }
+
+    @media #{$str} {
+        @content;
+    }
+}
+
+// Clearfix
+// @include clearfix()
+@mixin clearfix {
+    &:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+// Transitions
+// @include transition(#s)
+@mixin transition($time) {
+    transition: all $time ease-in-out;
+}

@@ -1,0 +1,155 @@
+// Body & Typography
+// ================================================================
+
+// H1-H6
+// map-deep-get($map, $key, $value)
+// ================================================================
+$heading: (
+    color: (
+        "h1": color("dark"),
+        "h2": color("dark"),
+        "h3": color("dark"),
+        "h4": color("dark"),
+        "h5": color("dark"),
+        "h6": color("dark")),
+    desktop: (
+        "h1": 48px,
+        "h2": 40px,
+        "h3": 28px,
+        "h4": 28px,
+        "h5": 24px,
+        "h6": 20px),
+    tablet: (
+        "h1": 35px,
+        "h2": 30px,
+        "h3": 26px,
+        "h4": 26px,
+        "h5": 22px,
+        "h6": 20px),
+    mobile: (
+        "h1": 30px,
+        "h2": 26px,
+        "h3": 23px,
+        "h4": 23px,
+        "h5": 20px,
+        "h6": 20px),
+    font-family: font('heading'),
+    font-weight: (
+        "h1": 400,
+        "h2": 400,
+        "h3": 400,
+        "h4": 400,
+        "h5": 400,
+        "h6": 400),
+    line-height: 1.1,
+    letter-spacing: 0,
+    margin-bottom: (
+        "h1": 15px,
+        "h2": 15px,
+        "h3": 15px,
+        "h4": 15px,
+        "h5": 15px,
+        "h6": 15px),
+    text-transform: (
+        "h1": none,
+        "h2": none,
+        "h3": none,
+        "h4": none,
+        "h5": none,
+        "h6": none)
+    ) !default;
+
+::selection {
+    color: white;
+    background: color("one");
+}
+
+@for $h from 1 through 6 {
+    h#{$h} {
+        color: map-deep-get($heading, "color", h#{$h});
+        font-size: map-deep-get($heading, "desktop", "h#{$h}");
+        font-family: heading("font-family");
+        font-weight: map-deep-get($heading, "font-weight", h#{$h});
+        line-height: heading("line-height");
+        margin: 0;
+        margin-bottom: map-deep-get($heading, "margin-bottom", h#{$h});
+        text-transform: map-deep-get($heading, "text-transform", h#{$h});
+
+        @include breakpoint(640px down) {
+            font-size: map-deep-get($heading, "tablet", "h#{$h}");
+        }
+
+
+        @include breakpoint(480px down) {
+            font-size: map-deep-get($heading, "mobile", "h#{$h}");
+        }
+    }
+}
+
+
+*:focus {
+    outline: 0 !important;
+}
+
+a {
+    color: color("one");
+    text-decoration: none;
+
+    &:hover {
+        color: color("two");
+    }
+}
+
+blockquote {
+    padding: 0 0 0 30px;
+    margin: 10px 0 40px 0;
+    display: block;
+    border-left: 4px solid color("one");
+
+    p {
+        margin: 0 !important;
+    }
+
+    cite {
+
+    }
+}
+
+figure {
+    margin: 0;
+}
+hr {
+    margin: 40px auto;
+    border: 1px solid color("medium");
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+pre {
+    color: white;
+    font-size: 16px;
+    font-family: Courier, "New Courier", monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 15px 20px;
+    background: wordpress("four");
+    border-radius: 6px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    // Please use @extend %ol within an ol element for styling, see _placeholders.scss
+}
+
+ol {
+    padding: 0;
+    margin: 0;
+
+    // Please use @extend %ol within an ol element for styling, see _placeholders.scss
+}

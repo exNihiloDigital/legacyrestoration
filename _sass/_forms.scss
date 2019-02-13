@@ -1,0 +1,129 @@
+// Forms
+// ================================================================
+
+.gform_wrapper {
+    display: inline-block;
+    margin: 0 auto 60px !important;
+
+    ul.gform_fields {
+        > li {
+            padding: 0;
+        }
+    }
+
+    [type=text] {
+        background: none;
+        border: 1px solid #ccc;
+    }
+
+    textarea {
+        background: none;
+        border: 1px solid #ccc;
+    }
+
+    select {
+        background: none;
+        border: 1px solid #ccc;
+    }
+
+    .ginput_container_checkbox, .ginput_container_radio {
+        margin-top: 0 !important;
+    }
+
+    [type=checkbox] {
+        margin-top: 0 !important;
+    }
+
+    [type=file] {
+        width: 100%;
+        color: #AAA;
+        text-align: left;
+        padding: 25px;
+        margin: 0 auto 16px !important;
+        background: rgba(0,0,0,.02);
+        border: 1px dashed #CCC;
+        border-radius: 4px;
+    }
+
+    .ginput_list {
+        padding: 15px;
+        background: #f8f8f8;
+    }
+
+    .gsurvey-rating {
+        margin-bottom: 25px;
+    }
+
+    .slider-display {
+        margin: 10px auto 60px;
+
+        span {
+            font-size: 16px;
+            font-style: italic;
+            margin: 5px;
+        }
+    }
+
+    th, td {
+        font-size: 16px !important;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+
+    .gsurvey-rank {
+        margin: 0;
+
+        .gsurvey-rank-choice {
+            padding: 0 0 0 36px;
+        }
+    }
+
+    a.gpoll_button {
+        width: 100%;
+        float: left;
+        margin: 10px auto 0;
+        @include transition(0.08s);
+    }
+
+    a#gform_save_1_link {
+        width: 100%;
+        text-align: left;
+        float: left;
+        padding: 0;
+        margin: 20px auto 0;
+        @include transition(0.08s);
+    }
+
+    .gform_page_footer {
+        margin: 35px auto 0 !important
+    }
+
+    .validation_error, .gfield_error, .gfield_required {
+        color: #ff4f4f !important;
+        text-align: left !important;
+        padding: 0 !important;
+        border: none !important;
+
+        label {
+            color: #ff4f4f !important;
+        }
+    }
+
+    .validation_message {
+        color: #ff4f4f !important;
+        font-style: italic;
+        padding: 0 !important;
+    }
+
+    .gfield_contains_required {
+        background: none !important;
+        border: none !important;
+    }
+}
+
+.gform_confirmation_message {
+    font-size: 22px;
+    padding: 20px 25px 30px;
+    background: #f1f1f1;
+    border-radius: 4px;
+}

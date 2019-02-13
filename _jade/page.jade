@@ -1,0 +1,50 @@
+- get_header()
+
+div(id="page")
+    main
+        article
+            - if (have_posts()) :
+                - while (have_posts()) : the_post()
+                    - the_content()
+                - endwhile
+
+                - wp_reset_postdata()
+            - else :
+                - include('includes/loop_missing.php')
+            - endif
+
+            //- Kitchen Sink - Use for initial styling
+            h1 Heading 1
+            h2 Heading 2
+            h3 Heading 3
+            h4 Heading 4
+            h5 Heading 5
+            h6 Heading 6
+
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam reiciendis asperiores quam obcaecati laborum officiis sit cum recusandae, labore corrupti necessitatibus voluptate nemo? Illo eaque animi ipsam error illum a incidunt aliquid vero accusantium impedit, excepturi sapiente voluptatum unde perferendis laudantium quaerat distinctio pariatur laborum ullam rem temporibus? Aliquid, amet.
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam reiciendis asperiores quam obcaecati laborum officiis sit cum recusandae, labore corrupti necessitatibus voluptate nemo? Illo eaque animi ipsam error illum a incidunt aliquid vero accusantium impedit, excepturi sapiente voluptatum unde perferendis laudantium quaerat distinctio pariatur laborum ullam rem temporibus? Aliquid, amet.
+
+            a(href="") Link Here
+            br
+            a(class="button" href="") Button Link
+
+            ul
+                li List 1
+                li List 2
+                li List 3
+                li List 4
+
+            ol
+                li Order List 1
+                li Ordered List 2
+                li Ordered List 3
+                li Ordered List 4
+
+            img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
+
+            blockquote Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis assumenda ut vero fugit saepe, quasi quas illum quisquam, modi velit, facilis accusantium vel doloremque consequatur.
+
+        aside
+            - get_sidebar()
+
+- get_footer()

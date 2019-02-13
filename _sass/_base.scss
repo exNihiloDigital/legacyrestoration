@@ -1,0 +1,83 @@
+// Susy 2.2.14
+// http://susy.readthedocs.io/settings/
+// ================================================================
+
+$susy: (
+    container: 1100px,
+    columns: 6,
+    column-width: true,
+    gutters: 1 / 8,
+    gutter-position: after,
+    global-box-sizing: border-box,
+    debug: (image: hide)
+);
+
+// Explainations
+// ================================================================
+
+// @include container();
+// --------------------------------
+// max-width: susy('container');
+// margin-left: auto;
+// margin-right: auto;
+// You could add margin: 0 auto; to override the margin-left & margin-right
+
+// @include span(4 of 6);
+// --------------------------------
+// width: 66.03774%;
+// float: left;
+// margin-right: 1.88679%;
+
+// @include span(2 of 6 last);
+// --------------------------------
+// width: 32.07547%;
+// float: right;
+// margin-right: 0;
+
+// Susy Layouts
+// ================================================================
+
+// Fonts
+// ================================================================
+
+$fonts: (
+    body: #{"Open Sans", Helvetica, Arial, sans-serif},
+    heading: #{"Montserrat", sans-serif}
+);
+*,*:focus {
+    box-sizing: border-box;
+}
+img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+
+    &.alignright {
+        margin: 0 0 20px 20px;
+        float: right;
+    }
+
+    &.alignleft {
+        margin: 0 20px 20px 0;
+        float: left;
+    }
+
+    &.aligncenter {
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+}
+
+body {
+    background: white;
+    color: color("dark");
+    font-family: font("body");
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1.5;
+}
+button,.button {
+    @extend %button;
+}

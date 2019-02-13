@@ -1,0 +1,17 @@
+- // Check if post has thumbnail, else grab default post image
+- if (has_post_thumbnail()) :
+    - $thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full')[0]
+- else :
+    - $thumbnail = esc_url(get_theme_file_uri()) . "/images/post.jpg"
+- endif
+
+section(class="post")
+    a(class="post-image" href="<?php echo get_permalink() ?>" style="background-image: url(<?php echo $thumbnail ?>)")
+
+    div(class="post-content")
+        h2
+            a(href="<?php echo get_permalink() ?>"): - the_title()
+
+        - the_excerpt()
+
+        a(href="<?php echo get_permalink() ?>" class="button") Continue

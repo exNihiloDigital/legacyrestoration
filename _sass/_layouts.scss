@@ -1,0 +1,249 @@
+// Layouts
+// ================================================================
+
+.masthead {
+    background: color("light");
+
+    .container {
+        @include container;
+
+        font-weight: bold;
+        text-align: right;
+        padding: 5px 0;
+    }
+}
+
+header {
+    background: white;
+    padding: 0 40px;
+
+    @include breakpoint(769px down) {
+        padding: 0 20px;
+    }
+    // Set this to the height of .container, menu will auto-center
+    $height: 108px;
+
+    .container {
+        @include container;
+
+        .logo {
+            @include span(2 of 6);
+
+            height: $height;
+            display: table;
+
+            @include breakpoint(768px down) {
+                width: 100%;
+                text-align: center;
+            }
+
+
+            a {
+                display: table-cell;
+                vertical-align: middle;
+
+                img {
+                    max-width: 200px;
+                }
+            }
+        }
+
+        .menu {
+            @include span(4 of 6 last);
+
+            height: $height;
+            display: table;
+
+            @include breakpoint(768px down) {
+                display: none;
+            }
+
+            nav {
+                display: table-cell;
+                vertical-align: middle;
+
+                ul {
+                    float: right;
+                    padding: 0;
+                    position: relative;
+
+                    li {
+                        text-align: center;
+                        display: inline-block;
+
+                        @include breakpoint(1100px down) {
+                            position: relative;
+                        }
+
+                        &:not(:first-child) {
+                            margin: 0 0 0 10px;
+                        }
+
+                        a {
+                            color: color('one');
+                            font-weight: bold;
+                            padding: 41px 5px; // See dropdown margin
+                            display: block;
+
+                            &:hover {
+                                color: color("two");
+                            }
+
+                            i.fa {
+                                width: 100%;
+                                margin: 0 0 5px 0;
+                            }
+                        }
+
+                        // Dropdown
+                        ul.dropdown {
+                            background: color("one");
+                            box-shadow: 4px 4px 6px transparentize(black, 0.95);
+                            display: none;
+                            margin: 0 0 0 -10px; // The differential of li padding and dropdown li padding
+                            max-width: 180px;
+                            position: absolute;
+                            width: 100%;
+                            z-index: 9;
+
+                            @include breakpoint(1100px down) {
+                                right: 0;
+                                width: 180px;
+                            }
+
+                            li {
+                                text-align: left;
+                                margin: 0;
+                                display: block;
+                                position: relative;
+
+                                @include transition(0.06s);
+
+                                &:hover {
+                                    background: color("two");
+                                }
+
+                                &:not(:last-child) {
+                                    // border-bottom: 1px solid transparentize(white, 0.95);
+                                }
+
+                                a {
+                                    color: white;
+                                    font-size: 16px;
+                                    padding: 10px 15px; // See dropdown margin
+                                    display: block;
+                                }
+
+                                // Dropdown
+                                ul.dropdown {
+                                    top: 0;
+                                    left: 100%;
+                                    margin: 0;
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+main {
+    @include container;
+
+    padding: 30px 0 60px;
+
+    article {
+        @include span(4 of 6);
+
+        .post {
+            @extend %post;
+        }
+
+        ul {
+            @extend %ul;
+        }
+
+        ol {
+            @extend %ol;
+        }
+    }
+
+    aside {
+        @include span(2 of 6 last);
+    }
+}
+
+#error {
+    background: url("../images/pattern.jpg") center repeat;
+
+    main {
+        @include container;
+
+        padding: 80px 0;
+
+        article {
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+
+            img {
+                max-width: 220px;
+                margin: 0 auto 20px;
+            }
+
+            p {
+                color: white;
+            }
+        }
+    }
+}
+
+#front {
+    
+}
+
+#page, #single {
+    padding: 0 40px;
+
+    @include breakpoint(769px down) {
+        padding: 0 20px;
+    }
+}
+
+#archive, #index, #search {
+    padding: 0 40px;
+
+    @include breakpoint(769px down) {
+        padding: 0 20px;
+    }
+}
+
+footer {
+    background: color("dark");    
+
+    .copyright {
+        padding: 8px 0;
+
+        .container {
+            @include container;
+
+            p {
+                width: 100%;
+                color: white;
+                text-align: center;
+                margin: 0 auto;
+
+                a {
+                    color: white;
+
+                    &:hover {
+                        color: color("two");
+                    }
+                }
+            }
+        }
+    }
+}

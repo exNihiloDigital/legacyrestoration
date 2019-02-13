@@ -1,0 +1,125 @@
+// Placeholders
+// ================================================================
+
+%button {
+    background: color("one");
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+
+    @include transition(0.12s);
+
+    &:hover {
+        background: color("two");
+        color: white;
+
+        @include transition(0.12s);
+    }
+}
+
+%post {
+    background: white;
+    border-radius: 4px;
+    margin: 0 auto 40px;
+
+    &-image {
+        background-position: center;
+        background-size: cover;
+        border-radius: 4px;
+        display: block;
+        height: 250px;
+        margin: 0 auto 25px;
+        width: 100%;
+    }
+
+    &-content {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+        }
+
+        p {
+            margin: 20px auto 25px;
+        }
+
+        .button {
+            margin: 0;
+        }
+    }
+}
+
+%ul {
+    display: inline-table;
+    margin: 0 0 20px 20px;
+
+    li {
+        list-style: none;
+        list-style-position: inside;
+        margin: 0 0 10px 0;
+        padding: 0 0 0 20px;
+        position: relative;
+
+        &:before {
+            background: color("one");
+            border-radius: 100%;
+            content: "";
+            height: 6px;
+            left: 0;
+            position: absolute;
+            top: 11px;
+            width: 6px;
+        }
+
+        ul {
+            margin: 0 0 20px 20px;
+
+            li {
+                list-style: none;
+                list-style-position: inside;
+                margin: 0 0 10px 0;
+                padding: 0 0 0 20px;
+                position: relative;
+
+                &:before {
+                    content: "•";
+                    color: color("two");
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                }
+            }
+        }
+    }
+}
+
+%ol {
+    display: inline-table;
+    margin: 0 0 20px 20px;
+
+    li {
+        counter-increment: list;
+        display: block;
+        list-style-type: none;
+        margin: 0 0 10px 0;
+        padding: 0 0 0 20px;
+        position: relative;
+
+        &:before {
+            content: counter(list) ".";
+            color: color("one");
+            font-weight: bold;
+            text-align: right;
+            left: -10px;
+            position: absolute;
+        }
+    }
+}

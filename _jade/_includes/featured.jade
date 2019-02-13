@@ -1,0 +1,5 @@
+- // featured('title'), featured('image'), featured('alt')
+
+div(class="featured <?php featured('alt') ?>" style="background-image: url(<?php featured('image') ?>)")
+    div(class="container")
+        h1: - featured('title')

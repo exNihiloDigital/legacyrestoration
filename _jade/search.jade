@@ -1,0 +1,17 @@
+- get_header()
+
+div(id="search")
+    main
+        article
+            - if (have_posts()) :
+                - while (have_posts()) : the_post()
+                    - include('includes/loop-post.php')
+                - endwhile
+
+                - pagination()
+                - wp_reset_postdata()
+            - endif
+        aside
+            - get_sidebar()
+
+- get_footer()

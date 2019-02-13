@@ -1,0 +1,19 @@
+- get_header()
+
+div(id="single")
+    main
+        article
+            - if (have_posts()) :
+                - while (have_posts()) : the_post()
+                    - the_content()
+                - endwhile
+
+                - wp_reset_postdata()
+            - else :
+                - include('includes/loop_missing.php')
+            - endif
+
+        aside
+            - get_sidebar()
+
+- get_footer()
