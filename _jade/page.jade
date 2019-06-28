@@ -1,5 +1,5 @@
 - get_header()
-
+div(class="new")
 div(id="page")
     main
         article
@@ -12,6 +12,8 @@ div(id="page")
             - else :
                 - include('includes/loop_missing.php')
             - endif
+
+            - print_r('lol')
 
             //- Kitchen Sink - Use for initial styling
             h1 Heading 1
