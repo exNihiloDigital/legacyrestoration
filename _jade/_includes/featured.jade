@@ -1,5 +1,6 @@
 - // featured('title'), featured('image'), featured('alt')
 
-div(class="featured <?php featured('alt') ?>" style="background-image: url(<?php featured('image') ?>)")
-    div(class="container")
-        h1: - featured('title')
+div(class="featured overlay <?php featured('alt') ?>" style="background-image: url(<?php featured('image') ?>)")
+    main
+        div
+            h1: - featured('title') 
