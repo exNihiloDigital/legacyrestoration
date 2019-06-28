@@ -33,7 +33,7 @@ function featured($key)
 
     if (is_home() || is_home() && is_paged()) {
         array_push($title, 'Blog');
-        array_push($image, esc_url(get_theme_file_uri()) . '/images/featured.jpg');
+        array_push($image, wp_get_attachment_image_src(get_post_thumbnail_id(get_queried_object()->ID), 'full')[0]);
     }
 
     if (is_page()) {

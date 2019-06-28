@@ -410,6 +410,27 @@ function remove_emojis()
     remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 }
 
+// Add Insert Button
+add_action( 'init', 'tiny_mce_new_buttons' );
+
+function tiny_mce_new_buttons() {
+  add_filter( 'mce_external_plugins', 'tiny_mce_add_buttons' );
+  add_filter( 'mce_buttons', 'tiny_mce_register_buttons' );
+}
+
+function tiny_mce_add_buttons( $plugins ) {
+  $plugins['mytinymceplugin'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
+  return $plugins;
+}
+
+function tiny_mce_register_buttons( $buttons ) {
+  $newBtns = array(
+    'myblockquotebtn'
+  );
+  $buttons = array_merge( $buttons, $newBtns );
+  return $buttons;
+}
+
 /**
  * Modifies TinyMCE's setting and button ordering
  *
@@ -417,7 +438,7 @@ function remove_emojis()
  * @param [type] $settings
  * @return void
  */
-add_filter('tiny_mce_before_init', 'clean_tinymce');
+// add_filter('tiny_mce_before_init', 'clean_tinymce');
 function clean_tinymce($settings)
 {
     $settings['remove_linebreaks'] = true;
@@ -433,7 +454,7 @@ function clean_tinymce($settings)
     /**
      * This is where you will add specific button shortcodes into the toolbar
      */
-    $settings['toolbar1'] = 'formatselect,forecolor,bold,italic,underline,strikethrough,hr,blockquote,numlist,bullist,button,link,unlink,alignleft,aligncenter,alignright,outdent,indent,undo,redo,charmap,removeformat,pastetext,wp_help';
+    $settings['toolbar1'] = 'formatselect,forecolor,bold,italic,underline,strikethrough,hr,blockquote,numlist,bullist,button,link,unlink,alignleft,aligncenter,alignright,outdent,indent,undo,redo,charmap,removeformat,pastetext,wp_help,myblockquotebtn';
 
     $settings['toolbar2'] = '';
 
@@ -441,3 +462,37 @@ function clean_tinymce($settings)
 
     return $settings;
 }
+//====================================================================
+//  Add Button to TinyMCE
+//====================================================================
+add_action('admin_head', 'phos_add_tinymce_button');
+function phos_add_tinymce_button() {
+    global $typenow;
+    // check user permissions
+    if ( !current_user_can('edit_posts') && !current_user_can('edit_pages') ) {
+    return;
+    }
+    // verify the post type
+    if( ! in_array( $typenow, array( 'post', 'page' ) ) )
+        return;
+    // check if WYSIWYG is enabled
+    if ( get_user_option('rich_editing') == 'true') {
+        add_filter("mce_external_plugins", "phos_add_tinymce_plugin");
+        add_filter('mce_buttons', 'phos_register_tc_button');
+    }
+}
+
+function phos_add_tinymce_plugin($plugin_array) {
+    $plugin_array['phos_tc_button'] = get_template_directory_uri() . '/assets/tinymce-plugin.js'; 
+    return $plugin_array;
+}
+
+function phos_register_tc_button($buttons) {
+   array_push($buttons, "phos_tc_button");
+   return $buttons;
+}
+function phos_tc_css() {
+    wp_enqueue_style('phos-tc', get_template_directory_uri() . '/assets/dashboard.min.css');
+}
+ 
+add_action('admin_enqueue_scripts', 'phos_tc_css');

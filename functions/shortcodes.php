@@ -40,7 +40,7 @@ function shortcode_accordion($atts)
                         $output .= '<div class="block">';
 
                         $output .= '<div class="title">';
-                        $output .= '<span>' . get_sub_field('title') . '</span><i class="fa fa-plus"></i>';
+                        $output .= '<span>' . get_sub_field('title') . '</span><i class="fas fa-plus"></i>';
                         $output .= '</div>';
 
                         $output .= '<div class="content">';

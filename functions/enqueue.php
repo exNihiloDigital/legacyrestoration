@@ -52,21 +52,14 @@ add_action('wp_enqueue_scripts', 'enqueue_theme');
 function enqueue_theme()
 {
     if (! is_admin()) {
-        wp_enqueue_script('jquery');
-        wp_enqueue_script('matchheight', 'https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js');
+        wp_deregister_script('jquery'); // Takes out the possibly outdated version included in WP
+        wp_enqueue_script('jquery', 'https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js');
+        wp_enqueue_script('scripts', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
         wp_enqueue_script('theme', get_template_directory_uri() . '/assets/theme.min.js');
 
+        wp_enqueue_style('normalize', 'https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css');
+        wp_enqueue_style('fontawesome', 'https://use.fontawesome.com/releases/v5.8.1/css/all.css');
         wp_enqueue_style('style', get_template_directory_uri() . '/style.css');
-        wp_enqueue_style('fontawesome', 'https://cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css');
         wp_enqueue_style('theme', get_template_directory_uri() . '/assets/theme.min.css');
-
-        /**
-         * Cross-browser
-         */
-        wp_script_add_data('html5shiv', 'conditional', 'gte IE 9');
-        wp_enqueue_script('html5shiv', 'https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js');
-
-        wp_script_add_data('html5shiv-printshiv', 'conditional', 'lte IE 8');
-        wp_enqueue_script('html5shiv-printshiv', 'https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv-printshiv.min.js');
     }
 }
