@@ -1,0 +1,6 @@
+/.git
+/assets
+/*.php
+!/functions.php
+*.DS_Store
+node_modules

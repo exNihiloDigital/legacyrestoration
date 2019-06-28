@@ -1,0 +1,13 @@
+{
+  "name": "framework",
+  "version": "1.0.0",
+  "description": "Test build of new framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "git pull gulp",
+    "commit": "git add . && git commit -m updated && git push"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}

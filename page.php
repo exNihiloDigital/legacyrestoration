@@ -1,5 +1,6 @@
 
 <?php get_header(); ?>
+<div class="new"></div>
 <div id="page">
   <main>
     <article>
@@ -11,6 +12,7 @@
       <?php else : ?>
       <?php include('includes/loop_missing.php'); ?>
       <?php endif; ?>
+      <?php print_r('lol'); ?>
       <h1>Heading 1</h1>
       <h2>Heading 2</h2>
       <h3>Heading 3</h3>
