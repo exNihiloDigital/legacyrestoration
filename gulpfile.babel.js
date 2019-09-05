@@ -6,6 +6,7 @@ import eslint from "gulp-eslint";
 import gulp from "gulp";
 import jade from "gulp-jade-php";
 import minify from "gulp-clean-css";
+import newer from "gulp-newer";
 import plumber from "gulp-plumber";
 import rename from "gulp-rename";
 import sass from "gulp-sass";
@@ -75,6 +76,7 @@ gulp.task("templates", done => {
     gulp.src(template)
         .pipe(plumber())
         .pipe(jade({ pretty: true }))
+        .pipe(newer("./"))
         .pipe(gulp.dest("./"))
         .pipe(browserSync.stream());
     done();
