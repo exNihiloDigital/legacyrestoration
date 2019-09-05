@@ -54,7 +54,12 @@ function enqueue_theme()
     if (! is_admin()) {
 		// Get the theme data.
 		$the_theme     = wp_get_theme();
+		// Will take the version from root folder /style.css
 		$theme_version = $the_theme->get( 'Version' );
+		// Will append the modified-time to static assets.
+		// theme.min.css becomes theme.min.css?ver=1.0.0195867.
+		// Prevents caching issues as the cache renews with changed file names.
+		// https://www.keycdn.com/support/what-is-cache-busting
 		$css_v = $theme_version . '.' . filemtime( get_template_directory() . '/css/theme.min.css' );
 		$js_v = $theme_version . '.' . filemtime( get_template_directory() . '/js/theme.min.js' );
 
