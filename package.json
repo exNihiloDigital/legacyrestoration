@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "git pull gulp",
-    "commit": "git add . && git commit -m updated && git push"
+    "commit": "git add . && git commit -m updated && git push",
+    "git": "git add . && git commit -m",
+    "postgit": "git push --all"
   },
   "author": "",
   "license": "ISC",
