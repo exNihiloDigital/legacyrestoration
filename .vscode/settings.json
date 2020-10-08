@@ -1,0 +1,19 @@
+{
+	// turn it off for JS, we will do this via eslint
+	"[javascript]": {
+		"editor.formatOnSave": false,
+		"editor.formatOnSaveMode": "file"
+	},
+	"[scss]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	// tell the ESLint plugin to run on save
+	"editor.codeActionsOnSave": { "source.fixAll": true },
+	// tell the Editor to format on save
+	"editor.formatOnSave": true,
+	// show eslint icon at bottom toolbar
+	"eslint.alwaysShowStatus": true,
+	// IMPORTANT: If you have the prettier extension enabled for other languages like CSS and HTML, turn it off for JS since we are doing it through Eslint already
+	"prettier.disableLanguages": ["javascript"]
+}
