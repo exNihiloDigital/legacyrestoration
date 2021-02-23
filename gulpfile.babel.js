@@ -1,121 +1,151 @@
 // Required NPM Packages
-import autoprefixer from "gulp-autoprefixer";
-import browserSync from "browser-sync";
-import concat from "gulp-concat";
-import eslint from "gulp-eslint";
-import gulp from "gulp";
-import jade from "gulp-jade-php";
-import minify from "gulp-clean-css";
-import newer from "gulp-newer";
-import plumber from "gulp-plumber";
-import rename from "gulp-rename";
-import sass from "gulp-sass";
-import sourcemaps from "gulp-sourcemaps";
-import uglify from "gulp-uglify";
+import autoprefixer from 'autoprefixer';
+import babel from 'gulp-babel';
+import browserSync from 'browser-sync';
+import concat from 'gulp-concat';
+import gulp from 'gulp';
+import jade from 'gulp-jade-php';
+import cleanCSS from 'gulp-clean-css';
+import newer from 'gulp-newer';
+import plumber from 'gulp-plumber';
+import postcss from 'gulp-postcss';
+import rename from 'gulp-rename';
+import sass from 'gulp-sass';
+import uglify from 'gulp-uglify';
 
 // Folder Destination Variables
-const root = "../../../../../../";
-const style = ["_scss/*.scss", "_sass/**/*.scss"];
-const dashboard = ["_sass/_admin/dashboard.scss"];
-const login = ["_sass/_admin/login.scss"];
-const template = "_jade/*.jade";
-const includes = ["_jade/_includes/*.jade"];
-const javascript = "_js/*.js";
-const output = "./assets";
-const siteURL = "phos-framework.test";
+const adminAcf = '_sass/_admin/acf.scss';
+const adminDashboard = '_sass/_admin/dashboard.scss';
+const adminGutenberg = '_sass/_admin/gutenberg.scss';
+const adminLogin = '_sass/_admin/login.scss';
+const javascript = '_js/*.js';
+const outputJS = './assets/js';
+const outputStyles = './assets/css';
+const style = '_sass/*.scss';
+const template = '_jade/*.jade';
+const templateIncludes = '_jade/_includes/*.jade';
+
+const siteURL = 'phos-framework.test';
 
 // Loop through _scss files, compile them, concatonate them, saves to /assets as .css
-gulp.task("styles", done => {
-    gulp.src("./_sass/theme.scss")
-        .pipe(plumber())
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(sass())
-        .pipe(autoprefixer("last 2 versions", "> 5%"))
-        .pipe(sourcemaps.write(undefined, { sourceRoot: null }))
-        .pipe(gulp.dest(output));
-    done();
-});
-
-gulp.task("minifycss", () => {
-    return gulp
-        .src(`${output}/theme.css`)
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(plumber())
-        .pipe(rename({ suffix: ".min" }))
-        .pipe(sourcemaps.write("./"))
-        .pipe(gulp.dest(output))
-        .pipe(browserSync.stream());
-});
-
-gulp.task("dashboard", done => {
-    gulp.src(dashboard)
+gulp.task('styles', () =>
+    gulp
+        .src('./_sass/theme.scss', { sourcemaps: true })
         .pipe(plumber())
         .pipe(sass())
-        .pipe(autoprefixer("last 2 versions", "> 5%"))
-        .pipe(concat("dashboard.min.css"))
-        .pipe(minify())
-        .pipe(gulp.dest(output))
-        .pipe(browserSync.stream());
-    done();
-});
+        .pipe(postcss([autoprefixer()]))
+        .pipe(gulp.dest(outputStyles, { sourcemaps: true }))
+);
 
-gulp.task("login", done => {
-    gulp.src(login)
+gulp.task('minifycss', () =>
+    gulp
+        .src(`${outputStyles}/theme.css`, { sourcemaps: true })
+        .pipe(plumber())
+        .pipe(cleanCSS())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest(outputStyles, { sourcemaps: '.' }))
+        .pipe(browserSync.stream())
+);
+
+gulp.task('acf', () =>
+    gulp
+        .src(adminAcf)
         .pipe(plumber())
         .pipe(sass())
-        .pipe(autoprefixer("last 2 versions", "> 5%"))
-        .pipe(concat("login.min.css"))
-        .pipe(minify())
-        .pipe(gulp.dest(output))
-        .pipe(browserSync.stream());
-    done();
-});
+        .pipe(postcss([autoprefixer()]))
+        .pipe(cleanCSS())
+        .pipe(rename('acf.min.css'))
+        .pipe(gulp.dest(outputStyles))
+        .pipe(browserSync.stream())
+);
+
+gulp.task('dashboard', () =>
+    gulp
+        .src(adminDashboard)
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer()]))
+        .pipe(cleanCSS())
+        .pipe(rename('dashboard.min.css'))
+        .pipe(gulp.dest(outputStyles))
+        .pipe(browserSync.stream())
+);
+
+gulp.task('gutenberg', () =>
+    gulp
+        .src(adminGutenberg)
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer()]))
+        .pipe(cleanCSS())
+        .pipe(rename('gutenberg.min.css'))
+        .pipe(gulp.dest(outputStyles))
+        .pipe(browserSync.stream())
+);
+
+gulp.task('login', () =>
+    gulp
+        .src(adminLogin)
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer()]))
+        .pipe(cleanCSS())
+        .pipe(rename('login.min.css'))
+        .pipe(gulp.dest(outputStyles))
+        .pipe(browserSync.stream())
+);
 
 // Loop through Jade files, compile them, saves to template root as .php
-gulp.task("templates", done => {
-    gulp.src(template)
+gulp.task('templates', () =>
+    gulp
+        .src(template)
         .pipe(plumber())
-        .pipe(jade({ pretty: true }))
-        .pipe(newer("./"))
-        .pipe(gulp.dest("./"))
-        .pipe(browserSync.stream());
-    done();
-});
+        .pipe(jade())
+        .pipe(newer('./'))
+        .pipe(gulp.dest('./'))
+        .pipe(browserSync.stream())
+);
 
 // Loop through files in the include folder
-gulp.task("includes", done => {
-    gulp.src(includes)
-        .pipe(jade({ pretty: true }))
-        .pipe(gulp.dest("./includes"))
-        .pipe(browserSync.stream());
-    done();
-});
+gulp.task('includes', () =>
+    gulp
+        .src(templateIncludes)
+        .pipe(plumber())
+        .pipe(jade())
+        .pipe(newer('./includes'))
+        .pipe(gulp.dest('./includes'))
+        .pipe(browserSync.stream())
+);
 
 // Loop through JS files, compile them, concatonate them, minify them, saves to /assets as .min.js
-gulp.task("javascript", done => {
-    gulp.src(javascript)
-        .pipe(plumber())
-        .pipe(eslint())
-        .pipe(concat("theme.js"))
-        .pipe(rename({ suffix: ".min" }))
+gulp.task('javascript', () => {
+    let scripts = ['!./_js/tinymce-plugin.js', './_js/equalizer.js', './_js/theme.js'];
+
+    gulp.src(scripts, { allowEmpty: true })
+        .pipe(babel({ presets: ['@babel/preset-env'] }))
+        .pipe(concat('theme.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(output))
-        .pipe(browserSync.stream());
-    done();
+        .pipe(gulp.dest(outputJS));
+
+    return gulp.src(scripts).pipe(babel()).pipe(concat('theme.js')).pipe(gulp.dest(outputJS));
 });
 
 // Watch files in _jade, _js, _scss. Run compile tasks for respective file type if changed.
-gulp.task("default", done => {
+gulp.task('default', done => {
     // Start BrowserSync
     browserSync.init({
         proxy: siteURL
     });
+
     //Watch Jade, SCSS, and JavaScript files
-    gulp.watch(style, gulp.series(["styles", "minifycss"]));
-    gulp.watch(dashboard, gulp.parallel(["dashboard"]));
-    gulp.watch(login, gulp.parallel(["login"]));
-    gulp.watch(template, gulp.parallel(["templates"]));
-    gulp.watch(includes, gulp.parallel(["includes"]));
-    gulp.watch(javascript, gulp.parallel(["javascript"]));
+    gulp.watch(adminAcf, gulp.series('acf'));
+    gulp.watch(adminDashboard, gulp.series('dashboard'));
+    gulp.watch(adminGutenberg, gulp.series('gutenberg'));
+    gulp.watch(adminLogin, gulp.series('login'));
+    gulp.watch(javascript, gulp.series('javascript'));
+    gulp.watch(style, gulp.series(['styles', 'minifycss']));
+    gulp.watch(template, gulp.series('templates'));
+    gulp.watch(templateIncludes, gulp.series('includes'));
+
     done();
 });
