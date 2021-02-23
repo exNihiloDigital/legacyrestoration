@@ -3,15 +3,15 @@
 // ================================================================
 
 $susy: (
-  container: 1100px,
-  columns: 6,
-  column-width: true,
-  gutters: 1 / 8,
-  gutter-position: after,
-  global-box-sizing: border-box,
-  debug: (
-    image: hide
-  )
+    container: 1100px,
+    columns: 6,
+    column-width: true,
+    gutters: 1 / 8,
+    gutter-position: after,
+    global-box-sizing: border-box,
+    debug: (
+        image: hide
+    )
 );
 
 // Explainations
@@ -43,50 +43,51 @@ $susy: (
 // ================================================================
 
 $fonts: (
-  body: #{"Open Sans",
-  Helvetica,
-  Arial,
-  sans-serif},
-  heading: #{"Montserrat",
-  sans-serif}
+    body: #{'Open Sans',
+    Helvetica,
+    Arial,
+    sans-serif},
+    heading: #{'Montserrat',
+    sans-serif}
 );
+
 *,
 *:focus {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 img {
-  width: auto;
-  max-width: 100%;
-  height: auto;
+    width: auto;
+    max-width: 100%;
+    height: auto;
 
-  &.alignright {
-    margin: 0 0 20px 20px;
-    float: right;
-  }
+    &.alignright {
+        margin: 0 0 20px 20px;
+        float: right;
+    }
 
-  &.alignleft {
-    margin: 0 20px 20px 0;
-    float: left;
-  }
+    &.alignleft {
+        margin: 0 20px 20px 0;
+        float: left;
+    }
 
-  &.aligncenter {
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-  }
+    &.aligncenter {
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
 }
 
 body {
-  background: white;
-  color: color("dark");
-  font-family: font("body");
-  font-size: 18px;
-  font-weight: normal;
-  letter-spacing: 0;
-  line-height: 1.5;
+    background: white;
+    color: color('dark');
+    font-family: font('body');
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1.5;
 }
 
 button,
 .button {
-  @extend %button;
+    @extend %button;
 }

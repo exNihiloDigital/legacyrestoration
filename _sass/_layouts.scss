@@ -2,7 +2,7 @@
 // ================================================================
 
 .masthead {
-    background: color("light");
+    background: color('light');
 
     .container {
         @include container;
@@ -34,9 +34,7 @@ header {
                 text-align: center;
             }
 
-
             a {
-
                 img {
                     max-width: 200px;
                 }
@@ -51,7 +49,6 @@ header {
             }
 
             nav {
-
                 ul {
                     float: right;
                     padding: 0;
@@ -76,7 +73,7 @@ header {
                             display: block;
 
                             &:hover {
-                                color: color("two");
+                                color: color('two');
                             }
 
                             i.fa {
@@ -87,7 +84,7 @@ header {
 
                         // Dropdown
                         ul.dropdown {
-                            background: color("one");
+                            background: color('one');
                             box-shadow: 4px 4px 6px transparentize(black, 0.95);
                             display: none;
                             margin: 0 0 0 -10px; // The differential of li padding and dropdown li padding
@@ -110,7 +107,7 @@ header {
                                 @include transition(0.06s);
 
                                 &:hover {
-                                    background: color("two");
+                                    background: color('two');
                                 }
 
                                 &:not(:last-child) {
@@ -167,7 +164,7 @@ main {
 }
 
 #error {
-    background: url("../images/pattern.jpg") center repeat;
+    background: url('../images/pattern.jpg') center repeat;
 
     main {
         @include container;
@@ -192,10 +189,10 @@ main {
 }
 
 #front {
-    
 }
 
-#page, #single {
+#page,
+#single {
     padding: 0 40px;
 
     @include breakpoint(769px down) {
@@ -203,7 +200,9 @@ main {
     }
 }
 
-#archive, #index, #search {
+#archive,
+#index,
+#search {
     padding: 0 40px;
 
     @include breakpoint(769px down) {
@@ -212,7 +211,7 @@ main {
 }
 
 footer {
-    background: color("dark");    
+    background: color('dark');
 
     .copyright {
         padding: 8px 0;
@@ -230,7 +229,7 @@ footer {
                     color: white;
 
                     &:hover {
-                        color: color("two");
+                        color: color('two');
                     }
                 }
             }

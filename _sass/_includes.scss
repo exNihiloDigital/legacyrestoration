@@ -4,7 +4,7 @@
 .mobile {
     display: none;
 
-    @include breakpoint(769px down){
+    @include breakpoint(769px down) {
         display: block;
         width: 100%;
     }
@@ -41,7 +41,7 @@
             padding: 15px;
             margin: 0 auto 25px;
 
-            [type=search] {
+            [type='search'] {
                 color: white;
                 width: calc(100% - 63px);
                 font-size: 16px;
@@ -174,7 +174,7 @@
     }
 }
 .breadcrumbs {
-    background: color("light");
+    background: color('light');
 
     .container {
         @include container;
@@ -182,20 +182,20 @@
         padding: 5px 0;
 
         span {
-            font-size: paragraph("font-size") - 2px;
+            font-size: paragraph('font-size') - 2px;
         }
     }
 }
 
 .pagination {
     clear: both;
-    font-size: paragraph("font-size") / 1.2;
+    font-size: paragraph('font-size') / 1.2;
     line-height: 13px;
     padding: 20px 0;
     position: relative;
 
     span {
-        background: color("one");
+        background: color('one');
         color: white;
         display: block;
         float: left;
@@ -207,7 +207,7 @@
     }
 
     a {
-        background: color("one");
+        background: color('one');
         color: white !important;
         display: block;
         float: left;
@@ -217,13 +217,13 @@
         width: auto;
 
         &:hover {
-            background: color("two");
+            background: color('two');
             color: white;
         }
     }
 
     .current {
-        background: color("two");
+        background: color('two');
         color: white;
         padding: 16px 19px 15px 19px;
     }

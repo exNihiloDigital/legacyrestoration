@@ -2,7 +2,7 @@
 // ================================================================
 
 %button {
-    background: color("one");
+    background: color('one');
     border: none;
     color: white;
     cursor: pointer;
@@ -15,7 +15,7 @@
     @include transition(0.12s);
 
     &:hover {
-        background: color("two");
+        background: color('two');
         color: white;
 
         @include transition(0.12s);
@@ -69,9 +69,9 @@
         position: relative;
 
         &:before {
-            background: color("one");
+            background: color('one');
             border-radius: 100%;
-            content: "";
+            content: '';
             height: 6px;
             left: 0;
             position: absolute;
@@ -90,8 +90,8 @@
                 position: relative;
 
                 &:before {
-                    content: "•";
-                    color: color("two");
+                    content: '•';
+                    color: color('two');
                     top: 0;
                     left: 0;
                     position: absolute;
@@ -114,8 +114,8 @@
         position: relative;
 
         &:before {
-            content: counter(list) ".";
-            color: color("one");
+            content: counter(list) '.';
+            color: color('one');
             font-weight: bold;
             text-align: right;
             left: -10px;

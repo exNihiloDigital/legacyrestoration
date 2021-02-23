@@ -11,7 +11,7 @@
         }
     }
 
-    [type=text] {
+    [type='text'] {
         background: none;
         border: 1px solid #ccc;
     }
@@ -26,22 +26,23 @@
         border: 1px solid #ccc;
     }
 
-    .ginput_container_checkbox, .ginput_container_radio {
+    .ginput_container_checkbox,
+    .ginput_container_radio {
         margin-top: 0 !important;
     }
 
-    [type=checkbox] {
+    [type='checkbox'] {
         margin-top: 0 !important;
     }
 
-    [type=file] {
+    [type='file'] {
         width: 100%;
-        color: #AAA;
+        color: #aaa;
         text-align: left;
         padding: 25px;
         margin: 0 auto 16px !important;
-        background: rgba(0,0,0,.02);
-        border: 1px dashed #CCC;
+        background: rgba(0, 0, 0, 0.02);
+        border: 1px dashed #ccc;
         border-radius: 4px;
     }
 
@@ -64,7 +65,8 @@
         }
     }
 
-    th, td {
+    th,
+    td {
         font-size: 16px !important;
         text-transform: none;
         letter-spacing: 0;
@@ -95,10 +97,12 @@
     }
 
     .gform_page_footer {
-        margin: 35px auto 0 !important
+        margin: 35px auto 0 !important;
     }
 
-    .validation_error, .gfield_error, .gfield_required {
+    .validation_error,
+    .gfield_error,
+    .gfield_required {
         color: #ff4f4f !important;
         text-align: left !important;
         padding: 0 !important;
