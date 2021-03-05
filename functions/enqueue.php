@@ -60,12 +60,14 @@ function enqueue_theme()
 		// theme.min.css becomes theme.min.css?ver=1.0.0195867.
 		// Prevents caching issues as the cache renews with changed file names.
 		// https://www.keycdn.com/support/what-is-cache-busting
-		$css_v = $theme_version . '.' . filemtime( get_template_directory() . '/assets/css/theme.min.css' );
-		$js_v = $theme_version . '.' . filemtime( get_template_directory() . '/assets/js/theme.min.js' );
+        $css = file_exists( get_template_directory() . '/assets/css/theme.min.css' ) ? '/assets/css/theme.min.css' : '/style.css';
+        $js = file_exists( get_template_directory() . '/assets/js/theme.min.js' ) ? '/assets/js/theme.min.js' : '/style.css';
+		$css_v = $theme_version . '.' . filemtime( get_template_directory() . $css );
+		$js_v = $theme_version . '.' . filemtime( get_template_directory() . $js );
 
         wp_enqueue_script('jquery');
         wp_enqueue_script('scripts', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
-        wp_enqueue_script('theme', get_template_directory_uri() . '/assets/js/theme.min.js', array(), $js_v, true);
+        wp_enqueue_script('theme', get_template_directory_uri() . '/assets/js/theme.min.js', array('jquery'), $js_v, true);
 
         wp_enqueue_style('normalize', 'https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css');
         wp_enqueue_style('fontawesome', 'https://pro.fontawesome.com/releases/v5.12.0/css/all.css');
