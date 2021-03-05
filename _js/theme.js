@@ -1,4 +1,4 @@
-jQuery(function () {
+jQuery(function ($) {
     /**
      * Sets the dropdown animation for our mobile-menu
      *
