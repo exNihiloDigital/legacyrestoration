@@ -6,3 +6,5 @@ node_modules
 
 /*.php
 !/functions.php
+
+**/*.webp
