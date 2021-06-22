@@ -13,29 +13,29 @@ head
 
 - wp_body_open();
 
-div(class="mobile")
-    div(class="topbar")
+.mobile
+    .topbar
         i.fa.fa-bars
         span Menu
 
-    div(class="block")
+    .block
         - if (get_field('search', 'options') == 'show') :
             - get_search_form()
         - endif
 
         - mobile_menu()
 
-div(class="masthead")
-    div(class="container")
+.masthead
+    .container
         a(href="tel:>") 111-222-3333
 
 header
-    div(class="container")
-        div(class="logo")
+    .container
+        .logo
             a(href="<?php echo esc_url(home_url('/')) ?>")
                 img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
 
-        div(class="menu")
+        .menu
             nav
                 - header_menu()
 

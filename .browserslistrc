@@ -1,5 +1,3 @@
 # Browsers that we support
 # https://github.com/browserslist/browserslist#browserslistrc
 # run 'npx browserslist' to see which versions are supported by the specs below
-
-extends @wordpress/browserslist-config

@@ -5,13 +5,13 @@
     - $thumbnail = esc_url(get_theme_file_uri()) . "/images/post.jpg"
 - endif
 
-section(class="post")
-    a(class="post-image" href="<?php echo get_permalink() ?>" style="background-image: url(<?php echo $thumbnail ?>)")
+.post
+    a.post-image(href="<?php echo get_permalink() ?>" style="background-image: url(<?php echo $thumbnail ?>)")
 
-    div(class="post-content")
+    .post-content
         h2
             a(href="<?php echo get_permalink() ?>"): - the_title()
 
         - the_excerpt()
 
-        a(href="<?php echo get_permalink() ?>" class="button") Continue
+        a.button(href="<?php echo get_permalink() ?>") Continue

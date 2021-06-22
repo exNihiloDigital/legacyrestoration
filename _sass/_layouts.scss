@@ -5,8 +5,6 @@
     background: color('light');
 
     .container {
-        @include container;
-
         font-weight: bold;
         text-align: right;
         padding: 5px 0;
@@ -21,7 +19,6 @@ header {
     }
 
     .container {
-        @include container;
         align-items: center;
         display: flex;
         padding: 10px 0;
@@ -138,8 +135,6 @@ header {
 }
 
 main {
-    @include container;
-
     padding: 30px 0 60px;
 
     article {
@@ -166,10 +161,7 @@ main {
 #error {
     background: url('../images/pattern.jpg') center repeat;
 
-    main {
-        @include container;
-
-        padding: 80px 0;
+    .container {
 
         article {
             width: 100%;

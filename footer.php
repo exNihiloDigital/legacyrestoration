@@ -1,16 +1,2 @@
-
-<?php get_header(); ?>
-<footer>
-  <div>
-    <div class="container">
-      <?php footer_menu(); ?>
-    </div>
-  </div>
-  <div class="copyright">
-    <div class="container">
-      <p>Copyright &copy; <?php echo date('Y') . ' ' . get_bloginfo('name') ?>. <a href="https://phoscreative.com/expertise/web-design/" target="blank">Web Design</a> by <a href="https://phoscreative.com" target="_blank">PHOS Creative</a></p>
-    </div>
-  </div>
-</footer>
-<?php wp_footer(); ?></body>
+<?php get_header(); ?><footer><div class="container"><aside> <div class="footer-logo"><a href="<?php echo esc_url(home_url('/')) ?>"><img src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo"/></a></div></aside><section><?php footer_menu(); ?></section></div><div class="copyright"><div class="container"><p>&copy; <?php echo date('Y') . ' ' . get_bloginfo('name'); ?><a href="https://phoscreative.com/expertise/web-design/" target="blank">Web Design&nbsp;</a>by&nbsp;<a href="https://phoscreative.com" target="_blank">PHOS Creative</a></p></div></div></footer><?php wp_footer(); ?></body>
 </html>

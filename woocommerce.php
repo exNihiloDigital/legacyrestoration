@@ -1,7 +1,1 @@
-
-<?php get_header(); ?>
-<div id="woocommerce">
-  <main>
-  </main>
-</div>
-<?php get_footer(); ?>
+<?php get_header(); ?><article id="woocommerce"><div class="container"></div></article><?php get_footer(); ?>

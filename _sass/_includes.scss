@@ -137,8 +137,7 @@
     width: 100%;
 
     .container {
-        @include container;
-
+        @extend %container;
         text-align: center;
         padding: 80px 0;
 
@@ -177,8 +176,6 @@
     background: color('light');
 
     .container {
-        @include container;
-
         padding: 5px 0;
 
         span {
@@ -227,4 +224,7 @@
         color: white;
         padding: 16px 19px 15px 19px;
     }
+}
+.container{
+    @extend %container;
 }

@@ -25,7 +25,7 @@ const style = '_sass/*.scss';
 const template = '_jade/*.jade';
 const templateIncludes = '_jade/_includes/*.jade';
 
-const siteURL = 'phos-framework.test';
+const siteURL = 'phosframework-base.test';
 
 // Loop through _scss files, compile them, concatonate them, saves to /assets as .css
 gulp.task('styles', () =>
