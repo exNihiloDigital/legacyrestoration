@@ -1,4 +1,9 @@
 jQuery(function ($) {
+    menuDesktop($);
+    menuMobile($);
+});
+
+const menuMobile = $ => {
     /**
      * Sets the dropdown animation for our mobile-menu
      *
@@ -15,7 +20,9 @@ jQuery(function ($) {
     $('.mobile ul li.parent span').on('click', function () {
         $(this).toggleClass('selected').siblings('.dropdown').slideToggle(200);
     });
+};
 
+const menuDesktop = $ => {
     /**
      * Sets the dropdown animation when you hover the header menu
      */
@@ -26,4 +33,4 @@ jQuery(function ($) {
         .on('mouseleave', function () {
             $(this).children('.dropdown').stop(true, false, true).slideUp(200);
         });
-});
+};
