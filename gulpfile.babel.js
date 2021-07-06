@@ -2,16 +2,20 @@
 import autoprefixer from 'autoprefixer';
 import babel from 'gulp-babel';
 import browserSync from 'browser-sync';
+import cleanCSS from 'gulp-clean-css';
 import concat from 'gulp-concat';
 import gulp from 'gulp';
 import jade from 'gulp-jade-php';
-import cleanCSS from 'gulp-clean-css';
 import newer from 'gulp-newer';
 import plumber from 'gulp-plumber';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
-import sass from 'gulp-sass';
+import gulpSass from 'gulp-sass';
+import dartSass from 'sass';
 import uglify from 'gulp-uglify';
+
+// https://github.com/dlmanning/gulp-sass#importing-it-into-your-project
+const sass = gulpSass(dartSass);
 
 // Folder Destination Variables
 const adminAcf = '_sass/_admin/acf.scss';
