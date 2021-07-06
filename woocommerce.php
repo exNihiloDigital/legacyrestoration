@@ -1,1 +1,0 @@
-<?php get_header(); ?><article id="woocommerce"><div class="container"></div></article><?php get_footer(); ?>

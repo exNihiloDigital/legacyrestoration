@@ -5,6 +5,7 @@ node_modules
 /assets
 
 /*.php
+/includes
 !/functions.php
 
 **/*.webp
