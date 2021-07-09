@@ -4,14 +4,14 @@ import babel from 'gulp-babel';
 import browserSync from 'browser-sync';
 import cleanCSS from 'gulp-clean-css';
 import concat from 'gulp-concat';
+import dartSass from 'sass';
 import gulp from 'gulp';
+import gulpSass from 'gulp-sass';
 import jade from 'gulp-jade-php';
 import newer from 'gulp-newer';
 import plumber from 'gulp-plumber';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
-import gulpSass from 'gulp-sass';
-import dartSass from 'sass';
 import uglify from 'gulp-uglify';
 
 // https://github.com/dlmanning/gulp-sass#importing-it-into-your-project
@@ -29,7 +29,7 @@ const style = '_sass/*.scss';
 const template = '_jade/*.jade';
 const templateIncludes = '_jade/_includes/*.jade';
 
-const siteURL = 'phosframework-base.test';
+const siteURL = 'phos-framework.test';
 
 // Loop through _scss files, compile them, concatonate them, saves to /assets as .css
 gulp.task('styles', () =>
@@ -58,7 +58,7 @@ gulp.task('acf', () =>
         .pipe(sass())
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
-        .pipe(rename('acf.min.css'))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(outputStyles))
         .pipe(browserSync.stream())
 );
@@ -70,7 +70,7 @@ gulp.task('dashboard', () =>
         .pipe(sass())
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
-        .pipe(rename('dashboard.min.css'))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(outputStyles))
         .pipe(browserSync.stream())
 );
@@ -82,7 +82,7 @@ gulp.task('gutenberg', () =>
         .pipe(sass())
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
-        .pipe(rename('gutenberg.min.css'))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(outputStyles))
         .pipe(browserSync.stream())
 );
@@ -94,7 +94,7 @@ gulp.task('login', () =>
         .pipe(sass())
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
-        .pipe(rename('login.min.css'))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(outputStyles))
         .pipe(browserSync.stream())
 );
@@ -125,20 +125,22 @@ gulp.task('includes', () =>
 gulp.task('javascript', () => {
     let scripts = ['!./_js/tinymce-plugin.js', './_js/equalizer.js', './_js/theme.js'];
 
-    gulp.src(scripts, { allowEmpty: true })
+    gulp.src(scripts).pipe(babel()).pipe(concat('theme.js')).pipe(gulp.dest(outputJS));
+
+    return gulp
+        .src(scripts, { allowEmpty: true })
         .pipe(babel({ presets: ['@babel/preset-env'] }))
         .pipe(concat('theme.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(outputJS));
-
-    return gulp.src(scripts).pipe(babel()).pipe(concat('theme.js')).pipe(gulp.dest(outputJS));
+        .pipe(gulp.dest(outputJS))
+        .pipe(browserSync.stream());
 });
 
 // Watch files in _jade, _js, _scss. Run compile tasks for respective file type if changed.
-gulp.task('default', done => {
+gulp.task('default', () => {
     // Start BrowserSync
     browserSync.init({
-        proxy: siteURL
+        proxy: siteURL,
     });
 
     //Watch Jade, SCSS, and JavaScript files
@@ -150,6 +152,4 @@ gulp.task('default', done => {
     gulp.watch(style, gulp.series(['styles', 'minifycss']));
     gulp.watch(template, gulp.series('templates'));
     gulp.watch(templateIncludes, gulp.series('includes'));
-
-    done();
 });

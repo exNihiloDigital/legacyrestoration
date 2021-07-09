@@ -3,7 +3,7 @@ jQuery(function ($) {
     menuMobile($);
 });
 
-const menuMobile = $ => {
+const menuMobile = ($) => {
     /**
      * Sets the dropdown animation for our mobile-menu
      *
@@ -22,7 +22,7 @@ const menuMobile = $ => {
     });
 };
 
-const menuDesktop = $ => {
+const menuDesktop = ($) => {
     /**
      * Sets the dropdown animation when you hover the header menu
      */

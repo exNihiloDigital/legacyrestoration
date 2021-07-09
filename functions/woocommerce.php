@@ -4,9 +4,16 @@
  * Declare WooCommerce support
  */
 add_action('after_setup_theme', 'woocommerce_support');
-function woocommerce_support()
-{
-    add_theme_support('woocommerce');
+if ( ! function_exists( 'woocommerce_support' ) ) {
+    // Declares WooCommerce theme support.
+    function woocommerce_support() {
+        add_theme_support('woocommerce');
+
+        // Add Product Gallery support.
+        add_theme_support( 'wc-product-gallery-lightbox' );
+		add_theme_support( 'wc-product-gallery-zoom' );
+		add_theme_support( 'wc-product-gallery-slider' );
+    }
 }
 
 /**
