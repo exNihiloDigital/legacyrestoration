@@ -12,7 +12,7 @@ import newer from 'gulp-newer';
 import plumber from 'gulp-plumber';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
-import uglify from 'gulp-uglify';
+import uglify from 'gulp-uglify-es';
 
 // https://github.com/dlmanning/gulp-sass#importing-it-into-your-project
 const sass = gulpSass(dartSass);
@@ -123,7 +123,7 @@ gulp.task('includes', () =>
 
 // Loop through JS files, compile them, concatonate them, minify them, saves to /assets as .min.js
 gulp.task('javascript', () => {
-    let scripts = ['!./_js/tinymce-plugin.js', './_js/equalizer.js', './_js/theme.js'];
+    let scripts = ['!./_js/tinymce-plugin.js', './_js/theme.js'];
 
     gulp.src(scripts).pipe(babel()).pipe(concat('theme.js')).pipe(gulp.dest(outputJS));
 
