@@ -1,5 +1,6 @@
 // Functions
 // ================================================================
+@use "sass:math";
 
 // Pulls a value from the following maps
 // function($value)
@@ -44,7 +45,7 @@
     $str: 'all';
 
     @if $dir == 'down' {
-        $max: $breakpoint - 1 / 16;
+        $max: $breakpoint - math.div(1, 16);
         $str: $str + ' and (max-width: #{$max})';
     } @else {
         $str: $str + ' and (min-width: #{$breakpoint})';

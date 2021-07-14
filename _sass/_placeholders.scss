@@ -1,20 +1,30 @@
 // Placeholders
 // ================================================================
-%container{
+%container {
     margin: 0 auto;
     max-width: 100%;
+    width: 1100px;
+}
+%horizontal-padding {
     padding-left: 20px;
     padding-right: 20px;
-    width: 1100px;
 
-    @include breakpoint(769px up){
+    @include breakpoint(769px up) {
         padding-left: 40px;
         padding-right: 40px;
     }
 }
+%vertical-padding {
+    padding-top: 60px;
+    padding-bottom: 60px;
 
+    @include breakpoint(769px up) {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+}
 %button {
-    background: color('one');
+    background-color: color('one');
     border: none;
     color: white;
     cursor: pointer;
@@ -27,50 +37,15 @@
     @include transition(0.12s);
 
     &:hover {
-        background: color('two');
+        background-color: color('two');
         color: white;
 
         @include transition(0.12s);
     }
 }
 
-%post {
-    background: white;
-    border-radius: 4px;
-    margin: 0 auto 40px;
-
-    &-image {
-        background-position: center;
-        background-size: cover;
-        border-radius: 4px;
-        display: block;
-        height: 250px;
-        margin: 0 auto 25px;
-        width: 100%;
-    }
-
-    &-content {
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin: 0;
-        }
-
-        p {
-            margin: 20px auto 25px;
-        }
-
-        .button {
-            margin: 0;
-        }
-    }
-}
-
 %ul {
-    display: inline-table;
+    display: block;
     margin: 0 0 20px 20px;
 
     li {
@@ -114,7 +89,7 @@
 }
 
 %ol {
-    display: inline-table;
+    display: block;
     margin: 0 0 20px 20px;
 
     li {

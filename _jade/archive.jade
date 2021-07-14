@@ -1,9 +1,9 @@
 - get_header()
 
 article#archive
-    .container
-        - if ( have_posts() ) :
-            - while ( have_posts() ) : the_post()
+    .container.content-block
+        - if (have_posts()) :
+            - while (have_posts()) : the_post()
                 - include('includes/loop-post.php')
             - endwhile
 

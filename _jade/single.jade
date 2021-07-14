@@ -1,9 +1,9 @@
 - get_header()
 
 article#single
-    .container
-        - if ( have_posts() ) :
-            - while ( have_posts() ) : the_post()
+    .container.content-block
+        - if (have_posts()) :
+            - while (have_posts()) : the_post()
                 - the_content()
             - endwhile
 

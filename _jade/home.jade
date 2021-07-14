@@ -1,0 +1,15 @@
+- get_header()
+
+article#archive
+    .container.content-block
+        - if (have_posts()) :
+            .post-container
+                - while (have_posts()) : the_post()
+                    - include('includes/loop-post.php')
+                - endwhile
+
+                - pagination()
+                - wp_reset_postdata()
+        - endif
+
+- get_footer()

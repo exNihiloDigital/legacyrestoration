@@ -13,33 +13,39 @@ head
 
 - wp_body_open();
 
-.mobile
-    .topbar
-        i.fa.fa-bars
-        span Menu
+-if(is_front_page()) :
+    - $home_mobile = 'home-mobile'
+- else :
+    - $home_mobile = ''
+- endif;
 
-    .block
-        - if ( class_exists('ACF') && get_field('search', 'options') == 'show' ) :
-            - get_search_form()
-        - endif
-
-        - mobile_menu()
-
-.masthead
+.masthead.hrz-padding
     .container
         a(href="tel:>") 111-222-3333
 
 header
-    .container
-        .logo
-            a(href="<?php echo esc_url( home_url('/') ) ?>")
-                img(src="<?php echo esc_url( get_theme_file_uri() );?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
+    //- use .mobile-side or .mobile-top to change dropdown locations
+    .mobile-container.mobile-side
+        .mobile(class="<?php echo $home_mobile;?>")
+            aside
+                a(href="<?php echo esc_url(home_url('/')) ?>")
+                    img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
+            section
+                .burgerBtn
+            #mobile-hidden-menu
+                - mobile_menu()
+        //- .mobile-side-wrapper
+    .main-header.hrz-padding
+        .container
+            .logo
+                a(href="<?php echo esc_url(home_url('/')) ?>")
+                    img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
 
-        .menu
-            nav
-                - header_menu()
+            .menu
+                nav
+                    - header_menu()
 
-- if ( !is_front_page() || !is_404()) :
+- if (! (is_front_page() || is_404())) :
     - include('includes/featured.php')
     - include('includes/breadcrumbs.php')
 - endif

@@ -3,127 +3,148 @@
 
 .masthead {
     background: color('light');
+    display: none;
 
+    @include breakpoint(769px up) {
+        display: block;
+    }
     .container {
         font-weight: bold;
         text-align: right;
-        padding: 5px 0;
+        padding: 8px 0;
     }
 }
 
 header {
-    padding: 0 40px;
+    height: 88px;
+    position: relative;
+    z-index: 10;
 
-    @include breakpoint(769px down) {
-        padding: 0 20px;
-    }
+    .main-header {
+        display: none;
 
-    .container {
-        align-items: center;
-        display: flex;
-        padding: 10px 0;
+        @include breakpoint(769px up) {
+            display: block;
+        }
+        .container {
+            display: block;
+            padding: 10px 0;
 
-        .logo {
-            @include span(2 of 6);
-
-            @include breakpoint(768px down) {
-                width: 100%;
-                text-align: center;
+            @include breakpoint(769px up) {
+                align-items: center;
+                display: flex;
             }
+            .logo {
+                display: none;
+                text-align: center;
+                width: 100%;
 
-            a {
-                img {
-                    max-width: 200px;
+                @include breakpoint(769px up) {
+                    display: block;
+                    width: auto;
+                }
+
+                a {
+                    img {
+                        max-width: 200px;
+                    }
                 }
             }
-        }
 
-        .menu {
-            @include span(4 of 6 last);
-
-            @include breakpoint(768px down) {
+            .menu {
                 display: none;
-            }
 
-            nav {
-                ul {
-                    float: right;
-                    padding: 0;
-                    position: relative;
+                @include breakpoint(769px up) {
+                    display: flex;
+                    flex-grow: 2;
+                }
+                nav {
+                    width: 100%;
 
-                    li {
-                        text-align: center;
-                        display: inline-block;
+                    ul {
+                        float: right;
+                        padding: 0;
+                        position: relative;
 
-                        @include breakpoint(1100px down) {
+                        li {
+                            text-align: center;
+                            display: inline-block;
                             position: relative;
-                        }
 
-                        &:not(:first-child) {
-                            margin: 0 0 0 10px;
-                        }
-
-                        a {
-                            color: color('one');
-                            font-weight: bold;
-                            // padding: 41px 5px; // See dropdown margin
-                            display: block;
-
+                            &:not(:first-child) {
+                                margin: 0 0 0 10px;
+                            }
                             &:hover {
-                                color: color('two');
-                            }
-
-                            i.fa {
-                                width: 100%;
-                                margin: 0 0 5px 0;
-                            }
-                        }
-
-                        // Dropdown
-                        ul.dropdown {
-                            background: color('one');
-                            box-shadow: 4px 4px 6px transparentize(black, 0.95);
-                            display: none;
-                            margin: 0 0 0 -10px; // The differential of li padding and dropdown li padding
-                            max-width: 180px;
-                            position: absolute;
-                            width: 100%;
-                            z-index: 9;
-
-                            @include breakpoint(1100px down) {
-                                right: 0;
-                                width: 180px;
-                            }
-
-                            li {
-                                text-align: left;
-                                margin: 0;
-                                display: block;
-                                position: relative;
-
-                                @include transition(0.06s);
-
-                                &:hover {
-                                    background: color('two');
-                                }
-
-                                &:not(:last-child) {
-                                    // border-bottom: 1px solid transparentize(white, 0.95);
-                                }
-
                                 a {
-                                    color: white;
-                                    font-size: 16px;
-                                    padding: 10px 15px; // See dropdown margin
-                                    display: block;
+                                    color: color(two);
+                                }
+                            }
+                            a {
+                                color: color('one');
+                                display: block;
+                                font-weight: bold;
+                                padding: 40px 5px;
+                                text-transform: uppercase;
+
+                                i.fa {
+                                    width: 100%;
+                                    margin: 0 0 5px 0;
+                                }
+                            }
+
+                            // Dropdown
+                            ul.dropdown {
+                                background: color('one');
+                                box-shadow: 4px 4px 6px transparentize(black, 0.95);
+                                display: none;
+                                margin: 0; // The differential of li padding and dropdown li padding
+                                max-width: 180px;
+                                position: absolute;
+                                left: 0;
+                                width: 180px;
+                                z-index: 9;
+
+                                @include breakpoint(1100px up) {
+                                    width: 100%;
                                 }
 
-                                // Dropdown
-                                ul.dropdown {
-                                    top: 0;
-                                    left: 100%;
+                                li {
+                                    text-align: left;
                                     margin: 0;
-                                    display: none;
+                                    display: block;
+                                    position: relative;
+
+                                    @include transition(0.06s);
+
+                                    &:hover {
+                                        background: color('two');
+                                    }
+
+                                    &:not(:last-child) {
+                                        // border-bottom: 1px solid transparentize(white, 0.95);
+                                    }
+
+                                    a {
+                                        color: white;
+                                        font-size: 16px;
+                                        padding: 10px 15px; // See dropdown margin
+                                        display: block;
+                                    }
+
+                                    // Dropdown
+                                    ul.dropdown {
+                                        top: 0;
+                                        left: 100%;
+                                        margin: 0;
+                                        display: none;
+                                    }
+                                }
+                            }
+                            &:last-child {
+                                ul.dropdown {
+                                    // If there is a dropdown on the last element, set it to align right rather than left
+                                    left: unset;
+                                    right: 0;
                                 }
                             }
                         }
@@ -134,35 +155,10 @@ header {
     }
 }
 
-main {
-    padding: 30px 0 60px;
-
-    article {
-        @include span(4 of 6);
-
-        .post {
-            @extend %post;
-        }
-
-        ul {
-            @extend %ul;
-        }
-
-        ol {
-            @extend %ol;
-        }
-    }
-
-    aside {
-        @include span(2 of 6 last);
-    }
-}
-
 #error {
     background: url('../images/pattern.jpg') center repeat;
 
     .container {
-
         article {
             width: 100%;
             text-align: center;
@@ -181,6 +177,8 @@ main {
 }
 
 #front {
+    position: relative;
+    z-index: 20;
 }
 
 #page,
@@ -189,6 +187,12 @@ main {
 
     @include breakpoint(769px down) {
         padding: 0 20px;
+    }
+    ul {
+        @extend %ul;
+    }
+    ol {
+        @extend %ol;
     }
 }
 
@@ -200,28 +204,58 @@ main {
     @include breakpoint(769px down) {
         padding: 0 20px;
     }
+    .post-container {
+        display: block;
+
+        @include breakpoint(769px up) {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+        }
+    }
 }
 
 footer {
     background: color('dark');
 
+    .container {
+        &.hrz-padding {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        aside {
+            text-align: center;
+
+            @include breakpoint(769px up) {
+                text-align: left;
+            }
+        }
+        section {
+            text-align: center;
+
+            @include breakpoint(769px up) {
+                text-align: right;
+            }
+        }
+    }
     .copyright {
         padding: 8px 0;
 
         .container {
-            @include container;
-
             p {
-                width: 100%;
                 color: white;
-                text-align: center;
+                font-size: 16px;
                 margin: 0 auto;
+                text-align: center;
+                width: 100%;
 
                 a {
-                    color: white;
+                    color: color(two);
+                    font-weight: 700;
+                    transition: color 0.2s;
 
                     &:hover {
-                        color: color('two');
+                        color: white;
                     }
                 }
             }

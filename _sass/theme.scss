@@ -1,12 +1,3 @@
-// Welcome to the main stylesheet for this theme.
-// ================================================================
-
-// Reset browser, Normalize elements, and add Susy for our grid.
-
-@import '../../../../../../../bower_components/susy/sass/susy';
-
-// Next, let's import our files in the correct order.
-
 @import 'utilities';
 @import 'colors';
 @import 'base';
@@ -17,5 +8,3 @@
 @import 'woocommerce';
 @import 'includes';
 @import 'layouts';
-
-// ================================================================
