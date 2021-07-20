@@ -1,15 +1,17 @@
 {
-  "name": "framework",
-  "version": "1.0.0",
-  "description": "Test build of new framework",
-  "main": "index.js",
-  "scripts": {
-    "start": "git pull gulp",
-    "commit": "git add . && git commit -m updated && git push",
-    "git": "git add . && git commit -m",
-    "postgit": "git push --all"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {}
+    "name": "framework",
+    "version": "1.0.0",
+    "description": "Test build of new framework",
+    "main": "index.js",
+    "scripts": {
+        "start": "git pull gulp",
+        "commit": "git add . && git commit -m updated && git push",
+        "git": "git add . && git commit -m",
+        "postgit": "git push --all",
+        "prettier:check": "prettier --check **/*.{json,yml,js,scss}",
+        "prettier:write": "prettier --write **/*.{json,yml,js,scss}"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {}
 }

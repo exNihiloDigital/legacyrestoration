@@ -1,0 +1,8 @@
+**/*.php
+**/*.jade
+
+/node_modules
+/.vscode
+/src
+/functions
+/assets
