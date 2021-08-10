@@ -13,7 +13,5 @@
     },
     "author": "",
     "license": "ISC",
-    "devDependencies": {
-        "gulp-pug-linter": "^1.5.0"
-    }
+    "devDependencies": {}
 }
