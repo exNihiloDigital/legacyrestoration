@@ -11,6 +11,7 @@ $framework_includes = array(
     '/enqueue.php',
     '/featured.php',
     '/menus.php',
+    '/hooks.php',
     '/post-types.php',
     '/shortcodes.php',
     '/theme.php',

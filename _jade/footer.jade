@@ -2,19 +2,16 @@
 
 footer
 	.container.aside-left.hrz-padding
-		aside 
+		aside
 			.footer-logo
-				a(href="<?php echo esc_url(home_url('/')) ?>")
+				a(href="<?php echo esc_url( home_url('/') ) ;?>")
 					img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
 		section
 			- footer_menu()
+
 	.copyright
 		.container
-			p &copy; 
-				- echo date('Y') . ' ' . get_bloginfo('name')
-				a(href="https://phoscreative.com/expertise/web-design/" target="blank") &nbsp;Web Design&nbsp;
-				| by&nbsp;
-				a(href="https://phoscreative.com" target="_blank") PHOS Creative
+			- site_info()
 
 - wp_footer()
 
