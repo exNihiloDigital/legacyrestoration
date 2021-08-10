@@ -12,7 +12,7 @@ import newer from 'gulp-newer';
 import plumber from 'gulp-plumber';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
-import uglify from 'gulp-uglify-es';
+import uglify from 'gulp-uglify';
 
 // https://github.com/dlmanning/gulp-sass#importing-it-into-your-project
 const sass = gulpSass(dartSass);

@@ -8,10 +8,12 @@
         "commit": "git add . && git commit -m updated && git push",
         "git": "git add . && git commit -m",
         "postgit": "git push --all",
-        "prettier:check": "prettier --check **/*.{json,yml,js,scss}",
-        "prettier:write": "prettier --write **/*.{json,yml,js,scss}"
+        "prettier:check": "prettier --check **/*.{json,yml,js,scss,jade}",
+        "prettier:write": "prettier --write **/*.{json,yml,js,scss,jade}"
     },
     "author": "",
     "license": "ISC",
-    "dependencies": {}
+    "devDependencies": {
+        "gulp-pug-linter": "^1.5.0"
+    }
 }
