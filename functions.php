@@ -21,15 +21,15 @@ $framework_includes = array(
 $theme_fn_dir = '/functions';
 
 // Load ACF functions only if ACF is activated.
-if ( class_exists( 'ACF' ) ) {
-	$framework_includes[] = '/acf.php';
+if (class_exists('ACF') ) {
+    $framework_includes[] = '/acf.php';
 }
 
 // Load WooCommerce functions only if WooCommerce is activated.
-if ( class_exists( 'WooCommerce' ) ) {
-	$framework_includes[] = '/woocommerce.php';
+if (class_exists('WooCommerce') ) {
+    $framework_includes[] = '/woocommerce.php';
 }
 
 foreach ( $framework_includes as $file) {
-    require_once get_template_directory() . $theme_fn_dir . $file ;
+    include_once get_theme_file_path($theme_fn_dir . $file);
 }

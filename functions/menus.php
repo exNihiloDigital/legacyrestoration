@@ -2,6 +2,7 @@
 
 /**
  * Register navigation menus
+ *
  * @link https://codex.wordpress.org/register_nav_menus
  */
 register_nav_menus(

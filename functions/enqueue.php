@@ -11,7 +11,6 @@ function enqueue_fonts()
     /**
      * font-family: 'Montserrat', sans-serif;
      * font-family: 'Roboto', sans-serif;
-     *
     */
     wp_enqueue_style('fonts', 'https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
 }
@@ -55,15 +54,15 @@ function enqueue_theme()
         // Get the theme data.
         $the_theme     = wp_get_theme();
         // Will take the version from root folder /style.css
-        $theme_version = $the_theme->get( 'Version' );
+        $theme_version = $the_theme->get('Version');
         // Will append the modified-time to static assets.
         // theme.min.css becomes theme.min.css?ver=1.0.0195867.
         // Prevents caching issues as the cache renews with changed file names.
         // https://www.keycdn.com/support/what-is-cache-busting
-        $css = file_exists( get_template_directory() . '/assets/css/theme.min.css' ) ? '/assets/css/theme.min.css' : '/style.css';
-        $js = file_exists( get_template_directory() . '/assets/js/theme.min.js' ) ? '/assets/js/theme.min.js' : '/style.css';
-        $css_v = $theme_version . '.' . filemtime( get_template_directory() . $css );
-        $js_v = $theme_version . '.' . filemtime( get_template_directory() . $js );
+        $css = file_exists(get_template_directory() . '/assets/css/theme.min.css') ? '/assets/css/theme.min.css' : '/style.css';
+        $js = file_exists(get_template_directory() . '/assets/js/theme.min.js') ? '/assets/js/theme.min.js' : '/style.css';
+        $css_v = $theme_version . '.' . filemtime(get_template_directory() . $css);
+        $js_v = $theme_version . '.' . filemtime(get_template_directory() . $js);
 
         wp_enqueue_script('jquery');
         wp_enqueue_script('swiper-js', 'https://unpkg.com/swiper@6.5.8/swiper-bundle.min.js');

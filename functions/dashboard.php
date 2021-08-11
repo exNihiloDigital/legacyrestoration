@@ -6,8 +6,7 @@
  * @return void
  */
 add_action('wp_head', 'remove_wordpress_defaults');
-function remove_wordpress_defaults()
-{
+function remove_wordpress_defaults() {
     $defaults = array(
         'rsd_link',
         'wlwmanifest_link',
@@ -32,12 +31,11 @@ function remove_wordpress_defaults()
 /**
  * Change 'Howdy' to 'Welcome' in $wp_admin_bar
  *
- * @param [type] $wp_admin_bar
+ * @param  [type] $wp_admin_bar
  * @return void
  */
 add_filter('admin_bar_menu', 'howdy_to_welcome');
-function howdy_to_welcome($wp_admin_bar)
-{
+function howdy_to_welcome($wp_admin_bar) {
     $account = $wp_admin_bar->get_node('my-account');
     $welcome = str_replace('Howdy', 'Welcome', $account->title);
 
@@ -60,32 +58,26 @@ function replace_thank_you_in_dashboard() {
 /**
  * Hide dashboard widgets for a cleaner interface
  *
- * @link https://codex.wordpress.org/Function_Reference/remove_meta_box/
+ * @link   https://codex.wordpress.org/Function_Reference/remove_meta_box/
  * @return void
  */
 add_action('wp_dashboard_setup', 'hide_dashboard_widgets', 999);
-function hide_dashboard_widgets()
-{
+function hide_dashboard_widgets() {
     global $wp_meta_boxes;
 
     $wp_meta_boxes['dashboard']['normal']['core'] = array();
     $wp_meta_boxes['dashboard']['side']['core'] = array();
-
-    // foreach ($wp_meta_boxes as $meta => $value) {
-    //     unset($wp_meta_boxes[$meta]);
-    // }
 }
 
 /**
  * Remove adminbar menu items for a cleaner interface
  *
- * @link https://codex.wordpress.org/Class_Reference/WP_Admin_Bar/add_menu/
- * @param [type] $dashboard
+ * @link   https://codex.wordpress.org/Class_Reference/WP_Admin_Bar/add_menu/
+ * @param  [type] $dashboard
  * @return void
  */
 add_action('admin_bar_menu', 'remove_adminbar_items', 999);
-function remove_adminbar_items($dashboard)
-{
+function remove_adminbar_items($dashboard) {
     global $wp_admin_bar;
 
     /**
@@ -162,8 +154,7 @@ function remove_adminbar_items($dashboard)
  * @return void
  */
 // add_action('admin_notices', debug_dashboard_menu);
-function debug_dashboard_menu()
-{
+function debug_dashboard_menu() {
     global $pagenow, $menu, $submenu;
 
     $phos_developers = array(
@@ -190,12 +181,11 @@ function debug_dashboard_menu()
 /**
  * Remove dashboard menu items
  *
- * @link https://codex.wordpress.org/Function_Reference/remove_menu_page
+ * @link   https://codex.wordpress.org/Function_Reference/remove_menu_page
  * @return void
  */
 add_action('admin_menu', 'remove_adminmenu_items');
-function remove_adminmenu_items()
-{
+function remove_adminmenu_items() {
     $menus = array(
         'link-manager.php',
         'edit-comments.php'
@@ -212,8 +202,7 @@ function remove_adminmenu_items()
  * @return void
  */
 add_action('admin_menu', 'edit_posts');
-function edit_posts()
-{
+function edit_posts() {
     global $menu, $submenu;
 
     $menu[5][0]                 = 'Blog';
@@ -228,8 +217,7 @@ function edit_posts()
  * @return void
  */
 add_action('init', 'edit_posts_labels');
-function edit_posts_labels()
-{
+function edit_posts_labels() {
     global $wp_post_types;
 
     $labels                     = &$wp_post_types['post']->labels;
@@ -251,12 +239,11 @@ function edit_posts_labels()
 /**
  * Create dashboard menu separators
  *
- * @param [type] $position
+ * @param  [type] $position
  * @return void
  */
 add_action('admin_init', 'create_separator');
-function create_separator($position)
-{
+function create_separator($position) {
     global $menu;
 
     $menu[$position] = array(
@@ -274,8 +261,7 @@ function create_separator($position)
  * @return void
  */
 add_action('admin_menu', 'assign_separator');
-function assign_separator()
-{
+function assign_separator() {
     foreach (range(1000, 1040) as $position) {
         create_separator($position);
     }
@@ -284,13 +270,12 @@ function assign_separator()
 /**
  * Reprioritize the adminmenu
  *
- * @param [type] $order
+ * @param  [type] $order
  * @return void
  */
 add_filter('custom_menu_order', 'organize_dashboard_menu');
 add_filter('menu_order', 'organize_dashboard_menu');
-function organize_dashboard_menu($order)
-{
+function organize_dashboard_menu($order) {
     if (! $order) {
         return true;
     }
@@ -330,13 +315,12 @@ function organize_dashboard_menu($order)
 /**
  * Hides specific meta boxes automatically from posts and pages
  *
- * @param [type] $hidden
- * @param [type] $screen
+ * @param  [type] $hidden
+ * @param  [type] $screen
  * @return void
  */
 add_action('default_hidden_meta_boxes', 'hide_meta_boxes', 10, 2);
-function hide_meta_boxes($hidden, $screen)
-{
+function hide_meta_boxes($hidden, $screen) {
     $hidden = array(
         'categorydiv',
         'revisionsdiv',
@@ -365,8 +349,7 @@ function hide_meta_boxes($hidden, $screen)
  * @return void
  */
 add_filter('wpseo_metabox_prio', 'yoast_to_bottom');
-function yoast_to_bottom()
-{
+function yoast_to_bottom() {
     return 'low';
 }
 
@@ -385,21 +368,22 @@ function no_index_paginated_pages($robots) {
 /**
  * Remove emoji support
  *
- * @link https://codex.wordpress.org/Emoji
+ * @link   https://codex.wordpress.org/Emoji
  * @return void
  */
 add_action('init', 'remove_emojis');
-function remove_emojis()
-{
+function remove_emojis() {
     add_filter('emoji_svg_url', '__return_false');
 
-    add_filter('tiny_mce_plugins', function ($plugins) {
-        if (is_array($plugins)) {
-            return array_diff($plugins, array('wpemoji'));
-        }
+    add_filter(
+        'tiny_mce_plugins', function ($plugins) {
+            if (is_array($plugins)) {
+                return array_diff($plugins, array('wpemoji'));
+            }
 
-        return array();
-    });
+            return array();
+        }
+    );
 
     remove_action('wp_head', 'print_emoji_detection_script', 7);
     remove_action('admin_print_scripts', 'print_emoji_detection_script');
@@ -411,36 +395,33 @@ function remove_emojis()
 }
 
 // Add Insert Button
-add_action( 'init', 'tiny_mce_new_buttons' );
+add_action('init', 'tiny_mce_new_buttons');
 
 function tiny_mce_new_buttons() {
-  add_filter( 'mce_external_plugins', 'tiny_mce_add_buttons' );
-  add_filter( 'mce_buttons', 'tiny_mce_register_buttons' );
+    add_filter('mce_external_plugins', 'tiny_mce_add_buttons');
+    add_filter('mce_buttons', 'tiny_mce_register_buttons');
 }
 
 function tiny_mce_add_buttons( $plugins ) {
-  $plugins['mytinymceplugin'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
-  return $plugins;
+    $plugins['mytinymceplugin'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
+    return $plugins;
 }
 
 function tiny_mce_register_buttons( $buttons ) {
-  $newBtns = array(
-    'myblockquotebtn'
-  );
-  $buttons = array_merge( $buttons, $newBtns );
-  return $buttons;
+    $newBtns = array('myblockquotebtn');
+    $buttons = array_merge($buttons, $newBtns);
+    return $buttons;
 }
 
 /**
  * Modifies TinyMCE's setting and button ordering
  *
- * @link https://codex.wordpress.org/TinyMCE
- * @param [type] $settings
+ * @link   https://codex.wordpress.org/TinyMCE
+ * @param  [type] $settings
  * @return void
  */
 // add_filter('tiny_mce_before_init', 'clean_tinymce');
-function clean_tinymce($settings)
-{
+function clean_tinymce($settings) {
     $settings['remove_linebreaks'] = true;
     $settings['gecko_spellcheck'] = true;
     $settings['keep_styles'] = true;
@@ -462,6 +443,7 @@ function clean_tinymce($settings)
 
     return $settings;
 }
+
 //====================================================================
 //  Add Button to TinyMCE
 //====================================================================
@@ -469,30 +451,26 @@ add_action('admin_head', 'phos_add_tinymce_button');
 function phos_add_tinymce_button() {
     global $typenow;
     // check user permissions
-    if ( !current_user_can('edit_posts') && !current_user_can('edit_pages') ) {
-    return;
+    if (!current_user_can('edit_posts') && !current_user_can('edit_pages') ) {
+        return;
     }
     // verify the post type
-    if( ! in_array( $typenow, array( 'post', 'page' ) ) )
+    if(! in_array($typenow, array( 'post', 'page' )) ) {
         return;
+    }
     // check if WYSIWYG is enabled
-    if ( get_user_option('rich_editing') == 'true') {
+    if (get_user_option('rich_editing') == 'true') {
         add_filter("mce_external_plugins", "phos_add_tinymce_plugin");
         add_filter('mce_buttons', 'phos_register_tc_button');
     }
 }
 
 function phos_add_tinymce_plugin($plugin_array) {
-    $plugin_array['phos_tc_button'] = get_template_directory_uri() . '/assets/tinymce-plugin.js'; 
+    $plugin_array['phos_tc_button'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
     return $plugin_array;
 }
 
 function phos_register_tc_button($buttons) {
-   array_push($buttons, "phos_tc_button");
-   return $buttons;
+    array_push($buttons, "phos_tc_button");
+    return $buttons;
 }
-function phos_tc_css() {
-    wp_enqueue_style('phos-tc', get_template_directory_uri() . '/assets/dashboard.min.css');
-}
- 
-add_action('admin_enqueue_scripts', 'phos_tc_css');

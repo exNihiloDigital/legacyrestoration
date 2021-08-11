@@ -4,15 +4,15 @@
  * Declare WooCommerce support
  */
 add_action('after_setup_theme', 'woocommerce_support');
-if ( ! function_exists( 'woocommerce_support' ) ) {
+if (! function_exists('woocommerce_support') ) {
     // Declares WooCommerce theme support.
     function woocommerce_support() {
         add_theme_support('woocommerce');
 
         // Add Product Gallery support.
-        add_theme_support( 'wc-product-gallery-lightbox' );
-		add_theme_support( 'wc-product-gallery-zoom' );
-		add_theme_support( 'wc-product-gallery-slider' );
+        add_theme_support('wc-product-gallery-lightbox');
+        add_theme_support('wc-product-gallery-zoom');
+        add_theme_support('wc-product-gallery-slider');
     }
 }
 
@@ -50,8 +50,7 @@ remove_filter('woocommerce_after_shop_loop_item_title', 'woocommerce_template_lo
  */
 remove_filter('woocommerce_single_product_summary', 'woocommerce_template_single_title');
 add_filter('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
-function woocommerce_template_single_title()
-{
+function woocommerce_template_single_title() {
     echo '<h2>'.get_the_title().'</h2>';
 }
 

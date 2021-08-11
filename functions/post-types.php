@@ -18,7 +18,7 @@ function post_types()
             'slug'        => 'example',
             'single_name' => 'Example',
             'plural_name' => 'Examples',
-            'menu_name'	  => 'Example',
+            'menu_name'   => 'Example',
             'description' => '',
             // https://developer.wordpress.org/resource/dashicons/#microphone
             'dashicon'    => 'dashicons-menu'

@@ -4,8 +4,7 @@
  * Loads any fields.json file saved in fields/ for syncing
  */
 // add_filter('acf/settings/load_json', 'preload_fields');
-function preload_fields($paths)
-{
+function preload_fields($paths) {
     unset($paths[0]);
 
     $paths[] = get_stylesheet_directory() . '/functions/fields';
@@ -15,6 +14,7 @@ function preload_fields($paths)
 
 /**
  * Creates an options page for the dashboard menu
+ *
  * @link https://www.advancedcustomfields.com/resources/options-page/
  */
 if (function_exists('acf_add_options_page')) {
