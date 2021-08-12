@@ -1,31 +1,28 @@
 <?php
 
 /**
- * Foreach removal of default Wordpress core functions for security
+ * Removes default Wordpress hooks for security
  *
+ * @link https://core.trac.wordpress.org/browser/tags/5.2.3/src/wp-includes/default-filters.php#L280
+ * @link https://developer.wordpress.org/reference/hooks/wp_head/#more-information
  * @return void
  */
 add_action('wp_head', 'remove_wordpress_defaults');
 function remove_wordpress_defaults() {
-    $defaults = array(
-        'adjacent_posts_rel_link_wp_head',
-        'feed_links_extra',
-        'feed_links',
-        'rsd_link',
-        'wlwmanifest_link',
-        'wp_generator',
-        'print_emoji_detection_script'
-    );
-
-    foreach ($defaults as $default) {
-        remove_action('wp_head', $default);
-    }
+    remove_action( 'wp_head', 'feed_links_extra', 3 ); // removes all extra rss feed links
+    remove_action( 'wp_head', 'feed_links', 2 ); // remove rss feed links
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'wp_head', 'rsd_link' ); // remove really simple discovery link
+    remove_action( 'wp_head', 'wlwmanifest_link' ); // remove wlwmanifest.xml (windows live writer)
+    remove_action( 'wp_head', 'wp_generator' ); // remove wordpress version
+    remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 ); // Remove shortlink
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
 }
 
 /**
- * Change 'Howdy' to 'Welcome' in $wp_admin_bar
+ * Changes 'Howdy' to 'Welcome' in the WordPress Admin Bar
  *
- * @param  [type] $wp_admin_bar
+ * @param  object $wp_admin_bar
  * @return void
  */
 add_filter('admin_bar_menu', 'howdy_to_welcome');
@@ -43,6 +40,8 @@ function howdy_to_welcome($wp_admin_bar) {
 
 /**
  * Replaces 'Thank you for creating with WordPress' with 'Website developed by PHOS Creative'
+ *
+ * @return void
  */
 add_filter('admin_footer_text', 'replace_thank_you_in_dashboard');
 function replace_thank_you_in_dashboard() {
@@ -81,48 +80,50 @@ function hide_dashboard_widgets() {
  * Remove adminbar menu items for a cleaner interface
  *
  * @link   https://codex.wordpress.org/Class_Reference/WP_Admin_Bar/add_menu/
- * @param  [type] $dashboard
+ * @param  object $dashboard
  * @return void
  */
 add_action('admin_bar_menu', 'remove_adminbar_items', 999);
 function remove_adminbar_items($dashboard) {
     global $wp_admin_bar;
 
+    $menu_bar_entries = (array) $wp_admin_bar->get_nodes();
+
     /**
      * Get the specific ID of every $wp_admin_bar item
      */
-    foreach ($wp_admin_bar->get_nodes() as $menu) {
-        $menus[] = $menu->id;
+    $menu_full = [];
+    foreach ($menu_bar_entries as $menu) {
+        $menu_full[] = $menu->id;
     }
 
     /**
      * Manually list all the menu items we wish to keep
      */
     $menu_keep = array(
-        'user-actions',
-        'user-info',
+        'appearance',
+        'dashboard',
         'edit-profile',
+        'edit',
         'logout',
         'menu-toggle',
-        'my-account',
-        'site-name',
-        'my-sites',
-        'my-sites-super-admin',
-        'network-admin',
-        'my-sites-list',
-        // ----------------
-        'dashboard',
-        'appearance',
         'menus',
-        'view-site',
-        'edit',
+        'my-account',
+        'my-sites-list',
+        'my-sites-super-admin',
+        'my-sites',
+        'network-admin',
         'new-content',
-        'new-post',
+        'new-example',
         'new-media',
         'new-page',
-        'new-example',
+        'new-post',
         'new-user',
+        'site-name',
         'top-secondary',
+        'user-actions',
+        'user-info',
+        'view-site',
     );
 
     /**
@@ -146,13 +147,13 @@ function remove_adminbar_items($dashboard) {
     /**
      * Get the differences between $menus and $menu_keep
      */
-    $menus = array_diff($menus, $menu_keep);
+    $menus = array_diff($menu_full, $menu_keep);
 
     /**
      * Eliminate the differences, leaving only what we want in wp_admin_bar
      */
     foreach ($menus as $menu) {
-        $dashboard->remove_menu($menu);
+        $dashboard->remove_menu( $menu );
     }
 }
 
@@ -164,15 +165,11 @@ function remove_adminbar_items($dashboard) {
  */
 add_action('admin_menu', 'remove_adminmenu_items');
 function remove_adminmenu_items() {
-    $menus = array('edit-comments.php');
-
-    foreach ($menus as $menu) {
-        remove_menu_page($menu);
-    }
+    remove_menu_page('edit-comments.php');
 }
 
 /**
- * Filter default posts label globally
+ * Filter default post labels globally
  *
  * @return void
  */
@@ -199,10 +196,13 @@ function edit_posts_labels() {
 /**
  * Create dashboard menu separators
  *
- * @param  [type] $position
+ * @param  int $position
  * @return void
  */
 function create_separator($position) {
+    /**
+     * @var array
+     */
     global $menu;
 
     $menu[$position] = array(
@@ -217,9 +217,10 @@ function create_separator($position) {
 /**
  * Control admin panel entry grouping - deactivated until needed
  *
+ * @link https://developer.wordpress.org/reference/hooks/admin_menu/
  * @return void
  */
-// add_action('admin_menu', 'assign_separator');
+add_action('admin_menu', 'assign_separator');
 function assign_separator() {
     foreach (range(1000, 1040) as $position) {
         create_separator($position);
@@ -227,15 +228,17 @@ function assign_separator() {
 }
 
 /**
- * Control admin panel entry sorting - deactivated until needed
+ * Control admin panel sorting - deactivated until needed
  *
- * @param  [type] $order
+ * @link https://developer.wordpress.org/reference/hooks/custom_menu_order/
+ * @link https://developer.wordpress.org/reference/hooks/menu_order/
+ * @param  array $order
  * @return void
  */
-// add_filter('custom_menu_order', 'organize_dashboard_menu');
+// add_filter('custom_menu_order', '__return_true');
 // add_filter('menu_order', 'organize_dashboard_menu');
 function organize_dashboard_menu($order) {
-    if (! $order) {
+    if ( ! $order ) {
         return true;
     }
 
@@ -289,7 +292,7 @@ function yoast_to_bottom() {
  */
 add_action('init', 'remove_emojis');
 function remove_emojis() {
-    // Filters the URL where emoji SVG images are hosted.
+    // Remove the DNS prefetch by returning false
     add_filter('emoji_svg_url', '__return_false');
 
     add_filter(
@@ -315,18 +318,35 @@ function remove_emojis() {
     remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 }
 
-// Add Insert Button
-add_action('init', 'tiny_mce_new_buttons');
+/**
+ * Add Insert Button
+ *
+ * @return void
+ */
+// add_action('init', 'tiny_mce_new_buttons');
 function tiny_mce_new_buttons() {
     add_filter('mce_external_plugins', 'tiny_mce_add_buttons');
     add_filter('mce_buttons', 'tiny_mce_register_buttons');
 }
 
+/**
+ * Help by inserting a proper description of the function
+ *
+ * @param array $plugins
+ * @return array
+ */
 function tiny_mce_add_buttons( $plugins ) {
     $plugins['mytinymceplugin'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
+
     return $plugins;
 }
 
+/**
+ * Help by inserting a proper description of the function
+ *
+ * @param array
+ * @return array
+ */
 function tiny_mce_register_buttons( $buttons ) {
     $newBtns = array('myblockquotebtn');
     $buttons = array_merge($buttons, $newBtns);
@@ -337,8 +357,8 @@ function tiny_mce_register_buttons( $buttons ) {
  * Modifies TinyMCE's setting and button ordering
  *
  * @link   https://codex.wordpress.org/TinyMCE
- * @param  [type] $settings
- * @return void
+ * @param  array $settings
+ * @return array
  */
 // add_filter('tiny_mce_before_init', 'clean_tinymce');
 function clean_tinymce($settings) {
@@ -364,33 +384,48 @@ function clean_tinymce($settings) {
     return $settings;
 }
 
-//====================================================================
-//  Add Button to TinyMCE
-//====================================================================
-add_action('admin_head', 'phos_add_tinymce_button');
+/**
+ * Add Button to TinyMCE
+ *
+ * @link   https://codex.wordpress.org/TinyMCE
+ * @return void
+ */
+// add_action('admin_head', 'phos_add_tinymce_button');
 function phos_add_tinymce_button() {
     global $typenow;
-    // check user permissions
-    if (!current_user_can('edit_posts') && !current_user_can('edit_pages') ) {
-        return;
-    }
-    // verify the post type
-    if(! in_array($typenow, array( 'post', 'page' )) ) {
-        return;
-    }
-    // check if WYSIWYG is enabled
-    if (get_user_option('rich_editing') == 'true') {
-        add_filter("mce_external_plugins", "phos_add_tinymce_plugin");
+
+    $can_edit       = current_user_can('edit_pages') && current_user_can('edit_posts');
+    $is_activated   = 'true' === get_user_option('rich_editing');
+    $is_verified    = in_array($typenow, array( 'post', 'page' ) );
+
+    if ( $is_activated && $is_verified && $can_edit) {
+        add_filter('mce_external_plugins', 'phos_add_tinymce_plugin');
         add_filter('mce_buttons', 'phos_register_tc_button');
     }
 }
 
-function phos_add_tinymce_plugin($plugin_array) {
+/**
+ * Add Button to TinyMCE
+ *
+ * @link   https://codex.wordpress.org/TinyMCE
+ * @param  array $settings
+ * @return array
+ */
+function phos_add_tinymce_plugin( $plugin_array ) {
     $plugin_array['phos_tc_button'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
+
     return $plugin_array;
 }
 
-function phos_register_tc_button($buttons) {
-    array_push($buttons, "phos_tc_button");
+/**
+ * Add Button to TinyMCE
+ *
+ * @link   https://codex.wordpress.org/TinyMCE
+ * @param  array $buttons
+ * @return array
+ */
+function phos_register_tc_button( $buttons ) {
+    $buttons[] = 'phos_tc_button';
+
     return $buttons;
 }
