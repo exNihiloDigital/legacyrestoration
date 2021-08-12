@@ -8,19 +8,13 @@
 add_action('wp_head', 'remove_wordpress_defaults');
 function remove_wordpress_defaults() {
     $defaults = array(
-        'rsd_link',
-        'wlwmanifest_link',
-        'feed_links',
-        'rsd_link',
-        'wlwmanifest_link',
-        'feed_links',
+        'adjacent_posts_rel_link_wp_head',
         'feed_links_extra',
-        'index_rel_link',
-        'parent_post_rel_link',
-        'start_post_rel_link',
-        'adjacent_posts_rel_l',
-        'rest_output_link_wp_head',
-        'wp_generator'
+        'feed_links',
+        'rsd_link',
+        'wlwmanifest_link',
+        'wp_generator',
+        'print_emoji_detection_script'
     );
 
     foreach ($defaults as $default) {
@@ -52,21 +46,35 @@ function howdy_to_welcome($wp_admin_bar) {
  */
 add_filter('admin_footer_text', 'replace_thank_you_in_dashboard');
 function replace_thank_you_in_dashboard() {
-    echo '<span id="footer-thankyou">Website developed by <a href="https://phoscreative.com" target="_blank">PHOS Creative</a>.</span>';
+    echo sprintf(
+        '<span id="footer-thankyou">%1$s %2$s</span>',
+        esc_html('Website developed by'),
+        sprintf(
+            '<a href="%1$s" target="_blank">%2$s</a>',
+            esc_url('https://phoscreative.com'),
+            esc_html('PHOS Creative')
+        )
+    );
 }
 
 /**
  * Hide dashboard widgets for a cleaner interface
  *
- * @link   https://codex.wordpress.org/Function_Reference/remove_meta_box/
  * @return void
  */
 add_action('wp_dashboard_setup', 'hide_dashboard_widgets', 999);
 function hide_dashboard_widgets() {
-    global $wp_meta_boxes;
-
-    $wp_meta_boxes['dashboard']['normal']['core'] = array();
-    $wp_meta_boxes['dashboard']['side']['core'] = array();
+    remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+    remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
+    remove_meta_box( 'rg_forms_dashboard', 'dashboard', 'normal'); // Gravity Forms
+    remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal'); // Yoast
 }
 
 /**
@@ -149,66 +157,18 @@ function remove_adminbar_items($dashboard) {
 }
 
 /**
- * Debug & var_dump the dashboard menu
- *
- * @return void
- */
-// add_action('admin_notices', debug_dashboard_menu);
-function debug_dashboard_menu() {
-    global $pagenow, $menu, $submenu;
-
-    $phos_developers = array(
-        'admin@localhost.dev',
-        'alex@phoscreative.com',
-        'miker@phoscreative.com'
-    );
-
-    foreach ($phos_developers as $developer) {
-        if (wp_get_current_user()->user_email == $developer) {
-            echo '<pre style="padding: 15px">';
-            echo '<h1>Menu Debugging</h1>';
-            echo '<h2>$pagenow</h2>';
-            var_dump($pagenow);
-            echo '<h2>$menu</h2>';
-            var_dump($menu);
-            echo '<h2>$submenu</h2>';
-            var_dump($submenu);
-            echo '</pre>';
-        }
-    }
-}
-
-/**
- * Remove dashboard menu items
+ * Remove admin panel comment entry
  *
  * @link   https://codex.wordpress.org/Function_Reference/remove_menu_page
  * @return void
  */
 add_action('admin_menu', 'remove_adminmenu_items');
 function remove_adminmenu_items() {
-    $menus = array(
-        'link-manager.php',
-        'edit-comments.php'
-    );
+    $menus = array('edit-comments.php');
 
     foreach ($menus as $menu) {
         remove_menu_page($menu);
     }
-}
-
-/**
- * Filter default posts label in the dashboard menu
- *
- * @return void
- */
-add_action('admin_menu', 'edit_posts');
-function edit_posts() {
-    global $menu, $submenu;
-
-    $menu[5][0]                 = 'Blog';
-    $submenu['edit.php'][5][0]  = 'Blog';
-    $submenu['edit.php'][10][0] = 'Add Blog';
-    $submenu['edit.php'][16][0] = 'Blog Tags';
 }
 
 /**
@@ -221,9 +181,9 @@ function edit_posts_labels() {
     global $wp_post_types;
 
     $labels                     = &$wp_post_types['post']->labels;
-    $labels->name               = 'Blog';
+    $labels->name               = 'Blogs';
     $labels->singular_name      = 'Blog';
-    $labels->add_new            = 'Add Blog';
+    $labels->add_new            = 'Add Blog Post';
     $labels->add_new_item       = 'Add Blog';
     $labels->edit_item          = 'Edit Blog';
     $labels->new_item           = 'Blog';
@@ -231,7 +191,7 @@ function edit_posts_labels() {
     $labels->search_items       = 'Search Blog';
     $labels->not_found          = 'No Blog found';
     $labels->not_found_in_trash = 'No Blog found in Trash';
-    $labels->all_items          = 'All Blog';
+    $labels->all_items          = 'All Blog Posts';
     $labels->menu_name          = 'Blog';
     $labels->name_admin_bar     = 'Blog';
 }
@@ -242,7 +202,6 @@ function edit_posts_labels() {
  * @param  [type] $position
  * @return void
  */
-add_action('admin_init', 'create_separator');
 function create_separator($position) {
     global $menu;
 
@@ -256,11 +215,11 @@ function create_separator($position) {
 }
 
 /**
- * Set $position range for dashboard menu separators
+ * Control admin panel entry grouping - deactivated until needed
  *
  * @return void
  */
-add_action('admin_menu', 'assign_separator');
+// add_action('admin_menu', 'assign_separator');
 function assign_separator() {
     foreach (range(1000, 1040) as $position) {
         create_separator($position);
@@ -268,13 +227,13 @@ function assign_separator() {
 }
 
 /**
- * Reprioritize the adminmenu
+ * Control admin panel entry sorting - deactivated until needed
  *
  * @param  [type] $order
  * @return void
  */
-add_filter('custom_menu_order', 'organize_dashboard_menu');
-add_filter('menu_order', 'organize_dashboard_menu');
+// add_filter('custom_menu_order', 'organize_dashboard_menu');
+// add_filter('menu_order', 'organize_dashboard_menu');
 function organize_dashboard_menu($order) {
     if (! $order) {
         return true;
@@ -313,37 +272,6 @@ function organize_dashboard_menu($order) {
 }
 
 /**
- * Hides specific meta boxes automatically from posts and pages
- *
- * @param  [type] $hidden
- * @param  [type] $screen
- * @return void
- */
-add_action('default_hidden_meta_boxes', 'hide_meta_boxes', 10, 2);
-function hide_meta_boxes($hidden, $screen) {
-    $hidden = array(
-        'categorydiv',
-        'revisionsdiv',
-        // 'pageparentdiv',
-        // 'postimagediv',
-        // 'submitdiv',
-        // 'tagsdiv-post_tag',
-        // 'tagsdiv-{$tax-name}',
-        // '{$tax-name}div',
-        'authordiv',
-        'slugdiv',
-        'commentstatusdiv',
-        'commentsdiv',
-        'formatdiv',
-        'postcustom',
-        'postexcerpt',
-        'trackbacksdiv'
-    );
-
-    return $hidden;
-}
-
-/**
  * Moves Yoast meta boxes to the bottom of posts and pages
  *
  * @return void
@@ -354,18 +282,6 @@ function yoast_to_bottom() {
 }
 
 /**
- * Remove indexing on archive pages
- */
-add_filter('wpseo_robots', 'no_index_paginated_pages');
-function no_index_paginated_pages($robots) {
-    if (is_paged()) {
-        return false;
-    } else {
-        return $robots;
-    }
-}
-
-/**
  * Remove emoji support
  *
  * @link   https://codex.wordpress.org/Emoji
@@ -373,6 +289,7 @@ function no_index_paginated_pages($robots) {
  */
 add_action('init', 'remove_emojis');
 function remove_emojis() {
+    // Filters the URL where emoji SVG images are hosted.
     add_filter('emoji_svg_url', '__return_false');
 
     add_filter(
@@ -385,18 +302,21 @@ function remove_emojis() {
         }
     );
 
+    // Print the inline Emoji detection script if it is not already printed.
     remove_action('wp_head', 'print_emoji_detection_script', 7);
     remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    // Print the important emoji-related styles.
     remove_action('wp_print_styles', 'print_emoji_styles');
     remove_action('admin_print_styles', 'print_emoji_styles');
+    // Convert emoji to a static img element.
     remove_filter('the_content_feed', 'wp_staticize_emoji');
     remove_filter('comment_text_rss', 'wp_staticize_emoji');
+    // Convert emoji in emails into static images.
     remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 }
 
 // Add Insert Button
 add_action('init', 'tiny_mce_new_buttons');
-
 function tiny_mce_new_buttons() {
     add_filter('mce_external_plugins', 'tiny_mce_add_buttons');
     add_filter('mce_buttons', 'tiny_mce_register_buttons');
