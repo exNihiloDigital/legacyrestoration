@@ -6,7 +6,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-if (! function_exists('site_info') ) {
+if ( ! function_exists('site_info') ) {
     /**
      * Add site info hook to WP hook library.
      */
@@ -16,8 +16,7 @@ if (! function_exists('site_info') ) {
 }
 
 
-add_action('site_info', 'add_site_info');
-if (! function_exists('add_site_info') ) {
+if ( ! function_exists('add_site_info') ) {
     /**
      * Add site info content.
      */
@@ -43,3 +42,4 @@ if (! function_exists('add_site_info') ) {
         echo apply_filters('site_info_content', $site_info);
     }
 }
+add_action('site_info', 'add_site_info');

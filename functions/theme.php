@@ -5,7 +5,6 @@
  *
  * @link https://developer.wordpress.org/reference/functions/add_theme_support
  */
-add_action('after_setup_theme', 'phos_supports');
 function phos_supports()
 {
     $content_width = 800;
@@ -46,13 +45,13 @@ function phos_supports()
     add_theme_support('editor-color-palette', $editor_colors);
     add_theme_support('disable-custom-colors');
 }
+add_action('after_setup_theme', 'phos_supports');
 
 /**
  * Join posts and postsmeta tables so we can search custom fields
  *
  * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_join
  */
-add_filter('posts_join', 'search_join');
 function search_join($join)
 {
     global $wpdb;
@@ -63,14 +62,13 @@ function search_join($join)
 
     return $join;
 }
-
+add_filter('posts_join', 'search_join');
 
 /**
  * Modify the search query with posts_where
  *
  * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
  */
-add_filter('posts_where', 'search_where');
 function search_where($where)
 {
     global $pagenow, $wpdb;
@@ -85,11 +83,11 @@ function search_where($where)
 
     return $where;
 }
+add_filter('posts_where', 'search_where');
 
 /**
  * Prevent duplicates in search
  */
-add_filter('posts_distinct', 'search_distinct');
 function search_distinct($where)
 {
     global $wpdb;
@@ -100,6 +98,7 @@ function search_distinct($where)
 
     return $where;
 }
+add_filter('posts_distinct', 'search_distinct');
 
 /**
  * Gets post ID as a conditional for it's children
@@ -120,7 +119,6 @@ function is_tree($page_id)
 /**
 * Limits the_excerpt() to a three sentences rather than a word limit
 */
-add_filter('get_the_excerpt', 'filter_excerpt');
 function filter_excerpt($excerpt)
 {
     $allowed_ends = array('.', '!', '?', '...');
@@ -146,15 +144,16 @@ function filter_excerpt($excerpt)
 
     return implode('', $sentences);
 }
+add_filter('get_the_excerpt', 'filter_excerpt');
 
 /**
  * Replaces [...] with a "Read More" button in the_excerpt() & the_content()
  */
-add_filter('excerpt_more', 'filter_read_more');
 function filter_read_more($more)
 {
     return '<a href="' . get_permalink() . '" class="button">Read More</a>';
 }
+add_filter('excerpt_more', 'filter_read_more');
 
 /**
  * Paginates a numeric list in archive, index, and search templates

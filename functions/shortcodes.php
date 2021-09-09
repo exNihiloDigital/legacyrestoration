@@ -4,7 +4,6 @@
  * [accordion name="$name"] shortcode
  * .h2+.accordion>.block>.title>span^+.content
  */
-add_shortcode('accordion', 'shortcode_accordion');
 function shortcode_accordion($atts)
 {
     $atts = shortcode_atts(
@@ -58,3 +57,4 @@ function shortcode_accordion($atts)
 
     return $output;
 }
+add_shortcode('accordion', 'shortcode_accordion');

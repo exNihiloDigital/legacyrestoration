@@ -3,7 +3,6 @@
 /**
  * Declare WooCommerce support
  */
-add_action('after_setup_theme', 'woocommerce_support');
 if (! function_exists('woocommerce_support') ) {
     // Declares WooCommerce theme support.
     function woocommerce_support() {
@@ -15,6 +14,7 @@ if (! function_exists('woocommerce_support') ) {
         add_theme_support('wc-product-gallery-slider');
     }
 }
+add_action('after_setup_theme', 'woocommerce_support');
 
 /**
  * Remove HTML before/after output when calling woocommerce_content()
@@ -48,11 +48,11 @@ remove_filter('woocommerce_after_shop_loop_item_title', 'woocommerce_template_lo
 /**
  * Changes title from an h1 to an h2
  */
-remove_filter('woocommerce_single_product_summary', 'woocommerce_template_single_title');
-add_filter('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
 function woocommerce_template_single_title() {
     echo '<h2>'.get_the_title().'</h2>';
 }
+remove_filter('woocommerce_single_product_summary', 'woocommerce_template_single_title');
+add_filter('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
 
 /**
  * Removes ratings

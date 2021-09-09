@@ -7,7 +7,6 @@
  * @link https://codex.wordpress.org/Function_Reference/register_post_type
  * @link https://codex.wordpress.org/Function_Reference/register_taxonomy
  */
-add_action('init', 'post_types');
 function post_types()
 {
     global $wp_post_types;
@@ -141,3 +140,4 @@ function post_types()
         register_taxonomy($taxonomy["slug"], $taxonomy["post_type"], $taxonomy_args);
     }
 }
+add_action('init', 'post_types');
