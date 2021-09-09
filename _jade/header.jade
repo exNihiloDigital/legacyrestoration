@@ -13,7 +13,7 @@ head
 
 - wp_body_open();
 
--if(is_front_page()) :
+- if ( is_front_page() ) :
     - $home_mobile = 'home-mobile'
 - else :
     - $home_mobile = ''
@@ -30,11 +30,15 @@ header
             aside
                 a(href="<?php echo esc_url(home_url('/')) ?>")
                     img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
+
             section
                 .burgerBtn
+
             #mobile-hidden-menu
-                - mobile_menu()
-        //- .mobile-side-wrapper
+                - if ( has_nav_menu('header') ) :
+                    - mobile_menu()
+                - endif;
+
     .main-header.hrz-padding
         .container
             .logo
@@ -43,7 +47,9 @@ header
 
             .menu
                 nav
-                    - header_menu()
+                    - if ( has_nav_menu('header') ) :
+                        - header_menu()
+                    - endif;
 
 - if (! (is_front_page() || is_404())) :
     - include('includes/featured.php')
