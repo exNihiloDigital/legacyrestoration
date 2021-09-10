@@ -97,7 +97,11 @@ const accordion = ($) => {
         } else {
             $('.accordion li').each(function () {
                 if ($(this).find('h3').hasClass('active')) {
-                    $(this).find('h3').removeClass('active').siblings('.accordion-content').slideToggle(200);
+                    $(this)
+                        .find('h3')
+                        .removeClass('active')
+                        .siblings('.accordion-content')
+                        .slideToggle(200);
                 }
             });
             $(this).toggleClass('active').siblings('.accordion-content').slideToggle(200);
