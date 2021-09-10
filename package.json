@@ -12,6 +12,6 @@
         "prettier:write": "prettier --write **/*.{json,yml,js,scss,jade}"
     },
     "author": "",
-    "license": "ISC",
+    "license": "GPL-3.0",
     "devDependencies": {}
 }
