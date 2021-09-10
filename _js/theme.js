@@ -27,7 +27,6 @@ const mobileMenu = ($) => {
     );
     const mobileSide = /** @type {HTMLElement} */ (document.querySelector('#mobile-hidden-menu'));
     const mobileWrapper = /** @type {HTMLElement} */ (document.querySelector('.mobile'));
-    const overflow = /** @type {HTMLElement} */ (document.querySelector('.mobile-overflow'));
     const pageHeight = document.body.scrollHeight;
 
     let open = false;
@@ -41,9 +40,9 @@ const mobileMenu = ($) => {
             body.style.overflowY = 'hidden';
             mobileSide.classList.add('mobile-active');
             mobileSide.style.height = pageHeight.toString();
-            mobileWrapper.style.height = '100%';
-            overflow.style.height = '100vh';
         } else {
+            const activeCaret = document.querySelector('.fa-caret-right.active');
+
             open = false;
 
             body.style.overflowY = 'scroll';
@@ -51,8 +50,8 @@ const mobileMenu = ($) => {
 
             // wait 225 ms to account for the closing time of the menu
             setTimeout(() => {
+                activeCaret && activeCaret.classList.toggle('active');
                 mobileWrapper.style.height = 'auto';
-                overflow.style.height = 'auto';
             }, 225);
 
             // on menu close, also close all open submenus for a fresh start every time
@@ -98,11 +97,7 @@ const accordion = ($) => {
         } else {
             $('.accordion li').each(function () {
                 if ($(this).find('h3').hasClass('active')) {
-                    $(this)
-                        .find('h3')
-                        .removeClass('active')
-                        .siblings('.accordion-content')
-                        .slideToggle(200);
+                    $(this).find('h3').removeClass('active').siblings('.accordion-content').slideToggle(200);
                 }
             });
             $(this).toggleClass('active').siblings('.accordion-content').slideToggle(200);
