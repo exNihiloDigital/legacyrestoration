@@ -1,37 +1,35 @@
+// @ts-check
+
 jQuery(function ($) {
     // Menus
-    mobileMenu($);
     desktopMenu($);
+    mobileMenu($);
 
     // Default Functionality
     accordion($);
     modals($);
 
     // Custom Functionality
-    // homeServices($);
-    // projectGallery($);
-    // singleArticleCopyBtn();
-    // smoothScroll($);
 });
 
 /**
- *
- * Menu Functionality
+ * Mobile Menu - Sets the dropdown animation for our mobile-menu on mobile
+ * @param {JQueryStatic} $ Provdes jQuery types
  */
 const mobileMenu = ($) => {
-    /**
-     *
-     * Sets the dropdown animation for our mobile-menu
-     *
-     */
     const body = document.querySelector('body');
     const burgerBtn = document.querySelector('.burgerBtn');
-    const dropdowns = document.querySelectorAll('#mobile-hidden-menu .parent .dropdown');
-    const mobileSide = document.querySelector('#mobile-hidden-menu');
-    const menuParent = document.querySelectorAll('#mobile-hidden-menu ul li.parent');
-    const mobileWrapper = document.querySelector('.mobile');
-    const overflow = document.querySelector('.mobile-overflow');
+    const dropdowns = /** @type {NodeListOf<HTMLElement>} */ (
+        document.querySelectorAll('#mobile-hidden-menu .parent .dropdown')
+    );
+    const menuParent = /** @type {NodeListOf<HTMLElement>} */ (
+        document.querySelectorAll('#mobile-hidden-menu ul li.parent')
+    );
+    const mobileSide = /** @type {HTMLElement} */ (document.querySelector('#mobile-hidden-menu'));
+    const mobileWrapper = /** @type {HTMLElement} */ (document.querySelector('.mobile'));
+    const overflow = /** @type {HTMLElement} */ (document.querySelector('.mobile-overflow'));
     const pageHeight = document.body.scrollHeight;
+
     let open = false;
 
     burgerBtn.addEventListener('click', () => {
@@ -39,16 +37,19 @@ const mobileMenu = ($) => {
 
         if (!open) {
             open = true;
-            mobileSide.classList.add('mobile-active').css('height', pageHeight);
+
             body.style.overflowY = 'hidden';
+            mobileSide.classList.add('mobile-active');
+            mobileSide.style.height = pageHeight.toString();
             mobileWrapper.style.height = '100%';
             overflow.style.height = '100vh';
         } else {
             open = false;
-            mobileSide.classList.remove('mobile-active');
-            body.style.overflowY = 'scroll';
 
-            // wait 250 ms to account for the closing time of the menu
+            body.style.overflowY = 'scroll';
+            mobileSide.classList.remove('mobile-active');
+
+            // wait 225 ms to account for the closing time of the menu
             setTimeout(() => {
                 mobileWrapper.style.height = 'auto';
                 overflow.style.height = 'auto';
@@ -72,23 +73,23 @@ const mobileMenu = ($) => {
 };
 
 /**
- *
- * Default Functionality
+ * Desktop Menu - Sets the dropdown animation for our header menu on desktop
+ * @param {JQueryStatic} $ Provdes jQuery types
  */
 const desktopMenu = ($) => {
-    /**
-     * Sets the dropdown animation when you hover the header menu
-     */
     $('nav ul li')
         .on('mouseenter', function () {
-            $(this).children('.dropdown').stop(true, false, true).slideDown(200);
+            $(this).children('.dropdown').stop(false, true).slideDown(200);
         })
         .on('mouseleave', function () {
-            $(this).children('.dropdown').stop(true, false, true).slideUp(200);
+            $(this).children('.dropdown').stop(false, true).slideUp(200);
         });
 };
 
-//Accordion
+/**
+ * Accordion
+ * @param {JQueryStatic} $ Provdes jQuery types
+ */
 const accordion = ($) => {
     $('.accordion li h3').on('click', function () {
         // Test all li. If active, close tab
@@ -109,16 +110,12 @@ const accordion = ($) => {
     });
 };
 
+/**
+ * Modal Functionality
+ * @param {JQueryStatic} $ Provdes jQuery types
+ */
 const modals = ($) => {
-    //modals
-    // $('#vid-placeholder').on('click', () => $('.modal-popup').fadeIn(250));
-
-    // $('.project-img').on('click', function () {
-    //     $(this).parent().find($('.modal-popup')).fadeIn(250);
-    // });
-
     $('.modal-block .modal-img').on('click', function () {
-        console.log('click');
         $(this).next('.modal-popup').fadeIn(250);
     });
 
