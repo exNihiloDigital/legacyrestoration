@@ -1,5 +1,8 @@
 # Browsers that we support
 # https://github.com/browserslist/browserslist#browserslistrc
-# run 'npx browserslist' to see which versions are supported by the specs below
+
+# Run 'npx browserslist' to see which versions are supported by the specs below
+# Run npx browserslist@latest --update-db regularly to update included browsers
 
 extends @wordpress/browserslist-config
+not op_mini all
