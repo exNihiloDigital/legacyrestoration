@@ -28,6 +28,8 @@
 !.gitignore
 !.jscsrc
 !.jshintignore
+!.prettierignore
+!.prettierrc
 !.travis.yml
 
 # Ignore all files with .lock extentions
