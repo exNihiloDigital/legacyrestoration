@@ -20,7 +20,8 @@
 *~
 ._*
 # but track
-!.browserslist
+!.babelrc
+!.browserslistrc
 !.editorconfig
 !.gitattributes
 !.github
@@ -31,8 +32,6 @@
 
 # Ignore all files with .lock extentions
 *.lock
-# but track
-!composer.lock
 
 # Dependencies
 bower_components
@@ -46,5 +45,3 @@ vendor
 # function.php files
 /*.php
 !/functions.php
-
-**/*.webp

@@ -35,8 +35,7 @@ const siteURL = 'phos-framework.test';
 gulp.task('styles', () =>
     gulp
         .src('./_sass/theme.scss', { sourcemaps: true })
-        .pipe(plumber())
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer()]))
         .pipe(gulp.dest(outputStyles, { sourcemaps: true }))
 );
@@ -54,8 +53,7 @@ gulp.task('minifycss', () =>
 gulp.task('acf', () =>
     gulp
         .src(adminAcf)
-        .pipe(plumber())
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
         .pipe(rename({ suffix: '.min' }))
@@ -66,8 +64,7 @@ gulp.task('acf', () =>
 gulp.task('dashboard', () =>
     gulp
         .src(adminDashboard)
-        .pipe(plumber())
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
         .pipe(rename({ suffix: '.min' }))
@@ -78,8 +75,7 @@ gulp.task('dashboard', () =>
 gulp.task('gutenberg', () =>
     gulp
         .src(adminGutenberg)
-        .pipe(plumber())
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
         .pipe(rename({ suffix: '.min' }))
@@ -90,8 +86,7 @@ gulp.task('gutenberg', () =>
 gulp.task('login', () =>
     gulp
         .src(adminLogin)
-        .pipe(plumber())
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
         .pipe(rename({ suffix: '.min' }))
@@ -123,7 +118,7 @@ gulp.task('includes', () =>
 
 // Loop through JS files, compile them, concatonate them, minify them, saves to /assets as .min.js
 gulp.task('javascript', () => {
-    let scripts = ['!./_js/tinymce-plugin.js', './_js/theme.js'];
+    let scripts = './_js/theme.js';
 
     gulp.src(scripts).pipe(babel()).pipe(concat('theme.js')).pipe(gulp.dest(outputJS));
 
