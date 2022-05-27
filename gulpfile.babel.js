@@ -27,7 +27,7 @@ const outputJS = './assets/js';
 const outputStyles = './assets/css';
 const style = '_sass/*.scss';
 const template = '_jade/*.jade';
-const templateIncludes = '_jade/_includes/*.jade';
+const templateIncludes = '_jade/_includes/**/*.jade';
 
 const siteURL = 'phos-framework.test';
 
@@ -148,3 +148,4 @@ gulp.task('default', () => {
     gulp.watch(template, gulp.series('templates'));
     gulp.watch(templateIncludes, gulp.series('includes'));
 });
+

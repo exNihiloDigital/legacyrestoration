@@ -1,0 +1,11 @@
+- if ( have_rows('flex_editor') ) :;
+    - while ( have_rows('flex_editor') ) : the_row();
+        - flexContentBlock()
+    - endwhile
+- endif
+
+- function flexContentBlock() {
+    - if ( 'flex_content_block' === get_row_layout() ) :;
+        - get_template_part( 'includes/flex/flex-content-block.jade' );
+    - endif;
+- }
