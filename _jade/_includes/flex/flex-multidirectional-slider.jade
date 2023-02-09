@@ -1,0 +1,78 @@
+- $bg_color = "bg-color-" . get_sub_field('background_color')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+
+section.flex-block.flex-multidirectional-slider.hrz-padding(class="<?= $bg_color; ?>")
+	.container.content-block
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+
+		- if($subheading) :
+			h3: - echo $subheading
+		- endif
+
+		- if($content) : 
+			- echo $content
+		- endif
+
+		- if (have_rows('slider')) :
+			//- Mobile View
+			.swiper.mobile-multidirectional-slider
+				.swiper-wrapper
+					- while (have_rows('slider')) : the_row()
+						.swiper-slide
+							img.slide-image(
+								src="<?= get_sub_field('image')['url'];?>",
+								alt="<?= get_sub_field('image')['url'];?>"
+								)
+							.mobile-slide-content
+								img.slide-icon(
+									src="<?= get_sub_field('icon')['url'];?>",
+									alt="<?= get_sub_field('icon')['url'];?>"
+									)
+								- echo get_sub_field('content')
+								- if(get_sub_field('button')) :
+									a.button(href="<?= get_sub_field('button')['url']; ?>")
+										- echo get_sub_field('button')['title']
+								- endif
+					- endwhile
+				.swiper-button-prev
+				.swiper-button-next
+		- endif
+
+
+		- if (have_rows('slider')) :
+			.multidirectional-slider-wrapper
+				aside 
+					.swiper.md-slider-img
+						.swiper-wrapper
+							- while (have_rows('slider')) : the_row()
+								.swiper-slide(
+									style="background-image: url('<?= get_sub_field('image')['url'];?>');",
+									alt="<?= get_sub_field('image')['alt'];?>"
+									)
+							- endwhile
+				section 
+					.swiper.md-slider-content
+						.swiper-wrapper
+							- while (have_rows('slider')) : the_row()
+								.swiper-slide
+									img(
+										src="<?php echo get_sub_field('icon')['url'];?>",
+										alt="<?php echo get_sub_field('icon')['alt'];?>"
+										)
+									h3: - echo get_sub_field('title')
+									p: - echo get_sub_field('content')
+									- if(get_sub_field('button')):
+										a.button(
+											href="<?= get_sub_field('button')['url'];?>"
+											)
+											- echo get_sub_field('button')['title']
+									- endif
+							- endwhile
+						.swiper-button-next
+						.swiper-pagination
+						.swiper-button-prev
+		- endif

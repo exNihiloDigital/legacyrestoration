@@ -1,0 +1,23 @@
+section.flex-block.flex-featured-content-slider
+	.container-lg.content-block
+		- if (have_rows('slider')) :
+			.swiper.featured-content-slider
+				.swiper-wrapper
+					- while (have_rows('slider')) : the_row()
+						- $bg_color = "bg-color-" . get_sub_field('background_color')
+						- $bg_image = get_sub_field('background_image')
+						.swiper-slide(style="background-image:url('<?= $bg_image['url'];?>');")
+							section(class="<?= $bg_color; ?>")
+								h2: - echo get_sub_field('title')
+								p: - echo get_sub_field('content')
+								- if(get_sub_field('button')) :
+									a.button.button-ghost(
+										href="<?= get_sub_field('button')['url'];?>"
+										target="<?= get_sub_field('button')['target'];?>"
+										)
+										- echo get_sub_field('button')['title']
+								- endif
+					- endwhile
+				.swiper-button-next
+				.swiper-button-prev
+		- endif

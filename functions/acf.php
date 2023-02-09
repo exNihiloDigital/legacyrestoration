@@ -25,8 +25,8 @@ if ( function_exists('acf_add_options_page') ) {
             'menu_slug'   => 'acf-settings',
             'capability'  => 'edit_posts',
             'position'    => '80.01',
-            'parent_slug' => 'options-general.php',
-            'icon_url'    => 'dashicons-admin-settings',
+            // 'parent_slug' => 'options-general.php',
+            'icon_url'    => 'dashicons-admin-site',
             'redirect'    => false
         )
     );

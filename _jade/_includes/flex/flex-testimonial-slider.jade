@@ -1,0 +1,22 @@
+- $background_image = get_sub_field('background_image') ? get_sub_field('background_image')['url'] : ''
+- $bg_overlay = 'overlay-' . get_sub_field('background_overlay')
+- $heading = get_sub_field('heading')
+
+section.flex-block.flex-testimonial-slider.hrz-padding(style="background-image: url('<?= $background_image;?>');" class="<?= $bg_overlay;?>")
+	.container.content-block
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		- if (have_rows('slider')) :
+			.swiper.testimonial-slider
+				.swiper-wrapper
+					- while (have_rows('slider')) : the_row()
+						.swiper-slide
+							p: - echo get_sub_field('testimonial')
+							h4: - echo get_sub_field('name')
+							p: strong: - echo get_sub_field('location_position')
+					- endwhile
+				.swiper-button-prev
+				.swiper-button-next
+				.swiper-pagination
+		- endif

@@ -24,7 +24,7 @@ if ( ! function_exists('add_site_info') ) {
         $site_info = sprintf(
             '<p>%1$s %2$s %3$s %4$s %5$s %6$s</p>',
             esc_html('&copy;'),
-            esc_html(get_the_date('Y')),
+            esc_html(date('Y')),
             esc_html(get_bloginfo('name') . "."),
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a>',

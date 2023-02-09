@@ -1,0 +1,48 @@
+//- Variables
+- $background = get_sub_field('background')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+- $column_count = count(get_sub_field('columns'))
+
+- if($background == "color"): 
+	- $bg_color = "bg-color-" . get_sub_field('background_color')
+	- $bg_overlay= ""
+	- $bg_img = ""
+- else : 
+	- $bg_color = ""
+	- $bg_overlay= "bg-overlay-" . get_sub_field('background_overlay')
+	- $bg_img = 'background-image: url(\'' . get_sub_field('background_image')['url'] . '\');'
+- endif
+
+section.flex-block.flex-content.hrz-padding(class="<?= $bg_color . ' ' . $bg_overlay; ?>")
+	.container.vert-padding
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		- if($subheading) :
+			h3: - echo $subheading
+		- endif
+		- if (have_rows('columns')) :
+			section.columns(class="col-count-<?php echo $column_count;?>")
+				- $cols = 1
+				- while (have_rows('columns')) : the_row()
+					.column(class="col-num-<?php echo $cols; ?>")
+						- if(get_sub_field('content')): 
+							- echo get_sub_field('content')
+						- endif
+						- if(get_sub_field('standard_button')): 
+							a.button(
+								href="<?php echo get_sub_field('standard_button')['url'];?>" 
+								target="<?php echo get_sub_field('standard_button')['target'];?>")
+								- echo get_sub_field('standard_button')['title']
+						- endif
+						- if(get_sub_field('alternate_button')): 
+							a.button.button-ghost(
+								href="<?php echo get_sub_field('alternate_button')['url'];?>" 
+								target="<?php echo get_sub_field('alternate_button')['target'];?>")
+								- echo get_sub_field('alternate_button')['title']
+						- endif
+						- $cols++
+				- endwhile
+		- endif

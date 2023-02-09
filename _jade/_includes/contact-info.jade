@@ -1,0 +1,21 @@
+aside.contact-info
+	- if(get_field('phone_number', 'options')) :
+		- $phone_raw = get_field('phone_number', 'options')
+		- $phone = str_replace([" ", "(", ")", "-"], "", $phone_raw)
+		a.contact-phone(href="tel:<?= $phone ?>" target="_blank") 
+			i.fa-sharp.fa-solid.fa-phone
+			p: - echo get_field('phone_number', 'options')
+	- endif
+	- if(get_field('email', 'options')) :
+		//- WISHLIST: find effective way to obscure emails
+		a.contact-email(href="mailto:<?= get_field('email', 'options') ?>" target="_blank") 
+			i.fa-solid.fa-envelope
+			p: - echo get_field('email', 'options')
+	- endif
+	- if(get_field('street_address', 'options') && get_field('city_state_zip', 'options')) : 
+		a.contact-location(href="<?= get_field('google_maps_link', 'options')['url'];?>") 
+			i.fa-solid.fa-location-dot
+			p 
+				span: - echo get_field('street_address', 'options')
+				span: - echo get_field('city_state_zip', 'options')
+	- endif

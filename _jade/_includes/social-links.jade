@@ -1,0 +1,41 @@
+ul.social-links
+	- if(get_field('facebook', 'options')) :
+		li 
+			a(
+				href="<?= get_field('facebook', 'options')['url']; ?>"
+				target="<?= get_field('facebook', 'options')['target']; ?>"
+				) 
+				i(class="fa-brands fa-facebook-f")
+	- endif
+	- if(get_field('twitter', 'options')) :
+		li 
+			a(
+				href="<?= get_field('twitter', 'options')['url']; ?>"
+				target="<?= get_field('twitter', 'options')['target']; ?>"
+				) 
+				i(class="fa-brands fa-twitter")
+	- endif
+	- if(get_field('instagram', 'options')) :
+		li 
+			a(
+				href="<?= get_field('instagram', 'options')['url']; ?>"
+				target="<?= get_field('instagram', 'options')['target']; ?>"
+				) 
+				i(class="fa-brands fa-instagram")
+	- endif
+	- if(get_field('linkedin', 'options')) :
+		li 
+			a(
+				href="<?= get_field('linkedin', 'options')['url']; ?>"
+				target="<?= get_field('linkedin', 'options')['target']; ?>"
+				) 
+				i(class="fa-brands fa-linkedin-in")
+	- endif
+	- if(get_field('pinterest', 'options')) :
+		li 
+			a(
+				href="<?= get_field('pinterest', 'options')['url']; ?>"
+				target="<?= get_field('pinterest', 'options')['target']; ?>"
+				) 
+				i(class="fa-brands fa-pinterest-p")
+	- endif

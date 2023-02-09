@@ -1,0 +1,44 @@
+- $bg_color = "bg-color-" . get_sub_field('background_color')
+- $image_alignment = get_sub_field('image_alignment')
+- $spacing = get_sub_field('spacing')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+- $image = get_sub_field('image')
+- $standard_btn = get_sub_field('standard_button')
+- $alternate_btn = get_sub_field('alternate_button')
+
+section.flex-block.flex-content-image.hrz-padding(class="<?= $bg_color; ?> img-alignment-<?= $image_alignment;?> spacing-<?= $spacing;?>")
+	.container.columns.col-count-2
+		section.column
+			- if($heading) :
+				h2: - echo $heading
+			- endif
+
+			- if($subheading) :
+				h3: - echo $subheading
+			- endif
+
+			- if($content) : 
+				- echo $content
+			- endif
+
+			- if($standard_btn): 
+				a.button(
+					href="<?= $standard_btn['url']; ?>" 
+					target="<?= $standard_btn['target']; ?>") 
+					- echo $standard_btn['title']
+			- endif
+
+			- if($alternate_btn): 
+				a.button.button-ghost(
+					href="<?= $alternate_btn['url']; ?>" 
+					target="<?= $alternate_btn['target']; ?>") 
+					- echo $alternate_btn['title']
+			- endif
+		aside.column
+			- if($image) :
+				.image-wrapper(
+					style="background-image:url('<?= $image['url'];?>');"
+					alt="<?= $image['alt'];?>")
+			- endif

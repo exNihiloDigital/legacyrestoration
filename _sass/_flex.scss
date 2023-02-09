@@ -1,0 +1,759 @@
+.flex-block {
+    &.flex-content {
+        .container {
+            h3 {
+                margin-bottom: 40px;
+            }
+        }
+    }
+    &.flex-content-image {
+        .container {
+            .column {
+                .image-wrapper {
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+        }
+    }
+    &.flex-tabs {
+        .container {
+            padding-bottom: 120px;
+
+            .tabs-block {
+                margin-top: 40px;
+                position: relative;
+
+                .tab {
+                    background-color: color(dark);
+                    border-right: 1px solid color(light);
+                    color: white;
+                    cursor: pointer;
+                    display: inline-block;
+                    font-size: 18px;
+                    font-weight: 600;
+                    padding: 5px 30px;
+                    transition: all 0.2s;
+
+                    @include breakpoint(769px up) {
+                        font-size: 24px;
+                    }
+                    &:nth-last-child(2) {
+                        // get last tab element
+                        border-right: 0;
+                    }
+                    &.active-tab {
+                        background-color: color(light);
+                        color: color(one);
+                    }
+                }
+                .tab-content {
+                    background-color: color(light);
+                    display: none;
+                    left: 0;
+                    position: absolute;
+                    top: 37px;
+                    padding: 30px;
+                    width: 100%;
+
+                    @include breakpoint(769px up) {
+                        position: absolute;
+                        top: 46px;
+                        padding: 30px;
+                    }
+                    &.active-content {
+                        display: block;
+                    }
+                    p {
+                        color: color(dark);
+                        font-size: 20px;
+                        font-weight: 400;
+                        margin-bottom: 20px;
+                    }
+                    a.button {
+                        &:hover {
+                            color: white;
+                        }
+                    }
+                }
+                .tab-content-spacer {
+                    display: block;
+                }
+            }
+        }
+    }
+    &.flex-team {
+        .container {
+            .modal-container {
+                .modal-block {
+                    .modal-text {
+                        h3,
+                        p {
+                            color: color(one);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.flex-video-embed {
+        .container {
+            section.modal-block {
+                padding-top: 40px;
+
+                .modal-button.video-modal {
+                    background-position: center;
+                    background-size: cover;
+                    cursor: pointer;
+                    height: 500px;
+                    position: relative;
+
+                    i.fa-solid {
+                        color: white;
+                        font-size: 80px;
+                        left: 50%;
+                        opacity: 0.5;
+                        position: absolute;
+                        transform: translate(-50%, -50%);
+                        top: 50%;
+                    }
+                }
+                .modal.video-embed-wrapper {
+                    display: none;
+                    height: 100%;
+                    left: 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                    z-index: 9999999;
+
+                    .close-bg.modal-bg {
+                        background-color: color(dark);
+                        height: 100%;
+                        opacity: 0.8;
+                        position: absolute;
+                        width: 100%;
+                    }
+                    .modal-content {
+                        background-color: white;
+                        display: block;
+                        height: 80vh;
+                        left: 0;
+                        max-width: 100%;
+                        padding: 60px;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        z-index: 100;
+
+                        @include breakpoint(769px up) {
+                            display: flex;
+                            left: 50%;
+                            top: 10vh;
+                            transform: translateX(-50%);
+                        }
+
+                        i {
+                            color: dark;
+                            cursor: pointer;
+                            font-size: 40px;
+                            position: absolute;
+                            right: 20px;
+                            top: 20px;
+                            transition: all 0.2s;
+
+                            &:hover {
+                                color: color(two);
+                            }
+                        }
+                        .player {
+                            height: 100%;
+                            width: 100%;
+
+                            iframe {
+                                height: 100%;
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.flex-carousel-slider {
+        .container {
+            .swiper {
+                margin-top: 40px;
+
+                @include breakpoint(769px up) {
+                    margin-top: 80px;
+                }
+                .swiper-wrapper {
+                    .swiper-slide {
+                        padding: 0 40px;
+                    }
+                }
+                .swiper-button-prev,
+                .swiper-button-next {
+                    color: color(two);
+                    transition: color 0.2s;
+
+                    &:hover {
+                        color: color(three);
+                    }
+                    &::after {
+                        font-size: 28px;
+                    }
+                }
+                .swiper-button-prev {
+                    left: 0;
+                }
+                .swiper-button-next {
+                    right: 0;
+                }
+                &.slider-type-carousel {
+                    .swiper-wrapper {
+                        .swiper-slide {
+                            background-color: color(light);
+                            border-radius: 10px;
+                            padding: 20px;
+
+                            p {
+                                color: color(one);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.flex-multidirectional-slider {
+        .container {
+            .mobile-multidirectional-slider {
+                background-color: color(light);
+                margin-top: 40px;
+
+                @include breakpoint(769px up) {
+                    display: none;
+                }
+                .swiper-wrapper {
+                    .swiper-slide {
+                        padding: 0 40px;
+                        text-align: center;
+
+                        img.slide-image,
+                        picture.slide-image img {
+                            margin-bottom: 40px;
+                            max-height: 400px;
+                        }
+                        .mobile-slide-content {
+                            padding-bottom: 40px;
+
+                            img.slide-icon,
+                            picture.slide-icon img {
+                                margin-bottom: 20px;
+                            }
+                            p {
+                                color: color(dark);
+                            }
+                        }
+                    }
+                }
+                .swiper-button-prev,
+                .swiper-button-next {
+                    color: color(dark);
+
+                    &:after {
+                        font-size: 30px;
+                    }
+                }
+            }
+            .multidirectional-slider-wrapper {
+                display: none;
+
+                @include breakpoint(769px up) {
+                    align-items: stretch;
+                    display: flex;
+                    margin-top: 80px;
+                    overflow: hidden;
+                }
+                aside {
+                    position: relative;
+                    z-index: 10;
+
+                    @include breakpoint(769px up) {
+                        display: inline-block;
+                        margin-bottom: 0;
+                        width: 60%;
+
+                        .md-slider-img {
+                            background-color: #efefef;
+                            display: block;
+                            height: 100%;
+                            overflow: visible;
+
+                            .swiper-wrapper {
+                                .swiper-slide {
+                                    background-position: center;
+                                    background-size: cover;
+                                    display: block;
+                                    height: 100%;
+                                    position: relative;
+                                }
+                            }
+                        }
+                    }
+                    .md-slider-img {
+                        @include breakpoint(769px down) {
+                            height: 300px;
+                        }
+                        .swiper-wrapper {
+                            .swiper-slide {
+                                background-position: center;
+                                background-size: cover;
+                                display: block;
+                                height: 100%;
+                                position: relative;
+                            }
+                        }
+                    }
+                }
+                section {
+                    background-color: white;
+                    position: relative;
+                    z-index: 100;
+
+                    @include breakpoint(769px up) {
+                        display: inline-block;
+                        padding-top: 80px;
+                        padding-bottom: 80px;
+                        vertical-align: top;
+                        width: 40%;
+                    }
+
+                    .md-slider-content {
+                        height: 500px;
+                        overflow: visible;
+                        padding: 0;
+                        position: relative;
+                        width: 100%;
+
+                        @include breakpoint(769px up) {
+                            height: 740px;
+                            padding: 60px 60px 0;
+                        }
+                        .swiper-wrapper {
+                            .swiper-slide {
+                                height: 100%;
+
+                                h3 {
+                                    color: color(one);
+                                    font-family: font(bold);
+                                    font-size: 45px;
+                                    font-weight: 700;
+                                    text-transform: uppercase;
+
+                                    @include breakpoint(769px up) {
+                                        font-size: 59px;
+                                    }
+                                }
+                                p {
+                                    color: color(dark);
+                                }
+                                .button-large {
+                                    margin-top: 20px;
+
+                                    @include breakpoint(769px up) {
+                                        margin-top: 0;
+                                        position: absolute;
+                                        left: -100px;
+                                        bottom: 80px;
+                                    }
+                                }
+                            }
+                        }
+                        .swiper-button-next,
+                        .swiper-button-prev {
+                            bottom: 40px;
+                            opacity: 1;
+                            top: unset;
+
+                            &:after {
+                                color: color(dark);
+                                font-size: 20px;
+                                font-weight: 700;
+                            }
+                        }
+                        .swiper-pagination-fraction {
+                            bottom: 40px;
+                            z-index: -1;
+
+                            @include breakpoint(769px up) {
+                                bottom: 47px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.flex-ataglance-slider {
+        background-position: center;
+        background-size: cover;
+
+        .container-lg {
+            aside {
+                margin-bottom: 40px;
+                position: relative;
+                text-align: center;
+                width: 100%;
+                z-index: 10;
+
+                @include breakpoint(1024px up) {
+                    border-right: 2px solid white;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    padding: 80px 0;
+                    text-align: left;
+                    width: calc(50% - 80px);
+                    vertical-align: top;
+                }
+            }
+            section {
+                position: relative;
+                width: 100%;
+                z-index: 10;
+
+                @include breakpoint(1024px up) {
+                    display: inline-block;
+                    margin-left: 80px; //must match width calc of aside
+                    padding: 80px 0;
+                    width: 50%;
+                    vertical-align: top;
+                }
+                .swiper.glance-slider {
+                    .swiper-wrapper {
+                        margin-bottom: 50px;
+
+                        @include breakpoint(1024px up) {
+                            margin-bottom: 0;
+                        }
+                        .swiper-slide {
+                            .slide-block {
+                                margin-bottom: 40px;
+                                text-align: center;
+
+                                @include breakpoint(1024px up) {
+                                    display: inline-block;
+                                    padding-right: 40px;
+                                    text-align: left;
+                                    width: 50%;
+                                    vertical-align: top;
+                                }
+                                h4 {
+                                    margin-bottom: 10px;
+                                }
+                                p {
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                .swiper-button-next,
+                .swiper-button-prev {
+                    color: white;
+                    top: calc(100% - 20px);
+                    transition: color 0.2s;
+
+                    &:hover {
+                        color: color(two);
+                    }
+                    &:after {
+                        font-size: 30px;
+
+                        @include breakpoint(1024px up) {
+                            font-size: 24px;
+                        }
+                    }
+                }
+                .swiper-button-next {
+                }
+                .swiper-button-prev {
+                    @include breakpoint(1024px up) {
+                        left: unset;
+                        right: 90px;
+                    }
+                }
+            }
+        }
+    }
+    &.flex-large-image-slider {
+        .swiper.photo-slider {
+            .swiper-wrapper {
+                .swiper-slide {
+                    align-items: stretch;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: column-reverse;
+
+                    @include breakpoint(769px up) {
+                        align-items: stretch;
+                        display: flex;
+                        flex-direction: unset;
+                        min-height: 670px;
+                    }
+                    section {
+                        background-color: color(one);
+                        padding: 80px 20px 40px;
+
+                        @include breakpoint(769px up) {
+                            min-height: 650px;
+                            padding: 80px 60px;
+                            width: 40%;
+                        }
+                        h2,
+                        h3,
+                        h4,
+                        h5,
+                        h6 {
+                            color: white;
+                            font-weight: 600;
+                        }
+                        a.button {
+                            color: white;
+                            margin-top: 20px;
+                        }
+                    }
+                    aside {
+                        background-position: center;
+                        background-size: cover;
+                        height: 300px;
+                        width: 100%;
+
+                        @include breakpoint(769px up) {
+                            // height: 550px;
+                            height: auto;
+                            width: 60%;
+                        }
+                    }
+                }
+            }
+            .swiper-button-next,
+            .swiper-button-prev {
+                color: white;
+                position: absolute;
+                top: 325px;
+                z-index: 10;
+
+                @include breakpoint(600px up) {
+                    top: 25%;
+                }
+                @include breakpoint(769px up) {
+                    bottom: 37px;
+                    top: unset;
+                }
+                &:after {
+                    font-family: 'Font Awesome 5 Pro';
+                    font-size: 30px;
+
+                    @include breakpoint(769px up) {
+                        font-size: 22px;
+                    }
+                }
+            }
+            .swiper-button-next {
+                right: 10px;
+
+                @include breakpoint(769px up) {
+                    // left: calc(50% - 200px);
+                    right: calc(60% + 80px);
+                }
+                @include breakpoint(1080px up) {
+                    right: calc(60% + 200px);
+                }
+                &:after {
+                    content: '\f061';
+                }
+            }
+            .swiper-button-prev {
+                left: 10px;
+
+                @include breakpoint(769px up) {
+                    left: 60px;
+                }
+                @include breakpoint(1080px up) {
+                    left: 100px;
+                }
+                &:after {
+                    content: '\f060';
+                }
+            }
+            .swiper-pagination {
+                color: white;
+                position: absolute;
+                top: 310px;
+                z-index: 1;
+
+                @include breakpoint(769px up) {
+                    bottom: 47px;
+                    color: color(dark);
+                    width: 35%;
+                }
+            }
+        }
+    }
+    &.flex-testimonial-slider {
+        .container {
+            text-align: center;
+
+            h2 {
+                margin-bottom: 40px;
+            }
+            .swiper.testimonial-slider {
+                .swiper-wrapper {
+                    .swiper-slide {
+                        padding: 0 40px;
+
+                        @include breakpoint(769px up) {
+                            padding: 0 200px;
+                        }
+                        h4 {
+                            margin-bottom: 5px;
+                        }
+                        p {
+                            strong {
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+                .swiper-button-prev,
+                .swiper-button-next {
+                    color: white;
+                    top: 40%;
+
+                    &:after {
+                        font-size: 30px;
+                    }
+                }
+                .swiper-pagination {
+                    bottom: -5px;
+
+                    .swiper-pagination-bullet,
+                    .swiper-pagination-bullet-active {
+                        background-color: white;
+                    }
+                }
+            }
+        }
+    }
+    &.flex-featured-content-slider {
+        .container-lg {
+            .swiper.featured-content-slider {
+                padding: 0 20px;
+
+                @include breakpoint(769px up) {
+                    padding: 0 40px;
+                }
+                @include breakpoint(1020px up) {
+                    padding: 0 80px;
+                }
+                .swiper-slide {
+                    padding: 80px 20px;
+
+                    @include breakpoint(1020px up) {
+                        padding: 100px 40px;
+                    }
+                    section {
+                        padding: 20px;
+                        text-align: center;
+
+                        @include breakpoint(769px up) {
+                            padding: 40px;
+                        }
+                        @include breakpoint(1020px up) {
+                            margin: 0 auto;
+                            max-width: 50%;
+                        }
+                    }
+                }
+                .swiper-button-next,
+                .swiper-button-prev {
+                    color: color(dark);
+                    transition: color 0.2s;
+
+                    &:after {
+                        font-size: 32px;
+
+                        @include breakpoint(769px up) {
+                            font-size: 45px;
+                        }
+                    }
+                    &:hover {
+                        color: color(two);
+                    }
+                }
+            }
+        }
+    }
+    &.flex-testimonial-cards {
+        .container {
+            h2 {
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            .swiper.testimonial-cards {
+                padding: 0 40px;
+
+                .swiper-slide {
+                    background-position: center;
+                    background-size: cover;
+                    border-radius: 40px;
+                    overflow: hidden;
+                    padding: 40px 20px;
+                    text-align: center;
+
+                    img {
+                        margin-bottom: 40px;
+                        max-width: 60px;
+                        opacity: 0.6;
+                        position: relative;
+                        z-index: 10;
+                    }
+                    h4 {
+                        font-size: 20px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
+                }
+                .swiper-button-next,
+                .swiper-button-prev {
+                    color: color(dark);
+                    transition: color 0.2s;
+
+                    &:after {
+                        font-size: 32px;
+
+                        @include breakpoint(769px up) {
+                            // font-size: 45px;
+                        }
+                    }
+                    &:hover {
+                        color: color(two);
+                    }
+                }
+                .swiper-button-next {
+                    @include breakpoint(1020px up) {
+                        right: 0;
+                    }
+                }
+                .swiper-button-prev {
+                    @include breakpoint(1020px up) {
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

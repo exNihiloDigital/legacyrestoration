@@ -1,0 +1,46 @@
+//- Variables
+- $bg_color = "bg-color-" . get_sub_field('background_color')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+
+section.flex-block.flex-tabs.hrz-padding(class="<?= $bg_color;?>")
+	.container.vert-padding
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		- if($subheading) :
+			h3: - echo $subheading
+		- endif
+		- if($content) :
+			p: - echo $content
+		- endif
+		- if (have_rows('tabs')) :
+			- $tab_count = 1
+			.tabs-block
+				- while (have_rows('tabs')) : the_row()
+					- if($tab_count == 1) :
+						- $tab_class = 'active-tab'
+						- $tab_content = 'active-content'
+					- else: 
+						- $tab_class = ''
+						- $tab_content = ''
+					- endif
+					.tab(class="<?php echo $tab_class;?>" data-tab="tab-<?php echo $tab_count;?>")
+						- echo get_sub_field('tab_title')
+
+						.tab-content(
+							data-content="content-tab-<?php echo $tab_count;?>" 
+							class="<?php echo $tab_content;?>"
+							)
+							- echo get_sub_field('tab_content')
+							- if(get_sub_field('tab_button')): 
+								a.button(
+									href="<?php echo get_sub_field('tab_button')['url'];?>" 
+									target="<?php echo get_sub_field('tab_button')['target'];?>")
+									- echo get_sub_field('tab_button')['title']
+							- endif
+					- $tab_count++
+				- endwhile
+				.tab-content-spacer
+		- endif

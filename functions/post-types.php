@@ -131,11 +131,11 @@ function post_types()
         /**
          * Gutenberg & Rest API Support
          */
-        if (isset($wp_post_types[$slug])) {
-            $wp_post_types[$slug]->show_in_rest = true;
-            $wp_post_types[$slug]->rest_base = $slug;
-            $wp_post_types[$slug]->rest_controller_class = 'WP_REST_Posts_Controller';
-        }
+        // if (isset($wp_post_types[$slug])) {
+        //     $wp_post_types[$slug]->show_in_rest = true;
+        //     $wp_post_types[$slug]->rest_base = $slug;
+        //     $wp_post_types[$slug]->rest_controller_class = 'WP_REST_Posts_Controller';
+        // }
 
         register_taxonomy($taxonomy["slug"], $taxonomy["post_type"], $taxonomy_args);
     }

@@ -1,0 +1,56 @@
+//- Variables
+- $bg_color = "bg-color-" . get_sub_field('background_color')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+
+section.flex-block.flex-team.hrz-padding(class="<?= $bg_color;?>")
+	.container.vert-padding
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		- if($subheading) :
+			h3: - echo $subheading
+		- endif
+		- if($content) :
+			p: - echo $content
+		- endif
+		- if (have_rows('team_members')) :
+			.modal-container
+				- while (have_rows('team_members')) : the_row()
+					.modal-block
+						.modal-img
+							- if(get_sub_field('headshot')) : 
+								.modal-img-block(
+									style="background-image: url('<?= get_sub_field('headshot')['url'];?>');",
+									alt="<?= get_sub_field('headshot')['alt'];?>"
+									)
+							- else : 
+								.img-placeholder
+							- endif
+							.modal-text
+								h3: -echo get_sub_field('name')
+								- if(get_sub_field('position')) :
+									p: - echo get_sub_field('position')
+								- endif
+						.modal-popup
+							.modal-bg
+							.modal-content
+								i.fa-light.fa-xmark
+								aside
+									- if(get_sub_field('headshot')):
+										img(src="<?= get_sub_field('headshot')['url'];?>", alt="<?= get_sub_field('headshot')['alt'];?>")
+									- endif
+									h3: -echo get_sub_field('name')
+									- if(get_sub_field('position')) :
+										p: strong: - echo get_sub_field('position')
+									- endif
+									- if(get_sub_field('email')) :
+										a.button(href="<?= get_sub_field('email');?>") Email
+											i.fa-solid.fa-envelope
+									- endif
+								section
+									-echo get_sub_field('bio')
+				- endwhile
+				- wp_reset_postdata()
+		- endif

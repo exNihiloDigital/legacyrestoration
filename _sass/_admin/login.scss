@@ -5,18 +5,20 @@
 // ================================================================
 
 body.login {
-    background: url('../images/pattern.jpg') #f1f1f1;
+    background: url('../../images/login.jpg') #f1f1f1;
+    background-position: center;
+    background-size: cover;
 
     div#login {
         h1 a {
+            background: url('../../images/login.png') center no-repeat;
             width: 100%;
-            background: url('../images/login.png') center no-repeat;
         }
 
         form#loginform {
-            padding: 24px;
-            box-shadow: none !important;
             border-radius: 3px;
+            box-shadow: none !important;
+            padding: 24px;
 
             p label {
                 color: color('dark');

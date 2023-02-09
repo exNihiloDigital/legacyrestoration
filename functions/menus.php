@@ -46,7 +46,7 @@ function mobile_menu()
         'menu_id'         => '',
         'echo'            => true,
         'fallback_cb'     => false,
-        'before'          => '<span><i class="fas fa-caret-right"></i></span>',
+        'before'          => '<span><i class="fa-sharp fa-solid fa-triangle"></i></span>',
         'after'           => '',
         'link_before'     => '',
         'link_after'      => '',

@@ -1,0 +1,31 @@
+- $bg_color = "bg-color-" . get_sub_field('background_color')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+- $slider_carousel = get_sub_field('slider_or_carousel')
+
+section.flex-block.flex-carousel-slider.hrz-padding(class="<?= $bg_color; ?>")
+	.container.content-block
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+
+		- if($subheading) :
+			h3: - echo $subheading
+		- endif
+
+		- if($content) : 
+			- echo $content
+		- endif
+
+		- if (have_rows('slider')) :
+			- $slide_type = "slider-type-" . $slider_carousel
+			.swiper(class="<?= $slide_type; ?>")
+				.swiper-wrapper
+					- while (have_rows('slider')) : the_row()
+						.swiper-slide
+							- echo get_sub_field('text_content')
+					- endwhile
+				.swiper-button-prev
+				.swiper-button-next
+		- endif

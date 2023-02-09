@@ -1,0 +1,31 @@
+//- Variables
+- $bg_color = "bg-color-" . get_sub_field('background_color')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+
+section.flex-block.flex-accordion.hrz-padding(class="<?= $bg_color;?>")
+	.container.vert-padding
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		- if($subheading) :
+			h3: - echo $subheading
+		- endif
+		- if($content) :
+			p: - echo $content
+		- endif
+		- if (have_rows('accordion')) :
+			- $acc_num = 1
+			section.accordion
+				- while (have_rows('accordion')) : the_row()
+					.acc-tab(data-acc="<?php echo $acc_num;?>")
+						h3.acc-title(
+							class="<?php if($acc_num == 1){ echo 'active'; };?>")
+								- echo get_sub_field('title')
+						.accordion-content(
+							style="<?php if($acc_num == 1){ echo 'display: block;'; };?>")
+							p: - echo get_sub_field('content')
+					- $acc_num++
+				- endwhile
+		- endif

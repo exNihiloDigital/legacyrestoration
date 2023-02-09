@@ -1,0 +1,157 @@
+//- Variables
+- $blockID = get_row_index()// each block gets a unique number on each page
+- $bg_color = "bg-color-" . get_sub_field('background_color')
+- $heading = get_sub_field('heading')
+- $subheading = get_sub_field('sub_heading')
+- $content = get_sub_field('content')
+- $video_placeholder_image = get_sub_field('video_placeholder_image')
+- $video_location = get_sub_field('video_location')
+
+//- set video embed variable based on Youtube or Vimeo
+- if($video_location == "youtube") :
+	- $video_embed = get_sub_field('youtube_embed')
+- else : 
+	- $video_embed = get_sub_field('vimeo_embed')
+- endif
+
+section.flex-block.flex-video-embed(id="flex-block-<?php echo $blockID;?>" class="<?= $bg_color . ' '; ?>")
+	.container.vert-padding
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		- if($subheading) :
+			h3: - echo $subheading
+		- endif
+		- if($content) :
+			p: - echo $content
+		- endif
+		section.modal-block
+			.modal-button.video-modal(style="background-image: url(<?php echo $video_placeholder_image['url']; ?>);")
+				i.fa-solid.fa-circle-play
+				
+			.modal.video-embed-wrapper
+				.close-bg.modal-bg
+				.modal-content.container
+					i.fa-light.fa-xmark.close-button
+					- if($video_location == "youtube") :
+						//- get position of beginning of Youtube ID code
+						- $video_embed_pos = strpos($video_embed, 'v=')+2
+
+						//- use Youtube ID code position to extract code from URL
+						- $video_embed_IDcode = str_split($video_embed, $video_embed_pos)[1]
+
+						//- display video embed ID code on front-end to make it accessible to the JS 
+						.hidden-id(data-vidID="<?php echo $video_embed_IDcode; ?>")
+
+						//- container for video
+						.player.video-embed
+
+						
+						- $video_embed_pos = strpos($video_embed, 'v=')+2
+						- $video_embed_IDcode = str_split($video_embed, $video_embed_pos)[1]
+						#hidden-id(data-vidID="<?php echo $video_embed_IDcode; ?>")
+						#player.video-embed
+
+						//- youtube script
+						script.
+							// load the YouTube Embed API script
+							var vidID = document.getElementById('hidden-id').getAttribute('data-vidID');
+
+							// create the YouTube player
+							var player;
+							function onYouTubePlayerAPIReady() {
+							player = new YT.Player("player", {
+								videoId: vidID,
+								events: {
+								onReady: function(event) {
+									// do something when the player is ready
+								}
+								}
+							});
+							}
+
+							document.getElementById("modal-button").addEventListener("click", function() {
+							// show the modal
+							document.getElementById("modal").style.display = "block";
+							});
+
+							document.getElementById("close-button").addEventListener("click", function() {
+							// hide the modal
+							document.getElementById("modal").style.display = "none";
+
+							// stop the video
+							player.stopVideo();
+							});
+
+							document.getElementById("close-bg").addEventListener("click", function() {
+							// hide the modal
+							document.getElementById("modal").style.display = "none";
+
+							// stop the video
+							player.stopVideo();
+							});
+							//- //- run script on load
+							//- jQuery('.modal-button').on('click', function(){
+							//- 	//get this unique block ID
+							//- 	let modalID = jQuery(this).closest('.flex-block').attr('id');
+							//- 	let blockNum = modalID.replace('flex-block-', '')
+								
+							//- 	// load the YouTube Embed API script
+							//- 	var tag = document.createElement("script");
+							//- 	tag.src = "https://www.youtube.com/player_api";
+							//- 	var firstScriptTag = document.getElementsByTagName("script")[0];
+							//- 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+							//- 	var vidID = jQuery("#" + modalID).find('.hidden-id').attr('data-vidID');
+
+							//- 	// create the YouTube player
+							//- 	var player;
+							//- 	function onYouTubePlayerAPIReady() {
+							//- 		player = new YT.Player("player", {
+							//- 			videoId: vidID,
+							//- 			events: {
+							//- 				onReady: function(event) {
+							//- 					// do something when the player is ready
+							//- 				}
+							//- 			}
+							//- 		});
+							//- 	}
+
+							//- 	//- close button
+							//- 	jQuery(".close-button").on("click", function() {
+							//- 		// hide the modal
+							//- 		jQuery(".modal").fadeOut(250);
+
+							//- 		// stop the video
+							//- 		player.pause();
+							//- 	});
+
+							//- 	jQuery(".close-bg").on("click", function() {
+							//- 		// hide the modal
+							//- 		jQuery(".modal").fadeOut(250);
+
+							//- 		// stop the video
+							//- 		player.pause();
+							//- 	});
+							//- });
+
+					
+					- else :
+						//- //- video embed container
+						//- .player.video-embed
+						//- 	- echo $video_embed
+						//- script(src="https://player.vimeo.com/api/player.js")
+						//- script.
+						//- 	var iframe = document.querySelector('.player > iframe');
+						//- 	var player = new Vimeo.Player(iframe);
+						//- 	var closeButton = document.querySelector('.modal-content #close-button');
+						//- 	var modalBg = document.querySelector('.modal .modal-bg');
+
+						//- 	[closeButton, modalBg]?.forEach((el) => {
+						//- 		el?.addEventListener('click', function () {
+						//- 		// hide the modal
+						//- 		document.getElementById("modal").style.display = "none";
+						//- 			player.pause();
+						//- 		});
+						//- 	});
+
+					- endif

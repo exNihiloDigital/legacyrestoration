@@ -9,7 +9,17 @@ jQuery(function ($) {
     accordion($);
     modals($);
 
-    // Custom Functionality
+    // Flex Functionality
+    flexTabs($);
+    flexVideoEmbed($);
+    flexSlider($);
+    flexCarousel($);
+    flexMultiDirectional($);
+    flexAtAGlance($);
+    flexLargeImageSlider($);
+    flexTestimonialSlider($);
+    flexFeaturedContentSlider($);
+    flexTestimonialCards($);
 });
 
 /**
@@ -17,57 +27,22 @@ jQuery(function ($) {
  * @param {JQueryStatic} $ Provdes jQuery types
  */
 const mobileMenu = ($) => {
-    const body = document.querySelector('body');
-    const burgerBtn = document.querySelector('.burgerBtn');
-    const dropdowns = /** @type {NodeListOf<HTMLElement>} */ (
-        document.querySelectorAll('#mobile-hidden-menu .parent .dropdown')
-    );
-    const menuParent = /** @type {NodeListOf<HTMLElement>} */ (
-        document.querySelectorAll('#mobile-hidden-menu ul li.parent')
-    );
-    const mobileSide = /** @type {HTMLElement} */ (document.querySelector('#mobile-hidden-menu'));
-    const mobileWrapper = /** @type {HTMLElement} */ (document.querySelector('.mobile'));
-    const pageHeight = document.body.scrollHeight;
-
-    let open = false;
-
-    burgerBtn.addEventListener('click', () => {
-        burgerBtn.classList.toggle('active');
-
-        if (!open) {
-            open = true;
-
-            body.style.overflowY = 'hidden';
-            mobileSide.classList.add('mobile-active');
-            mobileSide.style.height = pageHeight.toString();
-        } else {
-            const activeCaret = document.querySelector('.fa-caret-right.active');
-
-            open = false;
-
-            body.style.overflowY = 'scroll';
-            mobileSide.classList.remove('mobile-active');
-
-            // wait 225 ms to account for the closing time of the menu
-            setTimeout(() => {
-                activeCaret && activeCaret.classList.toggle('active');
-                mobileWrapper.style.height = 'auto';
-            }, 225);
-
-            // on menu close, also close all open submenus for a fresh start every time
-            dropdowns.forEach((drop) => {
-                drop.style.display = 'none';
-            });
-        }
+    $('.topbar .menu-icon').on('click', function () {
+        $(this).parent().toggleClass('mobile-menu-active');
     });
 
-    menuParent.forEach((parent) => {
-        parent.addEventListener('click', () => {
-            $(parent).find('.fa-caret-right').toggleClass('active');
-            $(parent).find('ul.dropdown').slideToggle(200);
-            $(parent).siblings().find('ul.dropdown').slideUp(200);
-            $(parent).siblings().find('.fa-caret-right').removeClass('active');
-        });
+    //open with hamburger icon
+    $('.mobile .topbar .menu-icon').on('click', function () {
+        $(this).parent().find('.block').slideToggle(400);
+    });
+
+    //close with X icon
+    $('.mobile .block i.fal.fa-times').on('click', function () {
+        $(this).parent().slideToggle(400);
+    });
+
+    $('.mobile ul li.parent').on('click', function () {
+        $(this).find('span').toggleClass('selected').siblings('.dropdown').slideToggle(200);
     });
 };
 
@@ -90,12 +65,12 @@ const desktopMenu = ($) => {
  * @param {JQueryStatic} $ Provdes jQuery types
  */
 const accordion = ($) => {
-    $('.accordion li h3').on('click', function () {
+    $('.accordion .acc-tab h3').on('click', function () {
         // Test all li. If active, close tab
         if ($(this).hasClass('active')) {
             $(this).toggleClass('active').siblings('.accordion-content').slideToggle(200);
         } else {
-            $('.accordion li').each(function () {
+            $('.accordion .acc-tab').each(function () {
                 if ($(this).find('h3').hasClass('active')) {
                     $(this)
                         .find('h3')
@@ -122,12 +97,222 @@ const modals = ($) => {
         $(this).parent().fadeOut(250);
     });
 
-    $('.modal-content i.fa-times').on('click', function () {
+    $('.modal-content i.fa-light').on('click', function () {
         $(this).parent().parent().fadeOut(250);
     });
 };
 
 /**
  *
- * Custom Functionality
+ * Flex Functionality
  */
+const flexTabs = ($) => {
+    // Number the Resource Blocks
+    let tabID = 1;
+    $('.tabs-block').each(function () {
+        // initial content height
+        let initialHeight = $(this).find('.active-content').height() + 50;
+
+        console.log(initialHeight);
+
+        //set unique id for each block
+        $(this)
+            .parent()
+            .parent()
+            .attr('id', 'tab-set-' + tabID);
+        tabID++;
+
+        // set initial content height on load
+        $(this).find('.tab-content-spacer').css('height', initialHeight);
+    });
+
+    // click functionality
+    $('.tab').on('click', function () {
+        //get tab set ID
+        let tabSetID = '#' + $(this).parent().parent().parent().attr('id');
+        let tabSetIDtab = tabSetID + ' .tab';
+        let tabSetIDcontent = tabSetID + ' .tabs-block .tab-content';
+        //get clicked ID
+        let tabID = $(this).attr('data-tab');
+        // set target content ID
+        let contentID = 'content-' + tabID;
+        // get contentID height
+        let contentHeight = $(tabSetID).find(`[data-content='${contentID}']`).height();
+
+        console.log(contentHeight);
+        //remove active tab class from all
+        $(tabSetIDtab).each(function () {
+            $(this).removeClass('active-tab');
+        });
+
+        //add active class to clicked tab
+        $(this).addClass('active-tab');
+
+        //remove active content class from all
+        $(tabSetIDcontent).each(function () {
+            $(this).removeClass('active-content');
+        });
+
+        //add active content class to appropriate content block
+        $(tabSetID).find(`[data-content='${contentID}']`).addClass('active-content');
+
+        console.log(contentHeight);
+        //set #tab-content-spacer to content height
+        $(tabSetID).find('.tab-content-spacer').css('height', contentHeight);
+    });
+};
+const flexVideoEmbed = ($) => {
+    $('.modal-button').on('click', function () {
+        // show the modal
+        $(this).next().fadeIn(250);
+        // get parent ID
+        const parentID = $(this).parent('.flex-block').attr('id');
+    });
+};
+const flexSlider = ($) => {
+    var slider = new Swiper('.slider-type-slider', {
+        slidesPerView: 1,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        spaceBetween: 40,
+    });
+};
+const flexCarousel = ($) => {
+    var slider = new Swiper('.slider-type-carousel', {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 20,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+        },
+    });
+};
+const flexMultiDirectional = ($) => {
+    var mdSliderImg = new Swiper('.md-slider-img', {});
+    var mdSliderContent = new Swiper('.md-slider-content', {
+        direction: 'vertical',
+        spaceBetween: 80,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+        },
+    });
+    var mobileProjectSliderContent = new Swiper('.mobile-multidirectional-slider', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+    mdSliderImg.controller.control = mdSliderContent;
+    mdSliderContent.controller.control = mdSliderImg;
+};
+const flexAtAGlance = ($) => {
+    var glanceSlider = new Swiper('.glance-slider', {
+        slidesPerView: 1,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+};
+const flexLargeImageSlider = ($) => {
+    var photoSlider = new Swiper('.photo-slider', {
+        slidesPerView: 1,
+        autoHeight: true,
+        effect: 'fade',
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+            clickable: true,
+        },
+    });
+};
+const flexTestimonialSlider = ($) => {
+    var testimonialSlider = new Swiper('.testimonial-slider', {
+        slidesPerView: 1,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+};
+const flexFeaturedContentSlider = ($) => {
+    var featuredContentSlider = new Swiper('.featured-content-slider', {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 80,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+    });
+};
+const flexTestimonialCards = ($) => {
+    var slider = new Swiper('.testimonial-cards', {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 40,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+            },
+        },
+    });
+};

@@ -7,6 +7,8 @@ head
 
     link(type="image/gif" href="<?php echo esc_url(get_theme_file_uri()) ?>/favicon.png" rel="icon" sizes="16x16")
 
+    script(src="https://www.youtube.com/player_api")
+
     - wp_head()
 
 <body <?php body_class(); ?>>
@@ -19,31 +21,45 @@ head
     - $home_mobile = ''
 - endif;
 
-.masthead.hrz-padding
-    .container
-        a(href="tel:>") 111-222-3333
+//- .masthead.hrz-padding
+//-     .container
+//-         a(href="tel:>") 111-222-3333
 
+- if(get_field('toggle_header_banner', 'options') == 'on'): 
+    .banner.hrz-padding
+        .container
+            p: - echo get_field('header_banner_content', 'options')
+            - if(get_field('header_banner_button', 'options')) :
+                a.button(
+                    href="<?= get_field('header_banner_button', 'options')['url'];?>" 
+                    target="<?= get_field('header_banner_button', 'options')['target'];?>"
+                    ) 
+                    - echo get_field('header_banner_button', 'options')['title']
+            - endif
+- endif
+.mobile
+    .topbar
+        a.mobile-logo(href="<?php echo esc_url(home_url('/')) ?>")
+            img(
+                src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo-white.png" 
+                alt="<?php bloginfo('name') ?> Logo"
+                )
+        .menu-icon
+            .line
+            .line 
+            .line
+        .block
+            .mobile-bottom.hrz-padding
+                - mobile_menu()
 header
-    //- use .mobile-side or .mobile-top to change dropdown locations
-    .mobile-container.mobile-side
-        .mobile(class="<?php echo $home_mobile;?>")
-            aside
-                a(href="<?php echo esc_url(home_url('/')) ?>")
-                    img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
-
-            section
-                .burgerBtn
-
-            #mobile-hidden-menu
-                - if ( has_nav_menu('header') ) :
-                    - mobile_menu()
-                - endif;
-
     .main-header.hrz-padding
         .container
             .logo
-                a(href="<?php echo esc_url(home_url('/')) ?>")
-                    img(src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo.png" alt="<?php bloginfo('name') ?> Logo")
+                a(href="<?= esc_url(home_url('/')) ?>")
+                    img(
+                        src="<?= esc_url(get_theme_file_uri()) ?>/images/logo.png" 
+                        alt="<?php bloginfo('name') ?> Logo"
+                        )
 
             .menu
                 nav
@@ -53,5 +69,5 @@ header
 
 - if (! (is_front_page() || is_404())) :
     - include('includes/featured.php')
-    - include('includes/breadcrumbs.php')
+    //- - include('includes/breadcrumbs.php')
 - endif

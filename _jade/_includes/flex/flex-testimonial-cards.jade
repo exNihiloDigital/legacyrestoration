@@ -1,0 +1,22 @@
+- $heading = get_sub_field('heading')
+- $card_bg = get_sub_field('card_bg_img')
+- $card_bg_overlay = 'overlay-' . get_sub_field('card_overlay')
+- $quote_icon = get_sub_field('quote_icon')
+
+section.flex-block.flex-testimonial-cards
+	.container.content-block
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		- if (have_rows('slider')) :
+			.swiper.testimonial-cards
+				.swiper-wrapper
+					- while (have_rows('slider')) : the_row()
+						.swiper-slide(style="background-image: url('<?= $card_bg['url'];?>');" class="<?= $card_bg_overlay;?>")
+							img(src="<?= $quote_icon['url']; ?>", alt="Testimonial")
+							p: - echo get_sub_field('testimonial')
+							h4: - echo get_sub_field('name')
+					- endwhile
+				.swiper-button-prev
+				.swiper-button-next
+		- endif
