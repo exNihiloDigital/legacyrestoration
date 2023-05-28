@@ -1,0 +1,19 @@
+//- Variables
+- $heading = get_sub_field('heading')
+- $content = get_sub_field('content')
+
+section.flex-block.flex-content.hrz-padding
+	.container.vert-padding
+		- if($heading) :
+			h2: - echo $heading
+		- endif
+		section
+			- if(get_sub_field('content')): 
+				- echo get_sub_field('content')
+			- endif
+			- if(get_sub_field('button')): 
+				a.button(
+					href="<?php echo get_sub_field('button')['url'];?>" 
+					target="<?php echo get_sub_field('button')['target'];?>")
+					- echo get_sub_field('button')['title']
+			- endif

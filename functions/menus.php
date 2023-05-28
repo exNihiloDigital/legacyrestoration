@@ -29,7 +29,7 @@ function header_menu()
         'link_after'      => '',
         'items_wrap'      => '<ul>%3$s</ul>',
         'depth'           => 5,
-        'walker'          => new PHOS_Walker()
+        'walker'          => new custom_walker()
     );
 
     wp_nav_menu($header);
@@ -52,7 +52,7 @@ function mobile_menu()
         'link_after'      => '',
         'items_wrap'      => '<ul>%3$s</ul>',
         'depth'          => 0,
-        'walker'          => new PHOS_Walker()
+        'walker'          => new custom_walker()
     );
 
     wp_nav_menu($mobile);
@@ -75,13 +75,13 @@ function footer_menu()
         'link_after'      => '',
         'items_wrap'      => '<ul>%3$s</ul>',
         'depth'          => 0,
-        'walker'          => new PHOS_Walker()
+        'walker'          => new custom_walker()
     );
 
     wp_nav_menu($footer);
 }
 
-class PHOS_Walker extends Walker_Nav_Menu
+class custom_walker extends Walker_Nav_Menu
 {
     public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
     {

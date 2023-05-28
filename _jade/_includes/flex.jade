@@ -2,94 +2,66 @@
     - while ( have_rows('flex_editor') ) : the_row();
         - flexContent()
         - flexContentAndImage()
+        - flexGalleryGrid()
+        - flexGalleryCarousel()
         - flexAccordion()
-        - flexTabs()
-        - flexVideoEmbed()
-        - flexTeam()
-        - flexSlider()
-        - flexMultidirectionalSlider()
-        - flexAtAGlanceSlider()
-        - flexLargeImageSlider()
         - flexTestimonialSlider()
-        - flexFeaturedContentSlider()
-        - flexTestimonialCards()
+        - flexDarkCTA()
+        - flexHomeHero()
+        - flexHomeServices()
     - endwhile
 - endif
 
 - function flexContent() {
-    - if ( 'content' === get_row_layout() ) :;
+    - if ( 'content_block' === get_row_layout() ) :;
         - get_template_part( 'includes/flex/flex', 'content');
     - endif;
 - }
 
 - function flexContentAndImage() {
-    - if ( 'content_and_image' === get_row_layout() ) :;
+    - if ( 'content_and_image_block' === get_row_layout() ) :;
         - get_template_part( 'includes/flex/flex', 'content-image' );
     - endif;
 - }
 
 - function flexAccordion() {
-    - if ( 'accordion' === get_row_layout() ) :;
+    - if ( 'accordion_block' === get_row_layout() ) :;
         - get_template_part( 'includes/flex/flex', 'accordion' );
     - endif;
 - }
 
-- function flexTabs() {
-    - if ( 'tabs' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex-tabs' );
+- function flexGalleryGrid() {
+    - if ( 'gallery_grid_block' === get_row_layout() ) :;
+        - get_template_part( 'includes/flex/flex', 'gallery-grid' );
     - endif;
 - }
 
-- function flexVideoEmbed() {
-    - if ( 'video_embed' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'video-embed');
-    - endif;
-- }
-
-- function flexTeam() {
-    - if ( 'team' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'team' );
-    - endif;
-- }
-
-- function flexSlider() {
-    - if ( 'slider_carousel' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'carousel-slider' );
-    - endif;
-- }
-
-- function flexMultidirectionalSlider() {
-    - if ( 'multi_directional_slider' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'multidirectional-slider' );
-    - endif;
-- }
-
-- function flexAtAGlanceSlider() {
-    - if ( 'at_a_glance' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'at-a-glance-slider' );
-    - endif;
-- }
-
-- function flexLargeImageSlider() {
-    - if ( 'large_image_slider' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'large-image-slider' );
+- function flexGalleryCarousel() {
+    - if ( 'gallery_carousel_block' === get_row_layout() ) :;
+        - get_template_part( 'includes/flex/flex', 'gallery-carousel' );
     - endif;
 - }
 
 - function flexTestimonialSlider() {
-    - if ( 'testimonial_slider' === get_row_layout() ) :;
+    - if ( 'testimonial_slider_block' === get_row_layout() ) :;
         - get_template_part( 'includes/flex/flex', 'testimonial-slider' );
     - endif;
 - }
 
-- function flexFeaturedContentSlider() {
-    - if ( 'featured_content_slider' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'featured-content-slider' );
+- function flexDarkCTA() {
+    - if ( 'dark_cta_block' === get_row_layout() ) :;
+        - get_template_part( 'includes/flex/flex', 'dark-cta-block');
     - endif;
 - }
 
-- function flexTestimonialCards() {
-    - if ( 'testimonial_cards' === get_row_layout() ) :;
-        - get_template_part( 'includes/flex/flex', 'testimonial-cards' );
+- function flexHomeHero() {
+    - if ( 'home_hero' === get_row_layout() ) :;
+        - get_template_part( 'includes/flex/flex', 'home-hero');
+    - endif;
+- }
+
+- function flexHomeServices() {
+    - if ( 'home_services' === get_row_layout() ) :;
+        - get_template_part( 'includes/flex/flex', 'home-services');
     - endif;
 - }

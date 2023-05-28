@@ -38,23 +38,6 @@ function howdy_to_welcome( $wp_admin_bar ) {
 }
 add_filter('admin_bar_menu', 'howdy_to_welcome');
 
-/**
- * Replaces 'Thank you for creating with WordPress' with 'Website developed by PHOS Creative'
- *
- * @return void
- */
-function replace_thank_you_in_dashboard() {
-    echo sprintf(
-        '<span id="footer-thankyou">%1$s %2$s</span>',
-        esc_html('Website developed by'),
-        sprintf(
-            '<a href="%1$s" target="_blank">%2$s</a>',
-            esc_url('https://phoscreative.com'),
-            esc_html('PHOS Creative')
-        )
-    );
-}
-add_filter('admin_footer_text', 'replace_thank_you_in_dashboard');
 
 /**
  * Hide dashboard widgets for a cleaner interface
@@ -391,7 +374,7 @@ function clean_tinymce( $settings ) {
  * @link   https://codex.wordpress.org/TinyMCE
  * @return void
  */
-function phos_add_tinymce_button() {
+function custom_add_tinymce_button() {
     global $typenow;
 
     $can_edit       = current_user_can('edit_pages') && current_user_can('edit_posts');
@@ -399,11 +382,11 @@ function phos_add_tinymce_button() {
     $is_verified    = in_array($typenow, array( 'post', 'page' ) );
 
     if ( $is_activated && $is_verified && $can_edit) {
-        add_filter('mce_external_plugins', 'phos_add_tinymce_plugin');
-        add_filter('mce_buttons', 'phos_register_tc_button');
+        add_filter('mce_external_plugins', 'custom_add_tinymce_plugin');
+        add_filter('mce_buttons', 'custom_register_tc_button');
     }
 }
-// add_action('admin_head', 'phos_add_tinymce_button');
+// add_action('admin_head', 'custom_add_tinymce_button');
 
 /**
  * Add Button to TinyMCE
@@ -412,8 +395,8 @@ function phos_add_tinymce_button() {
  * @param  array $settings
  * @return array
  */
-function phos_add_tinymce_plugin( $plugin_array ) {
-    $plugin_array['phos_tc_button'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
+function custom_add_tinymce_plugin( $plugin_array ) {
+    $plugin_array['custom_tc_button'] = get_template_directory_uri() . '/assets/tinymce-plugin.js';
 
     return $plugin_array;
 }
@@ -425,8 +408,8 @@ function phos_add_tinymce_plugin( $plugin_array ) {
  * @param  array $buttons
  * @return array
  */
-function phos_register_tc_button( $buttons ) {
-    $buttons[] = 'phos_tc_button';
+function custom_register_tc_button( $buttons ) {
+    $buttons[] = 'custom_tc_button';
 
     return $buttons;
 }

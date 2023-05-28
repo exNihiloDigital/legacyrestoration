@@ -4,9 +4,6 @@
 .container {
     @extend %container;
 }
-.container-lg {
-    @extend %container-lg;
-}
 .container-full {
     @extend %container-full;
 }
@@ -391,21 +388,24 @@ article {
     background-position: center;
     background-size: cover;
     box-shadow: inset 0 0 80px transparentize(black, 0.8);
+    height: 501px;
     position: relative;
     width: 100%;
 
     .container {
-        text-align: center;
+        height: 100%;
         position: relative;
         z-index: 10;
 
         h1 {
+            bottom: 0;
             color: white;
-            margin: 0;
-            padding: 100px 0;
-
-            @include breakpoint(769px up) {
-                padding: 180px 0;
+            left: 0;
+            margin: 0 52px;
+            position: absolute;
+            
+            @include breakpoint(950px up){
+                margin-bottom: 85px;
             }
         }
     }
@@ -898,6 +898,9 @@ article {
 // Social Links
 // ===========================================================
 ul.social-links {
+    h3{
+        color: white;
+    }
     li {
         display: inline-block;
         margin-left: 20px;

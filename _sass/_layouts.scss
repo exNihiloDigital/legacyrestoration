@@ -4,14 +4,15 @@
 .masthead {
     background: color('light');
     display: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
 
     @include breakpoint(769px up) {
         display: block;
     }
-    .container {
-        font-weight: bold;
-        padding: 10px 0 15px;
-        text-align: center;
+    a{
+        font-size: 41px;
     }
 }
 .banner {
@@ -40,6 +41,9 @@
 }
 
 header {
+    background-color: color(dark);
+    padding-top: 20px;
+    padding-bottom: 20px;
     position: relative;
 
     .main-header {
@@ -48,7 +52,8 @@ header {
         @include breakpoint(769px up) {
             display: block;
         }
-        .container {
+        .container,
+        .container-full {
             display: block;
 
             @include breakpoint(769px up) {
@@ -67,7 +72,7 @@ header {
 
                 a {
                     img {
-                        max-width: 200px;
+                        max-width: 500px;
                     }
                 }
             }
@@ -101,9 +106,10 @@ header {
                                 }
                             }
                             a {
-                                color: color('one');
+                                color: white;
                                 display: block;
-                                font-weight: bold;
+                                font-weight: 600;
+                                letter-spacing: 2px;
                                 padding: 40px 5px;
                                 text-transform: uppercase;
 
@@ -229,8 +235,8 @@ footer {
         align-items: stretch;
         display: flex;
         flex-wrap: wrap;
-        padding-top: 60px;
-        padding-bottom: 60px;
+        padding-top: 52px;
+        padding-bottom: 52px;
 
         aside {
             flex: 100%;
@@ -241,7 +247,7 @@ footer {
                 text-align: left;
             }
             .footer-logo {
-                margin-bottom: 30px;
+                max-width: 500px;
             }
         }
         section {
@@ -265,11 +271,37 @@ footer {
                 }
             }
         }
+        &.footer-locations{
+            border-top: 2px solid white;
+            border-bottom: 2px solid white;
+            display: block;
+            padding-bottom: 0;
+            padding-top: 40px;
+            text-align: center;
+
+            .footer-location{
+                display: inline-block;
+                margin: 0 20px 20px;
+                
+                h3, a{
+                    color: white;
+                    display: inline-block;
+                }
+                h3{
+                    margin-right: 20px;
+                }
+                a{
+                    font-size: 32px;
+                    font-weight: 400;
+                }
+            }
+        }
     }
     .copyright {
         padding: 0 0 15px;
 
         .container {
+            color: white;
             padding-top: 0;
             padding-bottom: 0;
 
@@ -281,11 +313,18 @@ footer {
                 width: 100%;
 
                 a {
-                    color: color(two);
+                    color: white;
                     font-weight: 700;
                     transition: color 0.2s;
 
                     &:hover {
+                        color: white;
+                    }
+                }
+            }
+            ul{
+                li{
+                    a{
                         color: white;
                     }
                 }

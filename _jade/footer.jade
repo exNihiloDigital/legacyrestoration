@@ -1,16 +1,15 @@
 - get_header()
-- if(get_field('footer_CTA', 'options') == "on"): 
-	section.footer-cta.hrz-padding
-		.container.content-block
-			- echo get_field('footer_cta_content', 'options')
-			- if(get_field('footer_cta_button', 'options')) :
-				a.button(
-					href="<?= get_field('footer_cta_button', 'options')['url'];?>" 
-					target="<?= get_field('footer_cta_button', 'options')['target'];?>"
-					) 
-					- echo get_field('footer_cta_button', 'options')['title']
-			- endif
-- endif
+
+section.footer-cta.hrz-padding
+	.container.content-block
+		- echo get_field('footer_cta_content', 'options')
+		- if(get_field('footer_cta_button', 'options')) :
+			a.button(
+				href="<?= get_field('footer_cta_button', 'options')['url'];?>" 
+				target="<?= get_field('footer_cta_button', 'options')['target'];?>"
+				) 
+				- echo get_field('footer_cta_button', 'options')['title']
+		- endif
 
 footer.hrz-padding
 	.container
@@ -21,15 +20,28 @@ footer.hrz-padding
 						src="<?php echo esc_url(get_theme_file_uri()) ?>/images/logo-white.png" 
 						alt="<?php bloginfo('name') ?> Logo"
 						)
-			- include('includes/contact-info.php')
 		section
 			- include('includes/social-links.php')
-			.footer-menu
-				- footer_menu()
-
+	.container.footer-locations
+		- $loc_args = array('post_type'=>'locations', 'posts_per_page'=>-1)
+		- $loc_loop = new WP_Query($loc_args)
+		- if ($loc_loop -> have_posts()):
+			- while ($loc_loop -> have_posts()): $loc_loop -> the_post()
+				.footer-location
+					h3: - echo get_the_title()
+					- $phone_raw = get_field('location_phone_number')
+					- $phone = str_replace([" ", "(", ")", "-"], "", $phone_raw)
+					a.location-phone(href="tel:<?= $phone ?>" target="_blank") 
+						- echo get_field('location_phone_number')
+			- endwhile
+			- wp_reset_postdata()
+		-endif
 	.copyright
 		.container
-			- site_info()
+			section 
+				p &copy; Copyright <?= date('Y'); ?>, <?= get_bloginfo('name') ?>
+			aside 
+				- footer_menu()
 
 - wp_footer()
 

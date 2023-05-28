@@ -29,7 +29,7 @@ const style = '_sass/*.scss';
 const template = '_jade/*.jade';
 const templateIncludes = '_jade/_includes/**/*.jade';
 
-const siteURL = 'framework.local';
+const siteURL = 'legacyresto.local';
 
 // Loop through _scss files, compile them, concatonate them, saves to /assets as .css
 gulp.task('styles', () =>

@@ -5,7 +5,7 @@
  *
  * @link https://developer.wordpress.org/reference/functions/add_theme_support
  */
-function phos_supports()
+function custom_supports()
 {
     $content_width = 800;
 
@@ -18,34 +18,11 @@ function phos_supports()
     add_theme_support('title-tag');
     add_theme_support('yoast-seo-breadcrumbs');
 
-    /**
-     * Gutenberg
-     *
-     * @link https://wordpress.org/gutenberg/handbook/extensibility/theme-support/
-     */
-    $editor_colors = array(
-        array(
-            'name' => __('PHOS Yellow'),
-            'slug' => 'phos-yellow',
-            'color' => '#f5c71f',
-        ),
-        array(
-            'name' => __('PHOS Blue'),
-            'slug' => 'phos-blue',
-            'color' => '#113751',
-        ),
-        array(
-            'name' => __('PHOS Dark Blue'),
-            'slug' => 'phos-dark-blue',
-            'color' => '#0a192c',
-        )
-    );
-
     add_theme_support('align-wide');
-    add_theme_support('editor-color-palette', $editor_colors);
+    // add_theme_support('editor-color-palette', $editor_colors);
     add_theme_support('disable-custom-colors');
 }
-add_action('after_setup_theme', 'phos_supports');
+add_action('after_setup_theme', 'custom_supports');
 
 /**
  * Join posts and postsmeta tables so we can search custom fields

@@ -8,10 +8,6 @@
     @return map-get($colors, $key);
 }
 
-@function phos($key: 'one') {
-    @return map-get($phos, $key);
-}
-
 @function wordpress($key: 'one') {
     @return map-get($wordpress, $key);
 }

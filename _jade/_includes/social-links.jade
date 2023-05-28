@@ -1,4 +1,5 @@
 ul.social-links
+	h3 Connect With Us
 	- if(get_field('facebook', 'options')) :
 		li 
 			a(
@@ -15,14 +16,6 @@ ul.social-links
 				) 
 				i(class="fa-brands fa-twitter")
 	- endif
-	- if(get_field('instagram', 'options')) :
-		li 
-			a(
-				href="<?= get_field('instagram', 'options')['url']; ?>"
-				target="<?= get_field('instagram', 'options')['target']; ?>"
-				) 
-				i(class="fa-brands fa-instagram")
-	- endif
 	- if(get_field('linkedin', 'options')) :
 		li 
 			a(
@@ -30,6 +23,14 @@ ul.social-links
 				target="<?= get_field('linkedin', 'options')['target']; ?>"
 				) 
 				i(class="fa-brands fa-linkedin-in")
+	- endif
+	- if(get_field('instagram', 'options')) :
+		li 
+			a(
+				href="<?= get_field('instagram', 'options')['url']; ?>"
+				target="<?= get_field('instagram', 'options')['target']; ?>"
+				) 
+				i(class="fa-brands fa-instagram")
 	- endif
 	- if(get_field('pinterest', 'options')) :
 		li 

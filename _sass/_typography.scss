@@ -8,31 +8,31 @@ $heading: (
     color: (
         'h1': color(dark),
         'h2': color(dark),
-        'h3': color(three),
+        'h3': color(dark),
         'h4': color(dark),
         'h5': color(dark),
         'h6': color(dark),
     ),
     desktop: (
-        'h1': 80px,
-        'h2': 60px,
-        'h3': 50px,
-        'h4': 30px,
-        'h5': 25px,
-        'h6': 20px,
+        'h1': 52px,
+        'h2': 41px,
+        'h3': 32px,
+        'h4': 25px,
+        'h5': 20px,
+        'h6': 16px,
     ),
     tablet: (
-        'h1': 70px,
-        'h2': 50px,
-        'h3': 40px,
-        'h4': 35px,
-        'h5': 22px,
-        'h6': 20px,
+        'h1': 52px,
+        'h2': 41px,
+        'h3': 32px,
+        'h4': 25px,
+        'h5': 20px,
+        'h6': 16px,
     ),
     mobile: (
-        'h1': 60px,
-        'h2': 40px,
-        'h3': 30px,
+        'h1': 52px,
+        'h2': 41px,
+        'h3': 32px,
         'h4': 25px,
         'h5': 20px,
         'h6': 16px,
@@ -40,7 +40,7 @@ $heading: (
     font-family: (
         'h1': font('heading'),
         'h2': font('heading'),
-        'h3': font('body'),
+        'h3': font('heading'),
         'h4': font('heading'),
         'h5': font('heading'),
         'h6': font('heading'),
@@ -56,28 +56,28 @@ $heading: (
     font-weight: (
         'h1': 700,
         'h2': 700,
-        'h3': 400,
+        'h3': 700,
         'h4': 700,
         'h5': 700,
         'h6': 700,
     ),
     line-height: 1.1,
-    letter-spacing: 0,
+    letter-spacing: 2px,
     margin-bottom: (
-        'h1': 15px,
-        'h2': 15px,
-        'h3': 15px,
-        'h4': 15px,
-        'h5': 15px,
-        'h6': 15px,
+        'h1': 36px,
+        'h2': 31px,
+        'h3': 25px,
+        'h4': 22px,
+        'h5': 19px,
+        'h6': 17px,
     ),
     text-transform: (
-        'h1': none,
-        'h2': none,
-        'h3': none,
-        'h4': none,
-        'h5': none,
-        'h6': none,
+        'h1': uppercase,
+        'h2': uppercase,
+        'h3': uppercase,
+        'h4': uppercase,
+        'h5': uppercase,
+        'h6': uppercase,
     ),
 ) !default;
 
@@ -95,6 +95,7 @@ $heading: (
         font-style: map-deep-get($heading, 'font-style', 'h#{$h}');
         font-weight: map-deep-get($heading, 'font-weight', h#{$h});
         line-height: heading('line-height');
+        letter-spacing: heading('letter-spacing');
         margin: 0;
         margin-bottom: map-deep-get($heading, 'margin-bottom', h#{$h});
         text-transform: map-deep-get($heading, 'text-transform', h#{$h});
@@ -138,9 +139,6 @@ figure {
 hr {
     margin: 40px auto;
     border: 1px solid color('medium');
-}
-p {
-    margin: 0 0 20px;
 }
 i,
 em {
