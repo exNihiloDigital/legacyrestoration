@@ -1,15 +1,33 @@
 - get_header()
 
 article#archive
-    .container.content-block
-        - if (have_posts()) :
-            .post-container
-                - while (have_posts()) : the_post()
-                    - include('includes/loop-post.php')
-                - endwhile
+    .featured-article.hrz-padding
+        .container.content-block
+            h2 Featured Article
+            -$featured_posts = get_field('featured_article', 9)
+            - if($featured_posts):
+                .feat-article-wrapper
+                    - foreach($featured_posts as $post):
+                        - setup_postdata($post)
+                        aside
+                            a.feat-img-wrapper(style="background-image: url('<?= get_the_post_thumbnail_url()?>');" href="<?= get_the_permalink()?>")
+                        section
+                            h3: - echo get_the_title()
+                            - echo get_the_excerpt()
+                            br
+                            a.button(href="<?= get_the_permalink()?>") Read More
+                    - endforeach
+            - endif
+    .all-articles.hrz-padding
+        .container.content-block
+            - if (have_posts()) :
+                .post-container
+                    - while (have_posts()) : the_post()
+                        - include('includes/loop-post.php')
+                    - endwhile
 
-                - pagination()
-                - wp_reset_postdata()
-        - endif
+                    - pagination()
+                    - wp_reset_postdata()
+            - endif
 
 - get_footer()

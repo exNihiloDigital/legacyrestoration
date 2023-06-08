@@ -6,11 +6,11 @@
 - $image = get_sub_field('image')
 - $button = get_sub_field('button')
 
-section.flex-block.flex-content-image.hrz-padding(class="<?= $bg_color; ?> img-position-<?= $image_position;?> spacing-<?= $spacing;?>")
-	.container.columns.col-count-2
+section.flex-block.flex-content-image.hrz-padding(class="<?= $bg_color; ?> img-position-<?= $image_position;?> flush-<?= $image_flush;?>")
+	.container.columns.col-count-2.vert-padding
 		section.column
 			- if($header) :
-				h2: - echo $header
+				h2.no-hborder: - echo $header
 			- endif
 
 			- if($content) : 

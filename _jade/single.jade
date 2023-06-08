@@ -1,15 +1,31 @@
 - get_header()
 
 article#single
-    .container.content-block
+    - if(is_singular('locations')):
+        - include('includes/flex.php')
+    - else :
         - if (have_posts()) :
-            - while (have_posts()) : the_post()
-                - the_content()
-            - endwhile
-
+            .hrz-padding
+                .container.content-block
+                    .social-block
+                        aside 
+                            p: - echo get_the_date()
+                        section
+                            - get_template_part( 'includes/share-buttons' );
+                    - while (have_posts()) : the_post()
+                        - the_content()
+                    - endwhile
+                    .social-block.social-bottom
+                        aside 
+                            - get_template_part( 'includes/share-buttons' );
+                        section
+                            .prev-next-nav
+                                span: - previous_post_link('%link','< Previous', 'Previous Post', 'yes')
+                                span: - next_post_link('%link', 'Next >', 'Next Post', 'yes'); 
             - wp_reset_postdata()
         - else :
             - include('includes/loop_missing.php')
         - endif
+    - endif
 
 - get_footer()

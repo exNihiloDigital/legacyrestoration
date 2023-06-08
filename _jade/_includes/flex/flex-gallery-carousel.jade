@@ -1,13 +1,13 @@
 - $gallery = get_sub_field('gallery')
 
-section.flex-block.flex-gallery-grid.hrz-padding
-	.container.content-block
-		- if (have_rows('gallery')) :
-			.swiper.gallery-grid
+section.flex-block.flex-gallery-carousel
+	.container
+		- if (have_rows('gallery_carousel')) :
+			.swiper.gallery-carousel
 				.swiper-wrapper
-					- while (have_rows('gallery')) : the_row()
-						.swiper-slide(style="background-image:('<?= get_sub_field('image')['url']?>'); height: 400px;" aria-label="<?= get_sub_field('image')['alt']?>")
+					- while (have_rows('gallery_carousel')) : the_row()
+						.swiper-slide(style="background-image:url('<?= get_sub_field('image')['url']?>'); height: 400px;" aria-label="<?= get_sub_field('image')['alt']?>")
 					- endwhile
-				.swiper-button-prev
-				.swiper-button-next
+				//- .swiper-button-prev
+				//- .swiper-button-next
 		- endif

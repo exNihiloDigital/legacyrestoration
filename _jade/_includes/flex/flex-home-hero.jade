@@ -3,11 +3,11 @@
 - $hero_subtitle = get_sub_field('hero_subtitle')
 - $background = get_sub_field('hero_background_image')
 
-section.flex-block.flex-home-hero.hrz-padding(style="background-image:('<?= $background['url']?>');" aria-label="<?= $background['alt']?>")
+section.flex-block.flex-home-hero.overlay(style="background-image:url('<?= $background['url']?>');" aria-label="<?= $background['alt']?>")
 	section.hero-content
 		- if($hero_title) :
-			h2: - echo $hero_title
+			h2.no-hborder: - echo $hero_title
 		- endif
 		- if($hero_subtitle) :
-			h2: - echo $hero_subtitle
+			h3: - echo $hero_subtitle
 		- endif

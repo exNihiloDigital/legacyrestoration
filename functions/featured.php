@@ -78,8 +78,8 @@ function featured( $key )
         array_push($image, esc_url(get_theme_file_uri()) . '/images/featured.jpg');
     }
 
-    if (is_post_type_archive('example') ) {
-        array_push($title, 'Examples');
+    if (is_post_type_archive('locations') ) {
+        array_push($title, 'Locations');
         array_push($alt, false);
     }
 

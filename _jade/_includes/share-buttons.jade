@@ -1,0 +1,36 @@
+ul.share
+    - $article_name = get_the_title();
+    - $article_name = str_replace(' ', '%20', $article_name);
+
+    li
+        a(
+            aria-label="Share on Facebook"
+            href="https://www.facebook.com/sharer.php?t=<?= $article_name; ?>&u=<?= the_permalink(); ?>"
+            target="_blank"
+        )
+            i(class="fab fa-facebook-f")
+
+    li
+        a(
+            aria-label="Share on LinkedIn"
+            href="https://www.linkedin.com/shareArticle?title=<?= $article_name; ?>&url=<?= the_permalink(); ?>&mini=true"
+            target="_blank"
+        )
+            i(class="fab fa-linkedin-in")
+
+    li
+        a(
+            aria-label="Share on Twitter"
+            href="https://twitter.com/intent/tweet?text=<?= $article_name; ?>&url=<?= the_permalink(); ?>"
+            target="_blank"
+        )
+            i(class="fab fa-twitter")
+
+    li
+        a(
+            aria-label="Copy to Clipboard"
+            data-clipboard-text="<?= the_permalink(); ?>"
+            class="copy_btn"
+            title="Copy URL to clipboard"
+        )
+            i(class="fas fa-link")

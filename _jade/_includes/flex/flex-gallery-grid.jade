@@ -2,7 +2,7 @@
 - $content = get_sub_field('content')
 - $gallery = get_sub_field('gallery')
 
-section.flex-block.flex-gallery-grid.hrz-padding
+section.flex-block.flex-gallery-grid.hrz-padding.bg-color-dark
 	.container.content-block
 		- if($header) :
 			h2: - echo $header
@@ -13,11 +13,8 @@ section.flex-block.flex-gallery-grid.hrz-padding
 		- endif
 
 		- if (have_rows('gallery')) :
-			.swiper.gallery-grid
-				.swiper-wrapper
-					- while (have_rows('gallery')) : the_row()
-						.swiper-slide(style="background-image:('<?= get_sub_field('image')['url']?>'); height: 400px;" aria-label="<?= get_sub_field('image')['alt']?>")
-					- endwhile
-				.swiper-button-prev
-				.swiper-button-next
+			.gallery-grid
+				- while (have_rows('gallery')) : the_row()
+					.gallery-img(style="background-image:url('<?= get_sub_field('image')['url']?>'); height: 400px;" aria-label="<?= get_sub_field('image')['alt']?>")
+				- endwhile
 		- endif

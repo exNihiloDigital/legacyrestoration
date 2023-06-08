@@ -29,217 +29,68 @@
     }
 }
 %button {
-    background-color: color(one);
-    border: none;
-    color: white;
+    background-color: transparent;
+    border: 3px solid color(dark);
+    color: color(dark);
     cursor: pointer;
     display: inline-block;
-    margin: 0 auto 32px;
-    padding: 10px 15px;
+    margin: 32px auto;
+    padding: 14px 52px;
+    position: relative;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.2s;
+    z-index: 10;
 
     &:hover {
-        background-color: color(two);
+        border-color: transparent;
+        color: color(dark);
+        padding-left: 38px;
+        padding-right: 38px;
+
+        &:before{
+            border-color: color(dark);
+            height: 100%;
+            top: -3px;
+        }
+    }
+    &:before {
+        background-color: transparent;
+        border-top: 3px solid color(dark);
+        border-bottom: 3px solid color(dark);
+        content: '';
+        display: block;
+        height: calc(100% + 23px);
+        position: absolute;
+        pointer-events: none;
+        width: calc(100% - 28px);
+        transition: all 0.1s;
+        z-index: 0;
+    }
+    &:before{
+        left: 14px;
+        top: -14px;
+    }
+    &:after{
+        background-color: white;
+        content: '';
+        display: block;
+    }
+    &.button-white{
+        border-color: white;
         color: white;
 
-        @include transition(0.12s);
-    }
-    &.button-ghost {
-        background-color: transparent;
-        border: 2px solid color(one);
-        color: color(one);
-
-        &:hover {
-            background-color: color(two);
-            border: 2px solid color(two);
+        &:hover{
+            border-color: transparent;
             color: white;
-        }
-    }
-    &.button-arrow {
-        background-color: transparent;
-        color: color(one);
-        padding: 5px 15px 5px 0;
-        position: relative;
 
-        &:after {
-            content: '\f178';
-            font-family: 'Font Awesome 6 Pro';
-            margin-left: 7px;
-            transition: all 0.2s;
-        }
-        &:hover {
-            color: color(two);
-
-            &:after {
-                margin-left: 15px;
+            &:before{
+                border-color: white;
             }
         }
-    }
-    &.button-slide {
-        background-color: transparent;
-        position: relative;
-
-        &:before {
-            background-color: color(one);
-            content: '';
-            display: block;
-            height: 100%;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 100%;
-            z-index: -1;
-            transition: all 0.2s;
-        }
-        &:after {
-            background-color: color(two);
-            content: '';
-            display: block;
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 0;
-            z-index: -1;
-            transition: all 0.2s;
-        }
-        &:hover {
-            &:before {
-                width: 0;
-            }
-            &:after {
-                width: 100%;
-            }
-        }
-    }
-    &.button-fillup {
-        background-color: transparent;
-        position: relative;
-
-        &:before {
-            background-color: color(one);
-            content: '';
-            display: block;
-            height: 100%;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 100%;
-            z-index: -1;
-            transition: all 0.2s;
-        }
-        &:after {
-            background-color: color(two);
-            bottom: 0;
-            content: '';
-            display: block;
-            height: 0;
-            left: 0;
-            position: absolute;
-            width: 100%;
-            z-index: -1;
-            transition: all 0.2s;
-        }
-        &:hover {
-            &:before {
-                height: 0;
-            }
-            &:after {
-                height: 100%;
-            }
-        }
-    }
-    &.button-offset {
-        background-color: transparent;
-        box-shadow: 0 0 0 0 color(one), inset 6em 3.5em 0 0 color(one);
-        color: white;
-        line-height: 1.5em;
-
-        &:hover,
-        &:focus {
-            box-shadow: 0.3em 0.3em 0 0 color(one), inset 0.3em 0.3em 0 0 color(one);
-            color: color(one);
-        }
-    }
-    &.button-draw {
-        //https://codepen.io/giana/pen/yYBpVY
-        background-color: transparent;
-        border: 0;
-        box-sizing: border-box;
-        color: color(one);
-        margin: 1em;
-        padding: 1em 2em;
-        transition: color 0.25s;
-
-        // Using inset box-shadow instead of border for sizing simplicity
-        box-shadow: inset 0 0 0 2px color(one);
-        color: color(one);
-        font-size: inherit;
-        font-weight: 700;
-
-        // Required, since we're setting absolute on pseudo-elements
-        position: relative;
-        vertical-align: middle;
-
-        &::before,
-        &::after {
-            box-sizing: inherit;
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        &::before,
-        &::after {
-            // Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts
-            border: 2px solid transparent;
-            width: 0;
-            height: 0;
-        }
-
-        // This covers the top & right borders (expands right, then down)
-        &::before {
-            top: 0;
-            left: 0;
-        }
-
-        // And this the bottom & left borders (expands left, then up)
-        &::after {
-            bottom: 0;
-            right: 0;
-        }
-
-        &:hover {
-            color: color(three);
-        }
-
-        // Hover styles
-        &:hover::before,
-        &:hover::after {
-            width: 100%;
-            height: 100%;
-        }
-
-        &:hover::before {
-            border-top-color: color(three); // Make borders visible
-            border-right-color: color(three);
-            transition: width 0.25s ease-out,
-                // Width expands first
-                height 0.25s ease-out 0.25s; // And then height
-        }
-
-        &:hover::after {
-            border-bottom-color: color(three); // Make borders visible
-            border-left-color: color(three);
-            transition: border-color 0s ease-out 0.5s,
-                // Wait for ::before to finish before showing border
-                width 0.25s ease-out 0.5s,
-                // And then exanding width
-                height 0.25s ease-out 0.75s; // And finally height
+        &:before{
+            border-color: white;
         }
     }
 }

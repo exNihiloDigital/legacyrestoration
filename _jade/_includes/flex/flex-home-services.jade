@@ -1,14 +1,15 @@
-section.flex-block.flex-content.hrz-padding
+section.flex-block.flex-home-services.hrz-padding
 	section.container.vert-padding
 		h2 Services
 		- if (have_rows('services')) :
 			.home-services-blocks
 				- while (have_rows('services')) : the_row()
-					a.service-block(
+					a.service-block.overlay(
 						href="<?= get_sub_field('link')['url'] ?>" target="<?= get_sub_field('link')['target'] ?>" style="background-image:url('<?= get_sub_field('background_image')['url'] ?>');" aria-label="<?= get_sub_field('background_image')['alt'] ?>")
-						
-						img(src="<?= get_sub_field('icon')['url'] ?>", alt="<?= get_sub_field('icon')['url'] ?>")
-						h2: - echo get_sub_field('service')
+						.service-block-content
+							img(src="<?= get_sub_field('icon')['url'] ?>", alt="<?= get_sub_field('icon')['url'] ?>")
+							h2.no-hborder: - echo get_sub_field('service')
 				- endwhile
 		- endif
-		a.button(href="<?= get_the_permalink(6)?>") All Services
+		.center-content
+			a.button(href="<?= get_the_permalink(6)?>") All Services

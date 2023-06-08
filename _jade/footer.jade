@@ -2,14 +2,23 @@
 
 section.footer-cta.hrz-padding
 	.container.content-block
-		- echo get_field('footer_cta_content', 'options')
-		- if(get_field('footer_cta_button', 'options')) :
-			a.button(
-				href="<?= get_field('footer_cta_button', 'options')['url'];?>" 
-				target="<?= get_field('footer_cta_button', 'options')['target'];?>"
-				) 
-				- echo get_field('footer_cta_button', 'options')['title']
-		- endif
+		section 
+			- echo get_field('footer_cta_content', 'options')
+			- if(get_field('footer_cta_button', 'options')) :
+				a.button(
+					href="<?= get_field('footer_cta_button', 'options')['url'];?>" 
+					target="<?= get_field('footer_cta_button', 'options')['target'];?>"
+					) 
+					- echo get_field('footer_cta_button', 'options')['title']
+			- endif
+
+		aside
+			- if(get_field('footer_cta_form_title', 'options')):
+				h2: - echo get_field('footer_cta_form_title', 'options')
+			- endif
+			- if(get_field('footer_cta_form_embed', 'options')) :
+				- echo get_field('footer_cta_form_embed', 'options')
+			- endif
 
 footer.hrz-padding
 	.container

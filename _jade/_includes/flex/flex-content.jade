@@ -6,7 +6,7 @@
 section.flex-block.flex-content.hrz-padding(class="<?= $bg_color ?>")
 	.container.vert-padding
 		- if($heading) :
-			h2: - echo $heading
+			h2.no-hborder: - echo $heading
 		- endif
 		section
 			- if(get_sub_field('content')): 

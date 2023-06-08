@@ -1,5 +1,11 @@
 - // featured('title'), featured('image'), featured('alt')
 
-.featured.overlay(style="background-image: url(<?php featured('image') ?>)")
+.featured.hrz-padding.overlay(style="background-image: url(<?php featured('image') ?>)")
     .container
-        h1: - featured('title') 
+        - if(is_singular('locations')):
+            h1
+                span Location
+                - featured('title')
+        - else :
+            h1: - featured('title')
+        - endif

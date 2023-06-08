@@ -20,6 +20,10 @@ jQuery(function ($) {
     flexTestimonialSlider($);
     flexFeaturedContentSlider($);
     flexTestimonialCards($);
+    flexGalleryCarousel($);
+
+    // Add copy functionality to post share
+    new ClipboardJS('.copy_btn');
 });
 
 /**
@@ -263,6 +267,7 @@ const flexTestimonialSlider = ($) => {
     var testimonialSlider = new Swiper('.testimonial-slider', {
         slidesPerView: 1,
         loop: true,
+        autoHeight: true,
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
@@ -312,6 +317,31 @@ const flexTestimonialCards = ($) => {
             768: {
                 slidesPerView: 3,
                 spaceBetween: 40,
+            },
+        },
+    });
+};
+const flexGalleryCarousel = ($) => {
+    var slider = new Swiper('.gallery-carousel', {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 0,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 0,
+            },
+            950: {
+                slidesPerView: 3,
+                spaceBetween: 0,
             },
         },
     });

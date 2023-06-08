@@ -2,17 +2,17 @@
 - $heading = get_sub_field('heading')
 - $content = get_sub_field('content')
 
-section.flex-block.flex-content.hrz-padding
+section.flex-block.flex-dark-cta-block.hrz-padding
 	.container.vert-padding
 		- if($heading) :
-			h2: - echo $heading
+			h2.no-hborder: - echo $heading
 		- endif
 		section
 			- if(get_sub_field('content')): 
 				- echo get_sub_field('content')
 			- endif
 			- if(get_sub_field('button')): 
-				a.button(
+				a.button.button-white(
 					href="<?php echo get_sub_field('button')['url'];?>" 
 					target="<?php echo get_sub_field('button')['target'];?>")
 					- echo get_sub_field('button')['title']

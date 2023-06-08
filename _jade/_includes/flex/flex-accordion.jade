@@ -21,7 +21,7 @@ section.flex-block.flex-accordion.hrz-padding(class="<?= $bg_color;?>")
 								- echo get_sub_field('title')
 						.accordion-content(
 							style="<?php if($acc_num == 1){ echo 'display: block;'; };?>")
-							p: - echo get_sub_field('content')
+							- echo get_sub_field('content')
 					- $acc_num++
 				- endwhile
 		- endif
