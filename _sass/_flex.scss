@@ -483,8 +483,46 @@
         height: 584px;
         width: 100%;
         
-        @include breakpoint(600px up){
+        @include breakpoint(950px up){
             height: 871px;
+        }
+        .hero-vid-wrapper{
+            display: none;
+            height: 100%;
+            margin-top: -20px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+
+            @include breakpoint(769px up){
+                display: block;
+            }
+            video{
+                height: 100%;
+                left: -15%;
+                position: absolute;
+                top: 0;
+                width: 125%;
+                
+                @include breakpoint(950px up){
+                    height: 100%;
+                    left: -50%;
+                    width: 156%;
+                }
+                @include breakpoint(1076px up){
+                    left: -33%;
+                }
+                @include breakpoint(1394px up){
+                    left: -10%;
+                    width: 120%;
+                }
+                @include breakpoint(1544px up){
+                    height: 125%;
+                    left: 0;
+                    margin-top: -6%;
+                    width: 100%;
+                }
+            }
         }
         section.hero-content{
             background-color: white;
