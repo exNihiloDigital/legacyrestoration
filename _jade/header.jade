@@ -2,13 +2,13 @@ doctype html
 <html <?php language_attributes(); ?>>
 head
 
-    meta(name="robots" content="noindex, nofollow")
+    //- meta(name="robots" content="noindex, nofollow")
 
     meta(charset="<?php bloginfo( 'charset' ); ?>")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(http-equiv="X-UA-Compatible" content="ie=11")
 
-    link(type="image/gif" href="<?php echo esc_url(get_theme_file_uri()) ?>/favicon.png" rel="icon" sizes="16x16")
+    //- link(type="image/gif" href="<?php echo esc_url(get_theme_file_uri()) ?>/favicon.png" rel="icon" sizes="16x16")
     script(src="https://www.youtube.com/player_api")
 
     link(rel="preconnect" href="https://fonts.googleapis.com")
@@ -16,9 +16,19 @@ head
     link(href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,600;0,800;1,400;1,800&display=swap" rel="stylesheet")
 
     - wp_head()
+    //- <!-- Google Tag Manager -->
+    script.
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5XTFCL5');
 
 <body <?php body_class(); ?>>
-
+<!-- Google Tag Manager (noscript) -->
+noscript
+    iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-5XTFCL5" height="0" width="0" style="display:none;visibility:hidden")
+<!-- End Google Tag Manager (noscript) -->
 - wp_body_open();
 
 - if ( is_front_page() ) :

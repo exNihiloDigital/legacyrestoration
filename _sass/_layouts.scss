@@ -422,6 +422,7 @@ section.footer-cta{
             }
         }
         aside{
+            max-width: 100%;
             flex: 100%;
 
             @include breakpoint(950px up){

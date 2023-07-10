@@ -586,16 +586,21 @@
 
             @include breakpoint(900px up){
                 gap: 52px;
+                text-align: center;
             }
             a.service-block{
                 background-position: center;
                 background-size: cover;
                 flex: 100%;
+                margin: 0 auto;
+                max-width: 100%;
                 padding: 32px;
+                position: relative;
                 text-align: center;
 
                 @include breakpoint(900px up){
                     flex: 45%;
+                    max-width: 50%;
                 }
                 &:hover{
                     &.overlay{
@@ -603,46 +608,74 @@
                             background-color: transparent;
                         }
                     }
+                    .service-block-lines{
+                        background-color: rgba(color(dark), 0);
+
+                        &:before, &:after{
+                            left: 0;
+                            width: 100%;
+                        }
+                        &:before{
+                            top: 0;
+                        }
+                        &:after{
+                            top: 100%;
+                        }
+                    }
+                }
+                .service-block-lines{
+                    background-color: rgba(color(dark), 0.4);
+                    height: 100%;
+                    left: 0;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    z-index: 10;
+                    transition: background-color 0.2s;
+                    
                     &:before, &:after{
-                        left: 0;
-                        width: 100%;
+                        background-color: white;
+                        content: '';
+                        display: block;
+                        height: 3px;
+                        left: 52px;
+                        position: absolute;
+                        width: calc(100% - 104px);
+                        transition: all 0.2s;
                     }
                     &:before{
-                        top: 0;
+                        top: 32px;
                     }
                     &:after{
-                        top: 100%;
+                        top: calc(100% - 32px);
                     }
-                }
-                &:before, &:after{
-                    background-color: white;
-                    content: '';
-                    display: block;
-                    height: 3px;
-                    left: 52px;
-                    position: absolute;
-                    width: calc(100% - 104px);
-                    transition: all 0.2s;
-                }
-                &:before{
-                    top: 32px;
-                }
-                &:after{
-                    top: calc(100% - 32px);
                 }
                 .service-block-content{
                     // border-top: 3px solid white;
                     // border-bottom: 3px solid white;
-                    padding: 52px;
+                    padding: 40px 0;
                     position: relative;
                     z-index: 100;
-
+                    
+                    @include breakpoint(769px up){
+                        padding: 52px;
+                    }
                     img{
                         margin-bottom: 32px;
+                        max-height: 150px;
+                        
+                        @include breakpoint(769px up){
+                            max-height: 220px;
+                        }
                     }
                     h2{
                         color: white;
+                        font-size: 20px;
                         margin-bottom: 0;
+
+                        @include breakpoint(769px up){
+                            font-size: 32px;
+                        }
                     }
                 }
             }

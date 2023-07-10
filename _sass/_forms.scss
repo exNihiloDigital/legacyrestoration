@@ -131,3 +131,17 @@
     background: #f1f1f1;
     border-radius: 4px;
 }
+form.wpcf7-form{
+    max-width: 100%;
+    
+    p{
+        label{
+            span{
+                input.wpcf7-form-control,
+                textarea.wpcf7-form-control{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

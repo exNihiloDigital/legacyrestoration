@@ -4,8 +4,9 @@ section.flex-block.flex-home-services.hrz-padding
 		- if (have_rows('services')) :
 			.home-services-blocks
 				- while (have_rows('services')) : the_row()
-					a.service-block.overlay(
+					a.service-block(
 						href="<?= get_sub_field('link')['url'] ?>" target="<?= get_sub_field('link')['target'] ?>" style="background-image:url('<?= get_sub_field('background_image')['url'] ?>');" aria-label="<?= get_sub_field('background_image')['alt'] ?>")
+						.service-block-lines
 						.service-block-content
 							img(src="<?= get_sub_field('icon')['url'] ?>", alt="<?= get_sub_field('icon')['url'] ?>")
 							h2.no-hborder: - echo get_sub_field('service')

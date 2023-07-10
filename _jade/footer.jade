@@ -17,7 +17,7 @@ section.footer-cta.hrz-padding
 				h2: - echo get_field('footer_cta_form_title', 'options')
 			- endif
 			- if(get_field('footer_cta_form_embed', 'options')) :
-				- echo get_field('footer_cta_form_embed', 'options')
+				- echo do_shortcode(get_field('footer_cta_form_embed', 'options'))
 			- endif
 
 footer.hrz-padding
