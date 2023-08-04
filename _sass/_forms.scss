@@ -145,3 +145,29 @@ form.wpcf7-form{
         }
     }
 }
+
+// ===================================================================
+// Gravity Forms
+// ===================================================================
+.gform_wrapper.gravity-theme{
+    .gfield{
+        input.large,
+        textarea.large{
+            background-color: white;
+            border: 1px solid gray;
+        }
+    }
+}
+.gform_wrapper.gravity-theme{
+    .gform_footer{
+        input{
+            background-color: transparent;
+            border: 3px solid black;
+            transition: all 0.2s;
+
+            &:hover{
+                background-color: white;
+            }
+        }
+    }
+}
