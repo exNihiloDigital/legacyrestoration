@@ -44,7 +44,8 @@
                 
                 .image-wrapper {
                     background-position: center;
-                    background-size: cover;
+                    background-size: contain;
+                    background-repeat: no-repeat;
                     height: 400px;
                     width: 100%;
                     
